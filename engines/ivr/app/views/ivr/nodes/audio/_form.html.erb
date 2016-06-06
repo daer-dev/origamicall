@@ -1,0 +1,40 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.audio.titles.audios') %></span>
+
+    <%= render 'ivr/nodes/shared/tools', field: 'audio_node_related_audios_a_0_text' %></td>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="10%"><%= I18n.t('ivr.nodes.audio.fields.order') %></th>
+          <th width="20%" class="block"><%= I18n.t('ivr.nodes.audio.fields.libs_audios_id') %></th>
+          <th width="44%" class="block"><%= raw("<acronym title=\"#{I18n.t('ivr.nodes.audio.fields.tts')}\">#{I18n.t('ivr.nodes.audio.fields.tts_acronym')}</acronym>") %></th>
+          <th width="18%"><%= I18n.t('ivr.nodes.audio.fields.tts_voice') %></td>
+          <th width="8%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render 'ivr/nodes/audio/audio', f: f, num: 0, order: String.new, libs_audios_id: @node.related_audios['a_0']['libs_audios_id'], text: @node.related_audios['a_0']['text'], tts_voice: @node.related_audios['a_0']['tts_voice'] %>
+      </tbody>
+      <tbody id="audios_list" class="sortable">
+        <% unless @node.related_audios.blank? %>
+          <% @node.related_audios.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/audio/audio', f: f, num: num, order: v['order'], libs_audios_id: v['libs_audios_id'], text: v['text'], tts_voice: v['tts_voice'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>

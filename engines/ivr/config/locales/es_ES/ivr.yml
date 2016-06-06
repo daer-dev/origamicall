@@ -1,0 +1,241 @@
+es_ES:
+
+  ivr:
+
+    menu:
+      trees: Árboles
+
+    trees:
+      create:
+        title: Nuevo árbol
+      index:
+        title: Listado de árboles
+      delete:
+        text: '<strong>¡Atención!</strong> Va a eliminar el árbol "<strong>%{name}</strong>" y con él, todos sus nodos. Haga click en el siguiente botón para continuar.'
+      graph: Gráfico
+      loading: Cargando árbol de nodos...
+      window_resize_alert: Por favor, para ver el árbol adecuadamente, devuelva la ventana a su tamaño original.
+      services:
+        title: Servicios
+        advice: Un servicio no puede estar vinculado a más de una CV, por lo que se resetearán las asociaciones anteriores de los que seleccione.
+      tools:
+        tree: Árbol
+        node: Nodo
+        config: Configuración
+        full_view: Vista completa
+        enable: Activar
+        disable: Desactivar
+        print: Imprimir
+        reload: Recargar
+      config:
+        main_node_position: Posición del nodo principal
+        tree_alignment: Alineación
+      orientation:
+        left: Izquierda
+        top: Superior
+        bottom: Inferior
+        right: Derecha
+      alignment:
+        center: Centro
+        left: Izquierda
+        right: Derecha
+      log:
+        loading: Cargando...
+        done: Terminado
+
+    nodes:
+      types:
+        intro: 'Por favor, seleccione un tipo de nodo para continuar con el proceso:'
+        not_found: Lo sentimos, pero por la configuración de su árbol y del servicio en general, no se pueden insertar nodos en el punto que ha seleccionado.
+        list:
+          main: Principal
+          audio: Audio
+          transfer: Transferencia
+          integration: Integración
+          menu: Menu
+          schedule_condition: Condición horaria
+          expression_condition: Condición de expresión
+          source_condition: Condición de origen
+          data_entry: Entrada de datos
+          jump: Salto
+          voicemail: Buzón de voz
+      unconfigured: Sin configurar
+      create:
+        title: Nuevo nodo
+        button: Volver
+      delete:
+        text: '<strong>¡Atención!</strong> Va a eliminar el nodo "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.'
+      enable:
+        text: '<strong>¡Atención!</strong> Va a activar el nodo "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.'
+        button: Activar
+      disable:
+        text: '<strong>¡Atención!</strong> Va a desactivar el nodo "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.'
+        button: Desactivar
+      status:
+        title: Estados
+        ok: OK
+        error: Error
+      tools:
+        vars:
+          title: Variables
+          intro: De cara a facilitar la personalización del mensaje, se permite la inserción de variables que haya configurado previamente en el nodo principal.
+          button: Insertar
+        tables:
+          title: Tablas de datos
+          intro: Puede insertar también una tabla de las que haya asociado al nodo principal, utilizando como índice la variable que haya seleccionado en su campo correspondiente.
+          button: Insertar con variable
+      main:
+        name: Principal
+        vars:
+          session: Llamada
+          global: Servicio
+        titles:
+          vars: Variables
+          tables: Tablas de datos
+          lists: Listas
+        error_messages:
+          data_entry_vars: 'La variable "%{var}" no puede ser eliminada, ya que actualmente está asociada al nodo "%{node}".'
+        fields:
+          vars:
+            value: Valor
+      audio:
+        titles:
+          audios: Audios
+        fields:
+          type: Tipo
+          order: Orden
+          libs_audios_id: Audio
+          tts_acronym: TTS
+          tts: Text to Speech
+          tts_voice: Voz
+        voices:
+          jorge: Jorge (masculino, Español)
+          leonor: Leonor (femenino, Español)
+          simon: Simon (masculino, Inglés)
+          kate: Kate (femenino, Inglés)
+          bernard: Bernard (masculino, Francés)
+          juliette: Juliette (femenino, Francés)
+        error_messages:
+          max: El máximo de audios permitidos es 9.
+          audios: Antes de guardar el nodo, debe asociarle al menos un audio.
+      transfer:
+        titles:
+          destinations: Destinos
+        error_messages:
+          max: El máximo de destinos permitidos es de 9.
+          percent: La suma de los porcentajes no puede ser superior a 100.
+          destinations: Antes de guardar el nodo, debe asociarle al menos un destino.
+        strategy:
+          linear: Lineal
+          percent: Porcentual
+        destinations:
+          types:
+            phone: Número
+            var: Variable
+            destination: Destino
+        fields:
+          order: Orden
+          type: Tipo
+          destination: Destino
+      integration:
+        titles:
+          code: Código
+        types:
+          url: URL
+          content: Contenido
+        content_placeholder: Escriba aquí el código PHP que quiera que se ejecute.
+        error_messages:
+          code_syntax: el código introducido contiene errores de sintáxis.
+      menu:
+        titles:
+          audios: Audios
+          options: Opciones
+        error_messages:
+          options: Revise la lista de opciones y asegúrese de que todas están configuradas correctamente.
+          without_options: Un nodo de este tipo siempre debe tener alguna opción asociada.
+          without_default_option: Debe marcar una opción como predeterminada.
+          options_with_repeated_dtmf_values: No se permite el uso de un mismo DTMF en más de una opción.
+          options_with_repeated_asr_values: No se permite el uso de un mismo valor ASR en más de una opción.
+          options_incorrect_range_format: 'Rango DTMF incorrecto: %{value}. Sólo puede haber un número de inicio y otro de fin.'
+          options_incorrect_range_value: 'Rango DTMF incorrecto: %{value}. Sólo se aceptan números enteros.'
+          options_incorrect_range: 'Rango DTMF incorrecto: el valor inicial (%{first}) ha de ser menor que el de fin (%{last}).'
+          options_incorrect_dtmf_value: 'DTMF incorrecto: %{value}. Sólo se aceptan números enteros, "*" y "#" como valores posibles.'
+          options_duplicate_dtmf_value: 'DTMF duplicado: %{value}. Por favor, revise los datos.'
+          duplicate_dtmf_values: Existen valores DTMF duplicados en diferentes opciones. Por favor, revise los datos.
+        audios:
+          prompt: Inicio
+          no_match: Ayuda
+        fields:
+          vars: Variables
+          node: Nodo
+          dtmf: DTMF
+          asr: Detección de voz (ASR)
+          bargein: Anticipación
+          grammar: Gramática
+          default: Predeterminada
+          option_asr: ASR
+      source_condition:
+        titles:
+          sources: Orígenes
+        sources:
+          info: Cualquier valor no numérico o repetido será descartado.
+          modes:
+            contains: Contiene
+            starts: Empieza por
+            ends: Acaba en
+            not_contains: No contiene
+            not_starts: No empieza por
+            not_ends: No acaba en
+        fields:
+          mode: Modo
+          phone_number: Teléfono
+        error_messages:
+          sources: Antes de guardar el nodo, debe asociarle al menos un origen.
+      data_entry:
+        titles:
+          audios: Audios
+          grammars: Gramáticas
+        audios:
+          prompt: Inicio
+          no_match: Ayuda
+          disconnect: Desconexión
+        fields:
+          asr: Detección de voz (ASR)
+          beep: Aviso acústico
+          bargein: Anticipación
+          type: Tipo
+          libs_audios_id: Audio
+          tts_acronym: TTS
+          tts: Text to Speech
+          tts_voice: Voz
+          vars: Variables
+      jump:
+        ivr_nodes_name_tooltip: 'Para cambiar el nodo al que se efectuará el salto, selecciónelo en la vista completa del árbol que verá haciendo click en el siguiente botón:'
+        select_node_button: Seleccionar nodo
+        error_messages:
+          ivr_nodes_name: el destinatario del salto no puede ser ni este mismo nodo ni su padre.
+      voicemail:
+        titles:
+          audios: Audios
+          email: Envío por email
+          accounts: Cuentas
+        error_messages:
+          accounts: Antes de guardar el nodo, debe asociarle al menos una cuenta.
+        audios:
+          prompt:
+            name: Inicio
+            text: Deje su mensaje después de la señal
+          confirm:
+            name: Confirmación
+            text: Presione 1 para continuar, 2 si desea volver a escuchar el mensaje o 3 para volver a grabarlo
+          no_match:
+            name: Ayuda
+            text: No se reconoce la opción elegida
+        send_now:
+          enabled: Después del nodo
+          disabled: Al finalizar la llamada
+        fields:
+          bargein: Anticipación
+          beep: Señal acústica
+          vars: Variables
+          send_now: Tipo de envío

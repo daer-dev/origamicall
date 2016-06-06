@@ -1,0 +1,31 @@
+es_ES:
+
+  fields:
+
+    controllers:
+      ivr__nodes:
+        ivr_nodes_name: Nodo
+        ivr_nodes_id: Nodo
+        libs_schedules_id: Horario
+        expression: Expresión
+        ivr_variables_id: Variable
+        times: Repeticiones
+        timeout: Tiempo máximo de espera
+        no_match: Audio de ayuda
+        prompt: Audio de inicio
+        grammar: Gramática
+        maxtime: Tiempo máximo
+        percent: Porcentaje
+        phone_number: Teléfono
+        libs_destinations_id: Destino
+        caller_id: Identificador de llamada
+        option: Opciones
+        strategy: Estrategia
+        url: URL
+        related_grammars: Gramáticas
+        content: Contenido
+        dtmf: DTMF
+        libs_options_id: ASR
+        email_from: Origen
+        email_subject: Asunto
+        email_message: Mensaje

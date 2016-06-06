@@ -1,0 +1,21 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :ivr_nodes_name %></span>
+
+    <%= smart_text_field f, :ivr_nodes_name, 'arrow-left', :disabled => true %>
+  </div>
+</fieldset>
+
+<div class="alert alert-info fade in">
+  <p><%= icon :info, I18n.t('ivr.nodes.jump.ivr_nodes_name_tooltip'), class: 'fa-fw' %></p>
+</div>
+
+<%= link_in_window_to I18n.t('ivr.nodes.jump.select_node_button'), "#{tree_path(params[:tree_id])}?ivr_nodes_id#{('=' + @node.ivr_nodes_id.to_s) unless @node.ivr_nodes_id.blank?}", 'get_jump_node();', :id => 'select_node', :class => 'btn btn-primary btn-lg' %>
+
+<%= f.hidden_field :ivr_nodes_id %>

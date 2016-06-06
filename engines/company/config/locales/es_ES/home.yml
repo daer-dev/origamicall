@@ -1,0 +1,106 @@
+es_ES:
+
+  company:
+
+    title: OrigamiCall
+
+    menu:
+      title: Menú
+      options:
+        us: Nosotros
+        tech: Tecnología
+        products: Productos
+        contact: Contacto
+      languages:
+        title: Idiomas
+        message: Idioma ya seleccionado.
+      private_area: Área de clientes
+
+    quotes:
+      buttons:
+        previous: Anterior
+        next: Siguiente
+      text:
+        q1: Soluciones de Red Inteligente accesibles a todo el mundo
+        q2: Productos diseñados pensando en el usuario
+        q3: La seguridad y cumplimiento de estándares son nuestros pilares fundamentales
+        q4: Nuestra plataforma es el fruto de años de experiencia en el sector
+        q5: Observe nuestros productos e infórmese sin compromiso
+
+    us:
+      title: ¿Quiénes somos?
+      text:
+        t1: Somos una empresa integrada por técnicos con más de diez años de experiencia en el sector. Tanto la organización de la empresa como la relación entre sus integrantes son informales y muy cercanas. Orientados a dar soluciones de telecomunicaciones, nos inspiramos en los valores del software libre y las metodologías ágiles de desarrollo, así como en las nuevas tecnologías de la información.
+        t2: Parte de nuestra misión consiste en desarrollar productos de telecomunicaciones fiables y sencillos, para cualquier empresa presente en Internet. Facilitamos la convergencia de las nuevas tecnologías con la telefonía tradicional y la VoIP. Trabajo en equipo, proactividad y desempeño profesional son algunos de nuestros valores, que hacen de nosotros un gran equipo y nos llevan a desarrollar las mejores soluciones para su empresa en este área.
+      team:
+        t1:
+          title: Telefonía
+          text: Integramos para usted soluciones de telefonía convencional, digital o sobre IP con la inteligencia de nuestro software y proporcionamos a sus sistemas de información el nivel de automatización que hará crecer a su empresa.
+        t2:
+          title: Web
+          text: Todos nuestros sistemas se basan en la Web. Configuración, estadísticas, paneles para teleoperadores y monitorización para supervisores; todo ello, disponible desde su equipo informático, tablet o teléfono móvil inteligente.
+        t3:
+          title: Sistemas
+          text: Deje que nosotros hagamos el trabajo de integración y mantenimiento del sistema por usted. No tendrá que preocuparse de instalaciones ni equipos físicos. Pague acorde a lo que consuma sin preocuparse de la estrategia necesaria para crecer.
+
+    tech:
+      title: ¿Con qué tecnología trabajamos?
+      blocks:
+        b1:
+          title: Debian
+          text: Como sistema operativo base nos gusta emplear Debian GNU/Linux. Este sistema nos da una gran versatilidad y su contrato social nos garantiza y asegura su estabilidad, seguridad y mantenimiento continuado.
+        b2:
+          title: Erlang
+          text: Ericsson desarrolló esta plataforma y lenguaje en los años 80 para sus sistemas de telefonía. Hoy en día se emplea no solo en el mundo de las telecomunicaciones, sino también en otras empresas del sector bancario y videojuegos, destacando su presencia como lenguaje más usado en compañías como Whatsapp.
+        b3:
+          title: Ruby On Rails
+          text: Este framework de desarrollo web es la base de muchos otros que existen hoy en día. El sistema es uno de los más férreos y en el que se han fijado empresas de todo el globo, grandes y pequeñas, gracias a su versatilidad y su filosofía. Desarrollar con Ruby on Rails nos garantiza crecer y ofrecer mejores servicios orientados a la web.
+        b4:
+          title: PostgreSQL
+          text: De entre las bases de datos de software libre y para misión crítica, PostgreSQL es la que mejores resultados siempre nos ha dado. Su potencia y rendimiento, así como su amplio abanico de características, la hacen ideal como backend para nuestros servicios. Una garantía para mantener un servicio 24/7.
+
+    products:
+      title: ¿Qué hacemos?
+      text:
+        t1: Las tecnologías que empleamos y nuestra experiencia se unen para ofrecer unos servicios pensados y diseñados para usuarios de todos los niveles de conocimiento en el campo de la telefonía. Los servicios han sido desarrollados para que cualquier usuario pueda configurar la respuesta a conseguir de sus sistemas de comunicación sin necesidad de ayuda de un experto.
+        t2: Puede revisar los diferentes productos. Cada uno abarca una solución específica y se enfoca a solucionar y dar valor al uso de la herramienta en conjunción con otras soluciones que se puedan agregar o integrar.
+      list:
+        ivr:
+          name: IVR
+          origami: Kobune
+          text:
+            visible: <span class="product-name">Kobune-IVR</span> es nuestro sistema de Respuesta de Voz Interactiva. Le ayuda a configurar el comportamiento de una llamada recibida a un número de teléfono basado en el número de origen o información que seleccione el llamante a través de menús de opciones, entradas de datos y horario de la llamada. El mejor sistema para tener la certeza de no perder ninguna llamada.
+            hidden:
+              h1: 'Kobune-IVR se configura en forma de diagramas asociados a un número telefónico entrante. Cuando el usuario llamante es conducido al primer nodo del árbol, según el comportamiento definido, se van produciendo acciones como: comprobación de la hora, comprobación del número de origen, reproducción de locuciones, menú de opciones para bifurcar el comportamiento en distintas direcciones, entrada de datos para obtener información sobre usuario, grabación de audio, transferencia de la llamada a un número de teléfono, etcétera.'
+              h2: Todo esto configurado desde una interfaz simple y muy fácil de usar. Tendrá siempre una visión global del funcionamiento de su sistema y podrá cambiar en tiempo real el comportamiento de las llamadas en cualquier momento y desde cualquier lugar.
+        acd:
+          name: ACD
+          origami: Tsune
+          text:
+            visible: <span class="product-name">Tsune-ACD</span> es un Distribuidor Automático de Llamadas. Este sistema está ideado para centros de llamadas donde se atienden llamadas por varios agentes y donde se necesita tener un control de cuantas llamadas hay en espera, el estado de los agentes activos y atendiendo llamadas y todo ello configurable a través de una interfaz web accesible desde cualquier dispositivo.
+            hidden:
+              h1: Tsune-ACD permite a un supervisor gestionar y monitorizar los agentes de un centro de llamadas e incluso a una empresa gestionar a agentes y centros de llamadas distribuidos geográficamente. Permite saber las llamadas en cola, las que están siendo atendidas, estadísticas de cada uno de los agentes y si el supervisor lo requiere, un modo de escucha de llamadas en curso de los agentes.
+              h2: El agente dispone también de un panel en el que se le informa de la llamada entrante, puede accionar un evento desde el navegador, como abrir una página web con los datos proporcionados por el sistema y el agente puede configurar su estado por si necesita abandonar su puesto de trabajo.
+        c2c:
+          name: C2C
+          origami: Kaeru
+          text:
+            visible: <span class="product-name">Kaeru-C2C</span> es nuestra solución de "Botón de Llamada" o Click 2 Call. Tan simple como agregar una pequeña línea de código en tu página y tendrás la funcionalidad completa para recibir llamadas desde tu página web.
+            hidden:
+              h1: Kaeru-C2C funciona como un botón en tu web. Cuando el visitante de la web lo usa, debe introducir su número de teléfono. Inmediatamente nuestro sistema se pone en contacto con él en el teléfono facilitado y acto seguido te llamamos para que puedas atender la llamada.
+              h2: Al igual que todos nuestros productos, Kaeru-C2C es totalmente configurable desde la interfaz web y permite adaptar el funcionamiento y dinámica de llamada a tus necesidades. Puedes configurar un horario de atención para que el usuario simplemente deje un mensaje de voz, agregar audios al inicio de la llamada para el usuario, enlazar esa llamada entrante con Kobune IVR o Tsune ACD para dar más inteligencia a esa llamada y mucho más.
+      button: Leer más
+
+    contact:
+      title: Contacto
+      text: "Si quieres saber más de nuestras soluciones o tienes alguna duda, sugerencia o propuesta, envíanos un mensaje usando el siguiente formulario:"
+      form:
+        messages:
+          success: ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo lo más rápido posible. Gracias por tu interés.
+          validation: Por favor, escribe algo en el campo de texto.
+          server: Ha habido un problema con el servidor. Por favor, inténtalo de nuevo más tarde.
+        buttons:
+          send: Enviar
+          reset: Borrar
+      links:
+        email: info@origamicall.com

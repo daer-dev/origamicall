@@ -1,0 +1,60 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% unless external_engine %>
+    <div class="section">
+      <span class="label"><%= auto_label_for f, :product %></span>
+
+      <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @table.product, true) %>
+    </div>
+  <% end %>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('fields.controllers.libs__tables.rows') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="45%"><%= I18n.t('fields.shared.name') %></th>
+          <th width="45%" class="block"><%= I18n.t('libs.tables.fields.value') %></th>
+          <th width="10%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="rows_list">
+        <%= render 'libs/tables/row', f: f, num: 0, name: @table.related_rows['r_0']['name'], value: @table.related_rows['r_0']['value'] %>
+        <% unless @table.related_rows.blank? %>
+          <% i = 0 %>
+          <% @table.related_rows.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'libs/tables/row', f: f, num: num, name: v['name'], value: v['value'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), tables_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

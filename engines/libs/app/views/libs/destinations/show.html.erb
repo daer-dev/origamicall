@@ -1,0 +1,47 @@
+<h1 class="page-title">
+  <%= icon :phone, @destination.name, class: 'fa-fw' %>
+</h1>
+
+<section id="widget-grid">
+  <div id="destination_<%= @destination.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+    <header>
+      <span class="widget-icon"><%= icon :edit %></span>
+      <h2><%= I18n.t('misc.data') %> (<%= I18n.t('misc.read_only') %>)</h2>
+    </header>
+
+    <div>
+      <div class="widget-body no-padding">
+        <table class="table table-bordered">
+          <tr>
+            <td><strong><%= I18n.t('fields.shared.name') %></strong></td>
+            <td><%= @destination.name %></td>
+          </tr>
+          <tr>
+            <td><strong><%= I18n.t('fields.controllers.libs__destinations.phone_number') %></strong></td>
+            <td><%= @destination.phone_number %></td>
+          </tr>
+          <% unless @destination.product.blank? %>
+            <tr>
+              <td><strong><%= I18n.t('fields.shared.product') %></strong></td>
+              <td><%= I18n.t("products.#{@destination.product}") %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if params.include? :ajax_loaded %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), destinations_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

@@ -1,0 +1,16 @@
+es_ES:
+
+  libs:
+
+    tables:
+
+      name: Tablas
+      create:
+        title: Nueva tabla de datos
+      index:
+        title: Listado de tablas de datos
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar la tabla de datos "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.
+      fields:
+        rows: Filas
+        value: Valor

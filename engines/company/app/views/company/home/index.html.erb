@@ -1,0 +1,367 @@
+<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="shadow"></div>
+
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only"><%= I18n.t('company.menu.title') %></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <%= link_to '#top' do %>
+        <h1 class="logo"><%= I18n.t('company.title') %></h1>
+      <% end %>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-menu">
+        <li data-tooltip data-placement="bottom" title="<%= I18n.t('company.us.title') %>"><%= link_to I18n.t('company.menu.options.us'), '#us' %></li>
+
+        <li data-tooltip data-placement="bottom" title="<%= I18n.t('company.tech.title') %>"><%= link_to I18n.t('company.menu.options.tech'), '#tech' %></li>
+
+        <li data-tooltip data-placement="bottom" title="<%= I18n.t('company.products.title') %>"><%= link_to I18n.t('company.menu.options.products'), '#products' %></a></li>
+
+        <li><%= link_to I18n.t('company.menu.options.contact'), '#contact' %></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-tooltip data-placement="bottom" title="<%= I18n.t('company.menu.languages.title') %>">
+            <span class="glyphicon glyphicon-globe"></span> <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu" role="menu">
+            <% WEBO_CONFIG['locale']['list'].each do |locale| %>
+              <li<%= raw ' class="disabled"' if I18n.locale.to_s == locale %>>
+                <% if I18n.locale.to_s == locale.to_s %>
+
+                  <span class="hidden-block"><%= I18n.t('company.menu.languages.message') %></span>
+
+                  <%= link_to I18n.t("languages.#{locale}"), '#', id: 'current-locale', 'data-toggle' => 'modal', 'data-target' =>'#modal' %>
+
+                <% else %>
+
+                  <%= link_to I18n.t("languages.#{locale}"), "/?locale=#{locale}" %>
+
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+
+        <% if COMPANY_CONFIG['private_area'] %>
+          <li class="option" data-tooltip data-placement="bottom" title="<%= I18n.t('company.menu.private_area') %>">
+            <%= link_to '#' do %>
+              <span class="glyphicon glyphicon-log-in"></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <span id="top" class="anchor"></span>
+
+  <section id="us-content">
+    <div id="quotes" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% @num_quotes.times do |num| %>
+          <li data-target="#quotes" data-slide-to="<%= num %>"<%= raw ' class="active"' if num == 0 %>></li>
+        <% end %>
+      </ol>
+
+      <div class="carousel-inner" role="listbox">
+        <%
+        @num_quotes.times do |num|
+          num += 1
+        %>
+          <div class="item<%= ' active' if num == 1 %>">
+            <%= image_tag "company/us/quotes/#{num}.png" %>
+
+            <div class="carousel-caption">
+              <%= I18n.t("company.quotes.text.q#{num}") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <%= link_to '#quotes', class: 'left carousel-control', role: 'button', 'data-slide' => 'prev' do %>
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only"><%= I18n.t('company.quotes.buttons.previous') %></span>
+      <% end %>
+
+      <%= link_to '#quotes', class: 'right carousel-control', role: 'button', 'data-slide' => 'next' do %>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only"><%= I18n.t('company.quotes.buttons.next') %></span>
+      <% end %>
+    </div>
+
+    <span id="us" class="anchor"></span>
+
+    <div class="text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2><%= I18n.t('company.us.title') %></h2>
+
+            <p><%= I18n.t('company.us.text.t1') %></p>
+
+            <p><%= I18n.t('company.us.text.t2') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="team" class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-4" data-sr>
+          <div class="box">
+            <div class="icon">
+              <div class="image"><i class="glyphicon glyphicon-earphone"></i></div>
+
+              <div class="info">
+                <h3 class="title"><%= I18n.t('company.us.team.t1.title') %></h3>
+
+                <p><%= I18n.t('company.us.team.t1.text') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4" data-sr>
+          <div class="box">
+            <div class="icon">
+              <div class="image"><i class="glyphicon glyphicon-cloud"></i></div>
+
+              <div class="info">
+                <h3 class="title"><%= I18n.t('company.us.team.t2.title') %></h3>
+
+                <p><%= I18n.t('company.us.team.t2.text') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4" data-sr>
+          <div class="box">
+            <div class="icon">
+              <div class="image"><i class="glyphicon glyphicon-wrench"></i></div>
+
+              <div class="info">
+                <h3 class="title"><%= I18n.t('company.us.team.t3.title') %></h3>
+
+                <p><%= I18n.t('company.us.team.t3.text') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <span id="tech" class="anchor"></span>
+
+  <section id="tech-content">
+
+    <div class="text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 data-sr><%= I18n.t('company.tech.title') %></h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="block" data-sr>
+            <div class="col-md-2">
+              <%= image_tag 'company/tech/1.png', :class => 'img-circle' %>
+            </div>
+
+            <div class="col-md-4">
+              <h3><%= I18n.t('company.tech.blocks.b1.title') %></h3>
+
+              <p><%= I18n.t('company.tech.blocks.b1.text') %></p>
+            </div>
+          </div>
+
+          <div class="block" data-sr>
+            <div class="col-md-2">
+              <%= image_tag 'company/tech/2.png', :class => 'img-circle' %>
+            </div>
+
+            <div class="col-md-4">
+              <h3><%= I18n.t('company.tech.blocks.b2.title') %></h3>
+
+              <p><%= I18n.t('company.tech.blocks.b2.text') %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="block" data-sr>
+            <div class="col-md-2">
+              <%= image_tag 'company/tech/3.png', :class => 'img-circle' %>
+            </div>
+
+            <div class="col-md-4">
+              <h3><%= I18n.t('company.tech.blocks.b3.title') %></h3>
+
+              <p><%= I18n.t('company.tech.blocks.b3.text') %></p>
+            </div>
+          </div>
+
+          <div class="block" data-sr>
+            <div class="col-md-2">
+              <%= image_tag 'company/tech/4.png', :class => 'img-circle' %>
+            </div>
+
+            <div class="col-md-4">
+              <h3><%= I18n.t('company.tech.blocks.b4.title') %></h3>
+
+              <p><%= I18n.t('company.tech.blocks.b4.text') %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <span id="products" class="anchor"></span>
+
+  <section id="products-content">
+    <div class="intro text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 data-sr><%= I18n.t('company.products.title') %></h2>
+
+            <p data-sr><%= I18n.t('company.products.text.t1') %></p>
+
+            <p data-sr><%= I18n.t('company.products.text.t2') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-4">
+          <div class="product">
+            <div class="origami ivr">
+              <h3><%= I18n.t('company.products.list.ivr.origami') %></h3>
+            </div>
+
+            <div class="name"><%= I18n.t('company.products.list.ivr.name') %></div>
+
+            <div class="text">
+              <p><%= raw I18n.t('company.products.list.ivr.text.visible') %></p>
+
+              <div class="hidden-block">
+                <p><%= I18n.t('company.products.list.ivr.text.hidden.h1') %></p>
+
+                <p><%= I18n.t('company.products.list.ivr.text.hidden.h2') %></p>
+              </div>
+            </div>
+
+            <div class="button-container text-center">
+              <%= link_to I18n.t('company.products.button'), '#', class: 'button ok' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-8 col-md-4">
+          <div class="product">
+            <div class="origami acd">
+              <h3><%= I18n.t('company.products.list.acd.origami') %></h3>
+            </div>
+
+            <div class="name"><%= I18n.t('company.products.list.acd.name') %></div>
+
+            <div class="text">
+              <p><%= raw I18n.t('company.products.list.acd.text.visible') %></p>
+
+              <div class="hidden-block">
+                <p><%= I18n.t('company.products.list.acd.text.hidden.h1') %></p>
+
+                <p><%= I18n.t('company.products.list.acd.text.hidden.h2') %></p>
+              </div>
+            </div>
+
+            <div class="button-container text-center">
+              <%= link_to I18n.t('company.products.button'), '#', class: 'button ok' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-8 col-md-4">
+          <div class="product">
+            <div class="origami c2c">
+              <h3><%= I18n.t('company.products.list.c2c.origami') %></h3>
+            </div>
+
+            <div class="name"><%= I18n.t('company.products.list.c2c.name') %></div>
+
+            <div class="text">
+              <p><%= raw I18n.t('company.products.list.c2c.text.visible') %></p>
+
+              <div class="hidden-block">
+                <p><%= I18n.t('company.products.list.c2c.text.hidden.h1') %></p>
+
+                <p><%= I18n.t('company.products.list.c2c.text.hidden.h2') %></p>
+              </div>
+            </div>
+
+            <div class="button-container text-center">
+              <%= link_to I18n.t('company.products.button'), '#', class: 'button ok' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<span id="contact" class="anchor"></span>
+
+<footer>
+  <div class="shadow"></div>
+
+  <div class="container" data-sr>
+    <div class="row">
+      <div class="col-md-2">
+        <h2><%= I18n.t('company.contact.title') %></h2>
+      </div>
+
+      <div >
+        <%= form_tag('/', :class => 'col-md-7') do |f| %>
+          <p class="intro"><%= I18n.t('company.contact.text') %></p>
+
+          <%= text_area_tag(:contact) %>
+
+          <p>
+            <%= submit_tag I18n.t('company.contact.form.buttons.send'), :class => 'button ok' %>
+            <%= submit_tag I18n.t('company.contact.form.buttons.reset'), :type => 'reset', :class => 'button cancel' %>
+          </p>
+        <% end %>
+      </div>
+
+      <div class="col-md-3">
+        <ul class="links">
+          <li><%= mail_to 'info@origamicall.com', I18n.t('company.contact.links.email') %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<%=
+  modal_options = Hash.new
+  modal_options[:auto] = true unless flash[:message].blank?
+  modal_options[:content] = flash[:message].blank? ? I18n.t('company.contact.form.messages.validation') : flash[:message]
+
+  render '/modal_window', modal_options
+%>

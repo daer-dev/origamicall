@@ -1,0 +1,76 @@
+<h1 class="page-title">
+  <%= icon 'clock-o', I18n.t('libs.schedules.index.title'), class: 'fa-fw' %>
+</h1>
+
+<% unless @schedules.blank? %>
+
+  <section id="widget-grid">
+    <div id="schedules" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= icon :table %></span>
+        <h2><%= I18n.t('misc.data') %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+          <table class="data-table table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><%= I18n.t('fields.shared.id') %></th>
+                <th><%= icon 'clock-o', String.new, class: 'text-muted hidden-md hidden-sm hidden-xs' %> <%= I18n.t('fields.shared.name') %></th>
+                <th><%= I18n.t('libs.schedules.fields.schedules.title') %></th>
+                <th><%= I18n.t('fields.controllers.libs__schedules.holidays_list') %></th>
+                <% unless external_engine %>
+                  <th><%= I18n.t('fields.shared.product') %></th>
+                <% end %>
+                <th class="options"><%= I18n.t('misc.options') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @schedules.each do |schedule| %>
+                <tr>
+                  <td><%= schedule.id %></td>
+                  <td><%= schedule.name %></td>
+                  <td><%= schedule.time_slots.length %></td>
+                  <td><%= schedule.holidays.length %></td>
+                  <% unless external_engine %>
+                    <td><%= I18n.t("products.#{schedule.product}") unless schedule.product.blank? %></td>
+                  <% end %>
+                  <td class="options">
+                    <% if schedule.users_id.blank? && not WEBO_CONFIG['users']['administrators'].include? session[:user]['data']['id'] %>
+                      <%= hlink_to schedule_path(schedule) do %>
+                        <%= icon :eye %>
+                        <%= I18n.t('actions.view') %>
+                      <% end %>
+                    <% else %>
+                      <%= hlink_to edit_schedule_path(schedule) do %>
+                        <%= icon :edit %>
+                        <%= I18n.t('actions.edit') %>
+                      <% end %>
+
+                      <%= hlink_to delete_schedule_path(schedule) do %>
+                        <%= icon :remove %>
+                        <%= I18n.t('actions.delete') %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% content_for :js_tags do %>
+    <%= render 'assets_calls/javascripts/data_tables' %>
+  <% end %>
+
+<% else %>
+
+  <div class="alert alert-info fade in">
+    <p><%= icon :info, I18n.t('messages.error.no_results'), class: 'fa-fw' %></p>
+  </div>
+
+<% end %>

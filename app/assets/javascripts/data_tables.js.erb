@@ -1,0 +1,92 @@
+var responsiveHelper_dt_basic = undefined;
+
+var breakpointDefinition = {
+  tablet : 1024,
+  phone : 480
+};
+
+if($('h1.page-title').length > 0) {
+  var file_name = $('h1.page-title').html().replace(/(<([^>]+)>)/ig, '').trim();
+} else {
+  var file_name = document.title;
+}
+
+$('.data-table').dataTable({
+  'order': [ [ 0, 'desc' ] ],
+  'sDom': "<'dt-toolbar'<'col-xs-8 col-sm-4'f><'col-sm-4 col-xs-8 hidden-xs'TC><'col-sm-4 col-xs-8 hidden-xs'l>Rr>" + 't' + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+  'oTableTools': {
+    'aButtons': [
+      {
+        'sExtends': 'copy',
+        'sButtonText': '<%= ApplicationController.helpers.icon :copy %>'
+      },
+      {
+        'sExtends': 'csv',
+        'sButtonText': '<%= ApplicationController.helpers.icon "file-text-o" %>',
+        'sTitle': file_name + ' (CSV)'
+      },
+      {
+        'sExtends': 'xls',
+        'sButtonText': '<%= ApplicationController.helpers.icon "file-excel-o" %>',
+        'sTitle': file_name + ' (Excel)'
+      },
+      {
+        'sExtends': 'pdf',
+        'sButtonText': '<%= ApplicationController.helpers.icon "file-pdf-o" %>',
+        'sTitle': file_name,
+        'sPdfSize': 'letter'
+      },
+      {
+        'sExtends': 'print',
+        'sButtonText': '<%= ApplicationController.helpers.icon :print %>',
+        'sMessage': locale['data_tables.print_message']
+      }
+    ],
+    'sSwfPath': '<%= asset_path "datatables.swf" %>'
+  },
+  'oColVis': {
+  'buttonText': '<%= ApplicationController.helpers.icon :columns %>'
+  },
+  'autoWidth': true,
+  'aoColumnDefs': [
+    {
+      'bSearchable': false,
+      'aTargets': 'options'
+    },
+    {
+      'bSortable': false,
+      'aTargets': 'options'
+    }
+  ],
+  'preDrawCallback': function() {
+    if(!responsiveHelper_dt_basic) {
+      responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('.data-table'), breakpointDefinition);
+    }
+  },
+  'rowCallback': function(nRow) {
+    responsiveHelper_dt_basic.createExpandIcon(nRow);
+  },
+  'drawCallback': function(oSettings) {
+    responsiveHelper_dt_basic.respond();
+  },
+  'language': {
+    'emptyTable': locale['data_tables.empty_table'],
+    'info': locale['data_tables.info'],
+    'infoEmpty': locale['data_tables.info_empty'],
+    'infoFiltered': locale['data_tables.info_filtered'],
+    'lengthMenu': locale['data_tables.length_menu'],
+    'loadingRecords': locale['data_tables.loading_records'],
+    'processing': locale['data_tables.processing'],
+    'zeroRecords': locale['data_tables.zero_records'],
+    'paginate': {
+      'first': locale['data_tables.paginate.first'],
+      'last': locale['data_tables.paginate.last'],
+      'next': locale['data_tables.paginate.next'],
+      'previous': locale['data_tables.paginate.previous']
+    },
+    'aria': {
+      'sortAscending':  locale['data_tables.aria.sort_ascending'],
+      'sortDescending': locale['data_tables.aria.sort_descending']
+    }
+  }
+});

@@ -1,0 +1,220 @@
+es_ES:
+
+  number:
+    format:
+      separator: ','
+      delimiter: '.'
+      precision: 3
+    currency:
+      format:
+        format: '%n %u'
+        unit: €
+        separator: ','
+        delimiter: '.'
+        precision: 2
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+    human:
+      format:
+        delimiter: ''
+        precision: 1
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          kb: KB
+          mb: MB
+          gb: GB
+          tb: TB
+
+  datetime:
+    formats:
+      default: '%d/%m/%Y %H:%M'
+    distance_in_words:
+      half_a_minute: medio minuto
+      less_than_x_seconds:
+        one: menos de un segundo
+        other: 'menos de %{count} segundos'
+      x_seconds:
+        one: un segundo
+        other: '%{count} segundos'
+      less_than_x_minutes:
+        one: menos de un minuto
+        other: 'menos de %{count} minutos'
+      x_minutes:
+        one: un minuto
+        other: '%{count} minutos'
+      about_x_hours:
+        one: alrededor de una hora
+        other: 'alrededor de %{count} horas'
+      x_days:
+        one: un día
+        other: '%{count} días'
+      about_x_months:
+        one: alrededor de un mes
+        other: 'alrededor de %{count} meses'
+      x_months:
+        one: un mes
+        other: '%{count} meses'
+      about_x_years:
+        one: alrededor de un año
+        other: 'alrededor de %{count} años'
+      over_x_years:
+        one: más de un año
+        other: 'más de %{count} años'
+
+  errors:
+    template:
+      title:
+        singular: Se encontró un error al intentar ejecutar la operación
+        plural: Se encontraron %{count} errores al intentar ejecutar la operación
+    messages:
+      inclusion: no está incluído en la lista.
+      exclusion: está reservado.
+      invalid: no es válido.
+      confirmation: no coincide con su confirmación.
+      accepted: debe ser aceptado.
+      empty: no puede estar vacío.
+      blank: no puede estar en blanco.
+      too_long: 'es demasiado largo (se permiten %{count} caracteres como máximo).'
+      too_short: 'es demasiado corto (se permiten %{count} caracteres como mínimo).'
+      wrong_length: 'no tiene la longitud correcta (%{count} caracteres).'
+      taken: ya está en uso.
+      not_a_number: no es un número.
+      greater_than: 'debe ser mayor que %{count}.'
+      greater_than_or_equal_to: 'debe ser mayor o igual que %{count}.'
+      equal_to: 'debe ser %{count}.'
+      less_than: 'debe ser menor que %{count}.'
+      less_than_or_equal_to: 'debe ser menor o igual que %{count}.'
+      odd: debe ser impar.
+      even: debe ser par.
+      global_phone: no es un número de teléfono válido (se admiten tanto fijos y móviles nacionales, como números internacionales o especiales).
+      global_no_special_phone: no es un número de teléfono válido (se admiten tanto fijos y móviles nacionales como números internacionales).
+      national_phone: no es un número de teléfono válido (sólo se admiten móviles y fijos nacionales).
+      landline_phone: no es un número de teléfono fijo válido (sólo se admiten nacionales).
+      mobile_phone: no es un número de teléfono móvil válido.
+      special_phone: no es un número de teléfono especial válido (sólo se admiten los que comienzan por 80 o 90).
+      international_phone: no es un número de teléfono internacional válido (sólo se tienen en cuenta los de fuera de España).
+      email: no es un email válido.
+      date: no es una fecha válida (en formato "<em>dd/mm/YYYY</em>").
+      date_list: no es una lista de fechas válida (en formato "<em>dd/mm/YYYY</em>" y separadas por comas).
+      time: no es una hora válida (en formato "<em>HH:mm</em>").
+      password: por motivos de seguridad, debe tener entre 6 y 32 caracteres de longitud (sin espacios), entre los cuales al menos debe haber uno en mayúsculas, otro en minúsculas y un número.
+      url: no es una dirección válida.
+      ip_address: no es una dirección IP válida.
+      ip_address_list: no es una lista de direcciones IP válida. Puede que haya alguna con una sintáxis errónea.
+      login: no es válido. Para serlo, debe estar en minúsculas y no puede contener tildes, espacios o caracteres extraños. Su longitud debe ser, como máximo, de 16 caracteres.
+      no_file: debe seleccionar un archivo.
+      no_audio_file: el archivo seleccionado debe ser un MP3 o WAV.
+      no_csv_file: el archivo seleccionado debe ser un CSV.
+      max_size_250kb: el archivo debe ocupar menos de 250KB.
+      max_size_10mb: el archivo debe ocupar menos de 10MB.
+
+  date:
+    formats:
+      default: '%d/%m/%Y'
+      short: '%e de %b'
+      long: '%e de %B de %Y'
+    day_names:
+      - Domingo
+      - Lunes
+      - Martes
+      - Miércoles
+      - Jueves
+      - Viernes
+      - Sábado
+    abbr_day_names:
+      - Dom
+      - Lun
+      - Mar
+      - Mie
+      - Jue
+      - Vie
+      - Sab
+    abbr_day_names_2:
+      - D
+      - L
+      - M
+      - X
+      - J
+      - V
+      - S
+    month_names:
+      - ~
+      - Enero
+      - Febrero
+      - Marzo
+      - Abril
+      - Mayo
+      - Junio
+      - Julio
+      - Agosto
+      - Septiembre
+      - Octubre
+      - Noviembre
+      - Diciembre
+    abbr_month_names:
+      - ~
+      - Ene
+      - Feb
+      - Mar
+      - Abr
+      - May
+      - Jun
+      - Jul
+      - Ago
+      - Set
+      - Oct
+      - Nov
+      - Dic
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: '%A, %e de %B de %Y %H:%M:%S %z'
+      short: '%e de %b %H:%M'
+      long: '%e de %B de %Y %H:%M'
+      standalone: '%H:%M:%S %z'
+    am: AM
+    pm: PM
+
+  support:
+    array:
+      words_connector: ', '
+      two_words_connector: ' y '
+      last_word_connector: ' y '
+
+  messages:
+    info:
+      loading: Cargando
+    success:
+      create: ¡Elemento creado con éxito!
+      update: ¡Elemento actualizado con éxito!
+      destroy: ¡Elemento eliminado con éxito!
+    error:
+      server: No se ha podido completar la operación debido a un problema con el servidor.
+      no_results: No se ha encontrado ningún resultado.
+      ajax: Error en la carga de la página.
+      status_400:
+        title: Solicitud incorrecta
+        text: Los datos de su petición están mal formados.
+      status_403:
+        title: Acceso prohibido
+        text: Está intentando ver una página sobre la que no tiene permisos.
+      status_404:
+        title: La página que está buscando no existe
+        text: Puede que haya escrito mal la dirección. Si ha llegado hasta aquí haciendo click en un enlace, contacte con el administrador. Gracias.
+      status_500:
+        title: Error general
+        text: Se ha producido un fallo en la ejecución de la página. El administrador de la misma ha sido informado de ello, por lo que estará solucionado a la mayor brevedad posible.<br />Sentimos las molestias que esto haya podido causarle. Gracias.
+    question:
+      sure: ¿Está seguro? Esta acción no se puede deshacer

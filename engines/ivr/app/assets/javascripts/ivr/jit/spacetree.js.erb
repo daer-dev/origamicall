@@ -1,0 +1,460 @@
+preload_images([
+  <% IVR_CONFIG['nodes']['types'].each do |k,v| %>
+    '<%= asset_path("ivr/nodes/#{k}.png", type: :image) %>',
+  <% end %>
+  '<%= asset_path('ivr/nodes/ok.png', type: :image) %>',
+  '<%= asset_path('ivr/nodes/error.png', type: :image) %>'
+]);
+
+var spacetree_div = '#spacetree.' + spacetree_preferences['view'];
+
+var Log = {
+  elem: false,
+  write: function(text) {
+    this.elem = $(spacetree_div + ' .bar .log');
+    this.elem.html(text);
+    this.elem.scrollLeft((500 - this.elem.width() / 2) + 'px');
+  }
+};
+
+var url_parts = document.location.href.split('/');
+var url_action = '/' + url_parts[url_parts.length - 1];
+var url_parent_id = url_parts[url_parts.length - 2];
+var y_pos = { min: 0, max: 0 };
+
+function children_count(parent, num_level) {
+  if(typeof(num_level) == 'undefined') { var num_level = 1; }
+
+  if(typeof(parent['children']) == 'undefined' || parent['children'].length == 0) {
+    return [ num_level, 0 ];
+  }
+
+  var max = num_level;
+  var hijos = parent['children'].length;
+
+  for(var i = 0; i < parent['children'].length; i++) {
+    var data = children_count(parent['children'][i], num_level + 1);
+
+    if(data[0] > max) { max = data[0]; }
+
+    if(data[1] > hijos) { hijos = data[1]; }
+  }
+
+  return [ max, hijos ];
+}
+
+function common_styles() {
+  $('.st_node .name').css('height', spacetree_preferences['node']['height'] - spacetree_preferences['label']['padding_top'])
+
+  $('.st_disabled_node').css({
+    'border': '1px solid ' + spacetree_preferences['node']['color'],
+    'background-color': spacetree_preferences['bg_colors']['main_sub']
+  });
+
+  $('.st_node .ico').css({
+    'width': spacetree_preferences['node']['ico']['width'] + 'px',
+    'margin-left': spacetree_preferences['node']['ico']['margin_left'] + 'px',
+    'margin-right': spacetree_preferences['node']['ico']['margin_right'] + 'px'
+  });
+
+  $('.st_node .dtmf_asr').css({
+    'width': spacetree_preferences['node']['dtmf_asr']['width'] + 'px',
+    'margin-left': spacetree_preferences['node']['dtmf_asr']['margin_left'] + 'px',
+    'margin-right': spacetree_preferences['node']['dtmf_asr']['margin_right'] + 'px'
+  });
+
+  $('.st_node .status').css({
+    'width': spacetree_preferences['node']['status']['width'] + 'px',
+    'margin-left': spacetree_preferences['node']['status']['margin_left'] + 'px',
+    'margin-right': spacetree_preferences['node']['status']['margin_right'] + 'px'
+  });
+}
+
+function cal_positions(node) {
+  var y_node_pos = Math.ceil(node.getPos().y);
+
+  if(y_node_pos < y_pos.min) { y_pos.min = y_node_pos }
+
+  if(y_node_pos > y_pos.max) { y_pos.max = y_node_pos }
+}
+
+function onclick_event(selected_node) {
+  if(selected_node.split('#').length == 2) {
+    var id = selected_node.split('#')[0];
+    var name = selected_node.split('#')[1];
+
+    set_cookie('ivr_nodes_id', id);
+    set_cookie('ivr_nodes_name', name);
+    $('.st_node').css('border', '');
+    $('#st_node_' + id).css('border', '1px solid ' + spacetree_preferences['node']['selected']);
+  } else {
+    var id = selected_node.split('#')[0];
+    var type = selected_node.split('#')[1];
+    var enabled = selected_node.split('#')[2];
+    if(enabled == 'undefined') { var enabled = 'false'; }
+
+    // Creamos la cookie que usaremos después para seleccionar el nodo que corresponda
+    set_cookie(('st_selected_node_' + url_parent_id), (id + '#' + type + '#' + enabled));
+
+    var edit_button = $(spacetree_div + ' .bar .options .node .edit');
+    var delete_button = $(spacetree_div + ' .bar .options .node .delete');
+    var enable_button = $(spacetree_div + ' .bar .options .node .enable');
+    var disable_button = $(spacetree_div + ' .bar .options .node .disable');
+
+    if(typeof(delete_button) != 'undefined') {
+      // Si el nodo seleccionado es el principal, ocultamos el botón de eliminar
+      if(type == 'main') {
+        delete_button.fadeOut();
+      } else {
+        delete_button.fadeIn();
+      }
+    }
+
+    // Si el nodo está activo mostramos un botón. Sino, el otro
+    if(enabled == 'true') {
+      enable_button.hide();
+      disable_button.show();
+    } else {
+      disable_button.hide();
+      enable_button.show();
+    }
+
+    // Cambiamos el "href" de los enlaces
+    var buttons = [ edit_button, delete_button, enable_button, disable_button ]
+    for(i = 0; i < buttons.length; i++) {
+      if(typeof(buttons[i]) != 'undefined' && typeof(buttons[i].attr('href')) != 'undefined') {
+        buttons[i].attr('href', buttons[i].attr('href').replace(/([0-9])+(\/[a-z]+)$/, id + '$2'));
+      }
+    }
+  }
+}
+
+// Mostramos un nodo como seleccionado al cargar la página
+function select_node() {
+  var selected_node = $('#ivr_nodes_id').val();
+  if(selected_node != '') { $('#st_node_' + selected_node).css('border', '1px solid ' + spacetree_preferences['node']['selected']); }
+}
+
+function draw_data(st) {
+  // Obtenemos el canvas del SpaceTree y definimos la fuente a utilizar
+  ctx = st.canvas.getCtx();
+  ctx.font = spacetree_preferences['full']['print']['font'];
+  ctx.fillStyle = spacetree_preferences['full']['print']['color'];
+
+  // Inicializamos los arrays que contendrán las imágenes (iconos de tipo y estado) y los textos
+  images = Array();
+  texts = Array();
+
+  // Recorremos el árbol
+  st.graph.eachNode(function(node) {
+    // Averiguamos la posición del nodo y, en base a ella, calculamos dónde dibujaremos el resto de datos
+    node_pos = node.getPos();
+    x = node_pos.x - (spacetree_preferences['node']['width'] / 2) + spacetree_preferences['full']['content']['margin']['left'] - 5;
+    y = node_pos.y + spacetree_preferences['full']['content']['margin']['top']['text'];
+    max_width = spacetree_preferences['node']['width'] - (spacetree_preferences['full']['content']['margin']['left'] * 2);
+    new_distance = 0;
+
+    // Tipo
+    if(typeof(node.data.type) != 'undefined' && node.data.type != 'main') {
+      images.push({ 'src': 'ivr/nodes/' + node.data.type + '.png', 'x': x, 'y': y });
+      new_distance += spacetree_preferences['node']['ico']['width'] + spacetree_preferences['full']['content']['margin']['left'];
+    }
+
+    // Estado
+    if(typeof(node.data.status) != 'undefined') {
+      images.push({ 'src': 'ivr/nodes/' + (node.data.status ? 'ok' : 'error') + '.png', 'x': x + new_distance, 'y': y });
+      new_distance += spacetree_preferences['node']['status']['width'] + spacetree_preferences['full']['content']['margin']['left'];
+    }
+
+    // Calculamos la distancia
+    x += new_distance;
+    max_width -= new_distance;
+
+    // Añadimos un indicador para saber si el nodo tiene DTMF o ASR activados
+    text = node.name
+    if(typeof(node.data.dtmf_value) != 'undefined') {
+      text = '[D] ' + text;
+    } else if(typeof(node.data.asr_value) != 'undefined') {
+      text = '[A] ' + text;
+    }
+
+    // Limitamos la longitud del texto y lo agregamos al array
+    text = text.toString().substring(0, spacetree_preferences['full']['content']['text_limit']);
+    texts.push({ 'text': text, 'x': x, 'y': y, 'max_width': max_width });
+  });
+
+  // Insertamos las imágenes y textos
+  for(var i = 0; i < images.length; i++) {
+    var img = new Image();
+    img.src = '/assets/' + images[i].src;
+    img.onload = (function(img, i){
+      return function () {
+        ctx.drawImage(img, images[i].x, images[i].y - spacetree_preferences['node']['ico']['width'] + spacetree_preferences['full']['content']['margin']['top']['images']);
+        if(typeof(texts[i]) != 'undefined') { ctx.fillText(texts[i].text, texts[i].x, texts[i].y, texts[i].max_width); }
+      }
+    })(img, i);
+  }
+
+  // Seleccionamos el nodo que corresponda
+  select_node();
+}
+
+function compute_graph() {
+  if(get_cookie('st_reload_' + url_parent_id) == 'true') {
+    // Mostramos un mensaje que indique que vamos a procesar la petición
+    canvas_html = $(spacetree_div + ' #canvas .content div').html();
+    $(spacetree_div + ' #canvas .content div').html('<div class="loading_message">' + $(spacetree_div + ' #canvas #loading').html() + '</div>');
+    // Obtenemos el listado de nodos mediante AJAX, actualizamos el campo y redibujamos el gráfico
+    $.get(document.location.href.split('#')[1].replace(url_action, '/export'), function(data) {
+      $(spacetree_div + ' #canvas .content div').html(canvas_html);
+      $('#spacetree_nodes').val(data);
+      create_tree(get_cookie('st_selected_node_' + url_parent_id).replace(/%23/g, '#'));
+    });
+  }
+}
+
+function create_tree(selected_node) {
+  eval('nodes = ' + $('#spacetree_nodes').val());
+
+  // Controles de orientación y alineación
+  $('#main_node_position').change(function() { st.switchPosition($('#main_node_position option:selected').val(), 'animate'); });
+  $('#tree_alignment').change(function() { st.switchAlignment($('#tree_alignment option:selected').val(), 'animate'); });
+
+  // Mostramos un mensaje si el usuario redimensiona la ventana (sólo para la vista completa)
+  if(spacetree_preferences['view'] == 'full') {
+    original_res = $(window).width() + 'x' + $(window).height();
+
+    $(window).resize(function() {
+      current_res = $(window).width() + 'x' + $(window).height();
+
+      if(original_res != current_res && !$('#window_resize_alert').hasClass('disabled')) {
+        $('#window_resize_alert').fadeIn().delay(2500);
+        setTimeout('$(\'#window_resize_alert\').fadeOut();', 1000);
+        $('#window_resize_alert').addClass('disabled');
+      } else {
+        $('#window_resize_alert').fadeOut();
+      }
+    });
+  }
+
+  // Calculamos las dimensiones del gráfico en función del número de hijos y de la altura máxima definida
+  children = children_count(nodes);
+  var num_levels = children[0];
+
+  // El límite de altura sólo se aplica si estamos en la vista simple
+  if(spacetree_preferences['view'] == 'simple') {
+    var max_children =  children[1];
+    if(max_children == 0) { max_children = 1; }
+
+    canvas_height = ((max_children * (spacetree_preferences['node']['height'] + 5)) + 10);
+    if(canvas_height > spacetree_preferences['canvas_height']['max']) {
+      $(spacetree_div + ' #canvas').css('overflow', 'auto');
+      $(spacetree_div + ' #canvas').css('height', spacetree_preferences['canvas_height']['max'] + 'px');
+    }
+
+    // Limite mínimo
+    if(canvas_height < spacetree_preferences['canvas_height']['min']) { canvas_height = spacetree_preferences['canvas_height']['min']; }
+
+    $(spacetree_div + ' #canvas .content').css('height', canvas_height + 'px');
+  }
+
+  node_width = (spacetree_preferences['node']['width'] + spacetree_preferences['node']['margin_left'] + spacetree_preferences['node']['margin_right']);
+
+  // Definimos las preferencias comunes
+  preferences = {
+    constrained: false,
+    levelsToShow: 9999999999999999999999999,
+    duration: spacetree_preferences['duration'],
+    transition: $jit.Trans.Quart.easeInOut,
+    levelDistance: spacetree_preferences['level_distance'],
+    Node: {
+      height: spacetree_preferences['node']['height'],
+      width: node_width,
+      type: spacetree_preferences['node']['type'],
+      color: spacetree_preferences['node']['color'],
+      overridable: spacetree_preferences['node']['overridable']
+    },
+    Edge: {
+      type: spacetree_preferences['edge']['type'],
+      overridable: spacetree_preferences['edge']['overridable']
+    },
+    onCreateLabel: function(label, node) {
+      label.id = node.id;
+
+      label.onclick = function() {
+        if(spacetree_preferences['view'] == 'simple') {
+          st.onClick(node.id, onclick_event(node.id + '#' + node.data.type + '#' + node.data.active) );
+        } else if($('#ivr_nodes_id').length > 0) {
+          onclick_event(node.id + '#' + node.name);
+        }
+      };
+
+      // Posición vertical
+      cal_positions(node);
+
+      // Capas
+      var ico = '';
+      var dtmf_asr = '';
+      var status = '';
+      var extra_class = '';
+      var add_node_button = '';
+
+      var label_height = spacetree_preferences['node']['height'] - spacetree_preferences['label']['padding_top'];
+      var name_width = spacetree_preferences['node']['width'];
+
+      if(typeof(node.data.type) != 'undefined' && node.data.type != 'main') {
+        ico = '<div class="ico">&nbsp;</div>';
+        name_width = name_width - spacetree_preferences['node']['ico']['width'] - spacetree_preferences['node']['ico']['margin_left'] - spacetree_preferences['node']['ico']['margin_right'];
+      }
+
+      if(typeof(node.data.dtmf_value) != 'undefined' || typeof(node.data.asr_value) != 'undefined') {
+        if(typeof(node.data.dtmf_value) == 'undefined') {
+          dtmf_asr_content = 'ASR: ' + node.data.asr_value + '.';
+        } else {
+          dtmf_asr_content = 'DTMF: ' + node.data.dtmf_value + '.';
+        }
+
+        dtmf_asr = '<div class="dtmf_asr" onclick="alert(\'' + dtmf_asr_content + '\');">?</div>';
+        extra_class = ' st_option_node';
+        name_width = name_width - spacetree_preferences['node']['dtmf_asr']['width'] - spacetree_preferences['node']['dtmf_asr']['margin_left'] - spacetree_preferences['node']['dtmf_asr']['margin_right'];
+      }
+
+      if(typeof(node.data.status) != 'undefined') {
+        var status_name = node.data.status ? 'ok' : 'error';
+        status = '<div class="status status_' + status_name + '">&nbsp;</div>';
+        extra_class = ' st_' + status_name + '_node'
+        name_width = name_width - spacetree_preferences['node']['status']['width'] - spacetree_preferences['node']['status']['margin_left'] - spacetree_preferences['node']['status']['margin_right'];
+      }
+
+      if(!node.data.active) { extra_class += ' st_disabled_node'; }
+
+      // Si un nodo tiene varios hijos (estados), no se permite la inserción de ningún otro entre medias
+      if(spacetree_preferences['view'] == 'simple') {
+        num_children = 0;
+        node.eachSubnode(function(n) { num_children++; });
+        if(num_children < 2 && node.data.type != 'jump' && node.data.type != 'menu' && node.data.type != 'transfer' && node.data.type.indexOf('condition') == -1) { add_node_button = '<div class="add_node"><a href="javascript:close_div(\'lib\');load_in_div(\'' + document.location.href.split('#')[1].replace(url_action, '/nodes/new') + '?parent=' + node.id + '\', \'node\');"><%= ApplicationController.helpers.icon 'plus-circle', String.new, class: 'fa-lg' %></a></div>'; }
+      }
+
+      label.innerHTML = '<div id="st_node_' + node.id + '" class="st_node st_' + node.data.type + '_node' + extra_class + '">' + ico + dtmf_asr + status + '<div class="name">' + node.name + '</div>' + add_node_button + '</div>';
+
+      // Estilos propios del nodo
+      label.style.width = node_width + 'px';
+      label.style.height = label_height + 'px';
+      label.style.cursor = spacetree_preferences['label']['cursor'];
+      label.style.color = spacetree_preferences['label']['color'];
+      label.style.fontSize = spacetree_preferences['label']['font_size'];
+      label.style.textAlign = spacetree_preferences['label']['text_align'];
+      label.style.paddingTop = spacetree_preferences['label']['padding_top'] + 'px';
+
+      $('#st_node_' + node.id + ' .name').css({
+        'width': name_width + 'px',
+        'height': label_height + 'px',
+        'display': 'none',
+        'margin-left': spacetree_preferences['node']['margin_left'] + 'px',
+        'margin-right': spacetree_preferences['node']['margin_right'] + 'px'
+      });
+    },
+    onBeforePlotNode: function(node) {
+      if(node.data.active == true) {
+        if(node.selected) {
+          node.data.$color = spacetree_preferences['bg_colors']['main'];
+          $('#st_node_' + node.id).css('background-color', spacetree_preferences['bg_colors']['main']);
+          if(typeof(node.data.dtmf_value) != 'undefined' || typeof(node.data.asr_value) != 'undefined') { $('#st_node_' + node.id + ' .dtmf_asr').css('background-color', spacetree_preferences['bg_colors']['main_sub']); }
+        } else {
+          delete node.data.$color;
+          $('#st_node_' + node.id).css('background-color', '');
+          if(typeof(node.data.dtmf_value) != 'undefined' || typeof(node.data.asr_value) != 'undefined') { $('#st_node_' + node.id + ' .dtmf_asr').css('background-color', ''); }
+
+          if(!node.anySubnode('exist')) {
+            node.data.$color = spacetree_preferences['node']['color'];
+          }
+        }
+      }
+      // Estilos comunes
+      common_styles();
+    },
+    onBeforePlotLine: function(adj) {
+      if(adj.nodeFrom.selected && adj.nodeTo.selected) {
+        adj.data.$color = spacetree_preferences['bg_colors']['main'];
+        adj.data.$lineWidth = spacetree_preferences['line_width'];
+      } else {
+        delete adj.data.$color;
+        delete adj.data.$lineWidth;
+      }
+    }
+  }
+
+  if(spacetree_preferences['view'] == 'simple') {
+    // Vista normal
+    $.extend(preferences, {
+      Navigation: {
+        enable: true,
+        panning: true
+      },
+      onBeforeCompute: function(node) {
+        Log.write(spacetree_preferences['log']['loading'] + ' "' + node.name + '"');
+      },
+      onComplete: function() {
+        Log.write(spacetree_preferences['log']['done']);
+      }
+    });
+
+    $(spacetree_div + ' #canvas').css('cursor', 'move');
+  } else {
+    // Vista completa
+    $.extend(preferences, {
+      onAfterCompute: function() {
+        if(typeof(canvas_resize) == 'undefined' || !canvas_resize) {
+          canvas_resize = true;
+
+          if(y_pos.max >= 0 && y_pos.min <= 0) {
+            // Calculamos las medidas del canvas
+            full_width = ((spacetree_preferences['node']['width'] + spacetree_preferences['level_distance']) * num_levels) + (spacetree_preferences['full']['margin'] * 2);
+            full_height = Math.abs(y_pos.min) + Math.abs(y_pos.max) + (spacetree_preferences['full']['margin'] * 2);
+
+            // Lo redimensionamos
+            st.canvas.resize(full_width, full_height);
+            $(spacetree_div + ' #canvas #loading').fadeOut();
+            $('#canvas-canvaswidget').delay(350).fadeIn();
+            $(spacetree_div + ' .bar .options .tree .print').fadeIn();
+
+            // Dibujamos el tipo y estado de cada nodo
+            draw_data(st);
+
+            // Y lo movemos para centrarlo en la pantalla
+            offset_x = 0 - (full_width - spacetree_preferences['node']['width'] - spacetree_preferences['full']['margin']) / 2;
+            offset_y = (full_height / 2) - Math.abs(y_pos.max) - spacetree_preferences['full']['margin'];
+            st.canvas.translate(offset_x, offset_y);
+          }
+
+          canvas_resize = false;
+        }
+      }
+    });
+
+    // Definimos la altura del canvas, restándole la de la barra y la del botón de cerrar de la ventana modal (de ahí el número a pelo)
+    $(spacetree_div + ' #canvas').height($(document).height() - $(spacetree_div + ' .bar').height() - 110);
+  }
+
+  // Creamos la capa donde irá el gráfico, borrándola primero para segurarnos de que no vamos a ver datos antiguos
+  $(spacetree_div + ' #canvas .content div').remove();
+  $(spacetree_div + ' #canvas .content').html('<div id="spacetree_canvas"></div>');
+
+  var st = new $jit.ST($.extend(preferences, {
+    injectInto: 'spacetree_canvas',
+    width: $(spacetree_div + ' #canvas .content').width(),
+    height: $(spacetree_div + ' #canvas .content').height()
+  }));
+
+  st.loadJSON(nodes);
+  st.compute();
+  st.geom.translate(new $jit.Complex(-($(spacetree_div + ' #canvas .content').width() + node_width), -$(spacetree_div + ' #canvas .content').height()), 'current');
+
+  // Si no se nos ha proporcionado ningún nodo, seleccionamos el principal
+  if(typeof(selected_node) == 'undefined' || selected_node == null) { selected_node = nodes.id + '#' + nodes.data.type + '#' + nodes.data.active; }
+
+  st.onClick(selected_node.split('#')[0], onclick_event(selected_node));
+}
+
+$(spacetree_div).fadeIn();
+create_tree();

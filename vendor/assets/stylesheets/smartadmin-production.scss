@@ -1,0 +1,44 @@
+/*!
+ * SmartAdmin - Responsive WebApp
+ *
+ * Copyright 2014 bootstraphunter.com
+ * Designed and built with all the love in the world by @bootstraphunt.
+ */
+
+// Core variables and mixins
+@import 'variables';
+@import 'bootstrap/mixins';
+
+// Libraries
+@import 'library/animation/animation-engine';
+@import 'library/flags/flags';
+@import 'library/cursors/cursors';
+
+// Components
+@import 'smartadmin/component-fullscreen';
+@import 'smartadmin/component-jqueryui';
+@import 'smartadmin/component-smartforms';
+
+// Sections
+@import 'smartadmin/section-ajax-msg';
+
+// Main
+@import 'smartadmin/main';
+@import 'smartadmin/main-progress';
+@import 'smartadmin/main-container-fix';
+@import 'smartadmin/main-special-class';
+@import 'smartadmin/main-form-radiocheck';
+@import 'smartadmin/main-animated';
+@import 'smartadmin/main-colorpallet';
+@import 'smartadmin/main-page-footer';
+@import 'smartadmin/main-responsive';
+
+// Patches
+@import 'smartadmin/ie-fix';
+
+// UI (overrides and new)
+@import 'smartadmin/top-menu';
+@import 'smartadmin/no-menu';
+
+// Overrides
+@import 'overrides';

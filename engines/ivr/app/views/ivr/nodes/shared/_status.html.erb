@@ -1,0 +1,19 @@
+<% if %w(new create).include? params[:action] || (@node.respond_to? :children && @node.children.length < 2) %>
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.status.title') %></span>
+
+    <div class="status_nodes">
+      <% if @node.children.select{ |x| x.status == true }.blank? %>
+        <span><%= image_tag('ivr/nodes/ok.png', :size => '16x16', :alt => I18n.t('ivr.nodes.status.ok')) %> <%= f.label :ok_node, I18n.t('ivr.nodes.status.ok') %></span>
+
+        <%= smart_select_field f, :ok_node, options_from_hash_for_select(@available_nodes, :id, :name, @node.ok_node, true) %>
+      <% end %>
+
+      <% if @node.children.select{ |x| x.status == false }.blank? %>
+        <span><%= image_tag('ivr/nodes/error.png', :size => '16x16', :alt => I18n.t('ivr.nodes.status.error')) %> <%= f.label :error_node, I18n.t('ivr.nodes.status.error') %></span>
+
+        <%= smart_select_field f, :error_node, options_from_hash_for_select(@available_nodes, :id, :name, @node.error_node, true) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

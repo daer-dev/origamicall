@@ -1,0 +1,40 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.source_condition.titles.sources') %></span>
+
+    <div class="alert alert-info fade in">
+      <p><%= icon :info, I18n.t('ivr.nodes.source_condition.sources.info'), class: 'fa-fw' %></p>
+    </div>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="40%"><%= I18n.t('ivr.nodes.source_condition.fields.mode') %></td>
+          <th width="40%"><%= I18n.t('ivr.nodes.source_condition.fields.phone_number') %></td>
+          <th width="20%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="sources_list">
+        <%= render 'ivr/nodes/source_condition/source', f: f, num: 0, mode: @node.related_sources['s_0']['mode'], phone_number: @node.related_sources['s_0']['phone_number'] %>
+        <% unless @node.related_sources.blank? %>
+          <% @node.related_sources.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/source_condition/source', f: f, num: num, mode: v['mode'], phone_number: v['phone_number'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= render 'ivr/nodes/shared/status', :f => f %>
+</fieldset>

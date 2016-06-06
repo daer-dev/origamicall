@@ -1,0 +1,28 @@
+<span id="activity" class="activity-dropdown">
+  <%= icon 'envelope-o' %>
+  <b class="badge">0</b>
+</span>
+
+<div class="ajax-dropdown">
+  <div class="btn-group btn-group-justified" data-toggle="buttons">
+    <label class="btn btn-default">
+      <%= radio_button_tag 'activity', String.new, false, id: 'product' %>
+      <%= I18n.t('header.activity.options.product') %> (0)
+    </label>
+
+    <label class="btn btn-default">
+      <%= radio_button_tag 'activity', String.new, false, id: 'common' %>
+      <%= I18n.t('header.activity.options.common') %> (0)
+    </label>
+  </div>
+
+  <div class="ajax-notifications custom-scroll">
+    <div class="alert alert-transparent">
+      <h4><%= I18n.t('header.activity.message.title') %></h4>
+
+      <p><%= I18n.t('header.activity.message.text') %></p>
+    </div>
+
+    <%= icon 'envelope-o', String.new, class: 'fa-5x fa-border' %>
+  </div>
+</div>

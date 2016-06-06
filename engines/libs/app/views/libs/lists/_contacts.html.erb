@@ -1,0 +1,22 @@
+<div id="list_<%= @list.id %>_contacts" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+  <header>
+    <span class="widget-icon"><%= icon :users %></span>
+    <h2><%= I18n.t('libs.lists.contacts.name') %> (<%= @list.contacts.length %>)</h2>
+  </header>
+
+  <div>
+    <div class="widget-body no-padding">
+      <% if @list.contacts.blank? %>
+        <div class="alert alert-info fade in">
+          <p><%= icon :info, I18n.t('messages.error.no_results'), class: 'fa-fw' %></p>
+        </div>
+      <% else %>
+        <ul class="inline-elements">
+          <% @list.contacts.each do |c| %>
+            <li><%= c.phone_number %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

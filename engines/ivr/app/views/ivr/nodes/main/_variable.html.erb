@@ -1,0 +1,15 @@
+<tr id="node_v_<%= num %>">
+  <td><%= smart_text_field f, [ "[related_vars][v_#{num}][name]", name ] %></td>
+
+  <td class="block"><%= smart_text_field f, [ "[related_vars][v_#{num}][value]", value ] %></td>
+
+  <td class="block"><%= smart_select_field nil, "main_node[related_vars][v_#{num}][type]", options_from_hash_for_select(@variable_types, :value, :text, type) %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_main_node_var('#{escape_javascript(render 'ivr/nodes/main/variable', f: f, num: 'x', name: String.new, value: String.new, type: type)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_object($('#node_v_#{num}'));" %>
+    <% end %>
+  </td>
+</tr>

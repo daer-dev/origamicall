@@ -1,0 +1,38 @@
+form .lib * {
+  float: left;
+}
+
+form .lib .select {
+  width: 100%;
+}
+
+form .lib .btn {
+  float: right;
+  margin-left: 5px;
+}
+
+form .multiple_lib .group,
+form .multiple_lib .group ul.scroll {
+  width: 100%;
+}
+
+form .multiple_lib .group,
+form .multiple_lib .group ul.scroll {
+  float: left;
+}
+
+form .multiple_lib .group .btn {
+  margin: -18px 5px 5px 0;
+}
+
+form .multiple_lib .group .btn {
+  float: right;
+}
+
+form .multiple_lib .group ul.scroll li a i {
+  margin-top: 7px;
+}
+
+.multiple_lib_option {
+  display: none;
+}

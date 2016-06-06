@@ -1,0 +1,40 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :att %></span>
+
+    <%= player @audio.path %>
+
+    <%= smart_file_field f, :att %>
+  </div>
+
+  <% unless external_engine %>
+    <div class="section">
+      <span class="label"><%= auto_label_for f, :product %></span>
+
+      <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @audio.product, true) %>
+    </div>
+  <% end %>
+</fieldset>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), audios_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

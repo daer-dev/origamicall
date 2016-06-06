@@ -1,0 +1,27 @@
+es_ES:
+
+  libs:
+
+    lists:
+
+      name: Listas
+      create:
+        title: Nueva lista
+      index:
+        title: Listas
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar la lista "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.
+      types:
+        white: Blanca
+        black: Negra
+      info:
+        title: Requisitos
+        requirements:
+          r1: El archivo no puede ocupar más de 250KB.
+          r2: No puede tener cabeceras (nombres de columna). En caso de ser así, se detectarán como un contacto descartado.
+          r3: Los contactos deben estar distribuidos en líneas.
+          r4: Sólo se aceptan móviles y fijos nacionales.
+        replace: Si selecciona esta opción, todos los números que haya agregado anteriormente serán sustituidos por los que envíe ahora. Sino, se mantendrán en la BBDD, añadiendo los nuevos a continuación.
+      contacts:
+        name: Contactos
+        message: '%{added} números agregados y %{discarded} descartados (de un total de %{total})'

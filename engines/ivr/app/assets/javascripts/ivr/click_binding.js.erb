@@ -1,0 +1,6 @@
+function click_binding() {
+  $('#voicemail_node .audio_link').click(function(){
+    $('#' + $(this).attr('title') + '_variables').fadeToggle();
+    return false;
+  });
+}

@@ -1,0 +1,13 @@
+<tr id="node_s_<%= num %>">
+  <td><%= smart_select_field f, "[related_sources][s_#{num}][mode]", options_from_hash_for_select(@source_modes, 'value', 'text', mode, false, false) %></td>
+
+  <td class="block"><%= smart_text_field f, [ "[related_sources][s_#{num}][phone_number]", phone_number ] %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_source_condition_node_source('#{escape_javascript(render 'ivr/nodes/source_condition/source', f: f, num: 'x', mode: String.new, phone_number: String.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_object($('#node_s_#{num}'));" %>
+    <% end %>
+  </td>
+</tr>

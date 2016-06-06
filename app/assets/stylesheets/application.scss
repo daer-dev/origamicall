@@ -1,0 +1,313 @@
+/************/
+/* Imports */
+/************/
+
+/* Vendor */
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'jquery-ui';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'smartadmin-production-plugins';
+@import 'smartadmin-skins';
+@import 'smartadmin-production';
+@import 'smartadmin-rtl.min';
+@import 'library/google-font/open-sans';
+@import 'overrides';
+@import 'variables';
+
+/* Aplicación */
+
+@import 'mixins';
+@import 'modal_window/main';
+@import 'modal_window/fullscreen';
+
+/************/
+/* Común */
+/************/
+
+#logo-mini {
+  float: left;
+  width: auto !important;
+  margin: 12px 12px 0 12px;
+}
+
+#content a,
+#content .label {
+  color: #666666;
+}
+
+#content a:hover,
+#content a:hover i {
+  color: #333333;
+}
+
+.ribbon-content {
+  display: none;
+}
+
+.data-table tbody .options a {
+  margin-right: 15px;
+  color: #333333;
+}
+
+.ajax-loaded-content {
+  padding: 10px;
+  @include border-radius(10px, 10px, 10px, 10px);
+  margin-bottom: 15px;
+  background: #f3f3f3;
+}
+
+.ajax-loaded-content .jarviswidget {
+  margin-bottom: 0;
+}
+
+.hidden-block {
+  display: none;
+}
+
+/************/
+/* Tablas */
+/************/
+
+.bordered-table {
+  float: left;
+  width: 100%;
+}
+
+.bordered-table input {
+  width: 50%;
+  z-index: 99999;
+}
+
+.bordered-table tr td,
+.bordered-table tr th,
+.bordered-table input {
+  text-align: center;
+}
+
+.bordered-table tr td,
+.bordered-table tr th {
+  padding: 5px;
+}
+
+.bordered-table .block {
+  border-left: 1px dotted #bdbdbd;
+}
+
+.bordered-table {
+  margin-bottom: 15px;
+}
+
+.bordered-table tr td {
+  border-top: 1px dotted #bdbdbd;
+  padding: 5px 15px;
+}
+
+/************/
+/* Listas */
+/************/
+
+ul {
+  list-style-type: square;
+  margin: 0 0 15px 0;
+  padding: 0 0 0 25px;
+}
+
+ul.inline-elements,
+ul.fixed-inline-elements {
+  list-style-type: none;
+  padding: 7px 0 0 7px;
+  float: left;
+}
+
+ul.inline-elements li,
+ul.fixed-inline-elements li {
+  float: left;
+  padding: 5px;
+  border: 1px solid #cccccc;
+  margin: 2px;
+}
+
+ul.fixed-inline-elements {
+  width: 100%;
+}
+
+ul.fixed-inline-elements li {
+  width: 20%;
+  overflow: hidden;
+}
+
+ul.scroll {
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  margin: 0;
+  padding: 0 0 0 3px;
+  list-style-type: none;
+  height: 100px;
+  width: 95%;
+  overflow: auto;
+  @include border-radius(10px, 10px, 10px, 10px);
+}
+
+ul.scroll li {
+  float: left;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.sortable tr {
+  background: #ffffff;
+}
+
+.sortable .order {
+  width: 30px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+/************/
+/* Iconos */
+/************/
+
+i.fa-1-5x{
+  font-size: 1.4em;
+}
+
+#content a i {
+  color: #717171;
+}
+
+#content a:hover i {
+  color: #333333;
+}
+
+#content i.fa-sort.handle {
+  color: $brand-info;
+  cursor: row-resize;
+}
+
+#content a i.fa-plus-square,
+#content a i.fa-plus-circle {
+  color: $brand-success;
+}
+
+#content a:hover i.fa-plus-square,
+#content a:hover i.fa-plus-circle {
+  color: $btn-success-border;
+}
+
+#content a i.fa-minus-square,
+#content a i.fa-minus-circle {
+  color: $brand-danger;
+}
+
+#content a:hover i.fa-minus-square,
+#content a:hover i.fa-minus-circle {
+  color: $btn-danger-border;
+}
+
+/************/
+/* Tags */
+/************/
+
+.bootstrap-tagsinput {
+  border-color: #bdbdbd;
+}
+
+.bootstrap-tagsinput .tag {
+  float: left;
+  background: #333333;
+  color: #ffffff;
+  border: 0;
+}
+
+.bootstrap-tagsinput .tag span {
+  float: left;
+  text-align: center;
+}
+
+/************/
+/* Tooltips */
+/************/
+
+[rel=popover] {
+  cursor: help;
+  float: left;
+  margin: 0 5px;
+}
+
+.popover .popover-title,
+.popover .popover-content {
+  padding: 10px;
+}
+
+.popover .popover-content ul {
+  list-style-type: square;
+  list-style-position: inside;
+  margin-top: -5px;
+}
+
+.popover .popover-content ul li {
+  padding-top: 5px;
+}
+
+/************/
+/* Mensajes */
+/************/
+
+#error-message {
+  margin: 0;
+}
+
+#error-message p {
+  margin-top: 10px;
+}
+
+.alert ul {
+  list-style-type: square;
+  padding-top: 5px;
+}
+
+/************/
+/* Selector de productos */
+/************/
+
+.login-info span:nth-child(1) {
+  @include border-radius(20px, 20px, 20px, 20px);
+}
+
+#shortcut ul li i {
+  position: relative;
+  @include border-radius(20px, 20px, 20px, 20px);
+}
+
+#shortcut ul li.ivr i {
+  background: asset-url('products/ivr.png') no-repeat center center;
+  top: -5px;
+}
+
+#shortcut ul li.acd i {
+  background: asset-url('products/acd.png') no-repeat center center;
+  top: -7px;
+}
+
+#shortcut ul li.c2c i {
+  background: asset-url('products/c2c.png') no-repeat center center;
+  top: -7px;
+}
+
+/************/
+/* Formularios */
+/************/
+
+form .section,
+form .section .group {
+  float: left;
+  width: 100%;
+}
+
+form .section {
+  margin: 10px 0;
+}

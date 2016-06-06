@@ -1,0 +1,107 @@
+<div id="spacetree" class="<%= @spacetree_preferences[:view] %><%= ' select_node' if params.include? :ivr_nodes_id %>">
+  <% unless params[:action] == 'show' %>
+    <div id="tree_<%= @tree.id %>_spacetree" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= icon :edit %></span>
+        <h2><%= I18n.t('ivr.trees.graph') %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+  <% end %>
+
+          <% unless params[:action] == 'show' && not params.include? :window %>
+            <div class="bar">
+              <% if params[:action] == 'show' %>
+
+                <div class="options">
+                  <div class="button">
+                    <%= link_to image_tag('ivr/trees/print.png'), 'javascript:window.print();' %>
+                    <span><%= link_to I18n.t('ivr.trees.tools.print'), 'javascript:window.print();' %></span>
+                  </div>
+
+                  <div class="button">
+                    <%= link_to image_tag('ivr/trees/reload.png'), request.fullpath %>
+                    <span><%= link_to I18n.t('ivr.trees.tools.reload'), request.fullpath %></span>
+                  </div>
+                </div>
+
+              <% else %>
+
+                <div class="options">
+                  <div class="tree">
+                    <span><%= I18n.t('ivr.trees.tools.tree') %>:</span>
+                    <%= link_to tooltip(I18n.t('ivr.trees.tools.config'), nil, icon(:cog, String.new, class: 'fa-lg')), 'javascript:$("#spacetree .bar .options .tree .fields").fadeToggle();' %>
+                    <%= link_in_window_to tooltip(I18n.t('ivr.trees.tools.full_view'), nil, icon(:eye, String.new, class: 'fa-lg')), tree_path(params[:id]) %>
+
+                    <div class="fields">
+                      <div class="block block_first">
+                        <%= label_tag :main_node_position, I18n.t('ivr.trees.config.main_node_position') %>:
+                        <%= select_tag :main_node_position, options_from_hash_for_select(@spacetree_preferences['orientation'], 'id', 'name', 'left', false, false) %>
+                      </div>
+
+                      <div class="block">
+                        <%= label_tag :tree_alignment, I18n.t('ivr.trees.config.tree_alignment') %>:
+                        <%= select_tag :tree_alignment, options_from_hash_for_select(@spacetree_preferences['alignment'], 'id', 'name','center', false, false) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="node">
+                    <span><%= I18n.t('ivr.trees.tools.node') %>:</span>
+                    <%= link_to tooltip(I18n.t('ivr.trees.tools.enable'), nil, icon('check-square', String.new, class: 'fa-lg')), disable_tree_node_path(@tree, 0), onclick: "javascript:load_in_div(this.href, 'node');return false;", class: 'enable' %>
+                    <%= link_to tooltip(I18n.t('ivr.trees.tools.disable'), nil, icon(:square, String.new, class: 'fa-lg')), disable_tree_node_path(@tree, 0), onclick: "javascript:load_in_div(this.href, 'node');return false;", class: 'disable' %>
+                    <%= link_to tooltip(I18n.t('actions.edit'), nil, icon(:edit, String.new, class: 'fa-lg')), edit_tree_node_path(@tree, 0), onclick: "javascript:load_in_div(this.href, 'node');return false;", class: 'edit' %>
+                    <%= link_to tooltip(I18n.t('actions.delete'), nil, icon(:remove, String.new, class: 'fa-lg')), delete_tree_node_path(@tree, 0), onclick: "javascript:load_in_div(this.href, 'node');return false;", class: 'delete' %>
+                  </div>
+                </div>
+
+                <div class="log"></div>
+
+              <% end %>
+            </div>
+          <% end %>
+
+          <div id="canvas">
+            <% if params.include? :window %>
+              <div id="window_resize_alert">
+                <%= I18n.t('ivr.trees.window_resize_alert') %>
+              </div>
+            <% end %>
+
+            <div id="loading"<%= raw ' class="hidden-block"' unless params.include?(:window) %>>
+              <%= image_tag('loading.gif') %>
+              <span><%= I18n.t('ivr.trees.loading') %></span>
+            </div>
+
+            <%= hidden_field_tag :spacetree_nodes, (data_to_js false, @tree.nodes, false) %>
+            <div class="content"></div>
+          </div>
+
+  <% unless params.include? :window %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= (hidden_field_tag :ivr_nodes_id, params[:ivr_nodes_id]) if params.include? :ivr_nodes_id %>
+
+<% content_for :js_tags do %>
+  <% if params.include? :window %>
+    <%= raw locale_to_js %>
+    <%= javascript_include_tag 'jquery2' %>
+    <%= javascript_include_tag 'application' %>
+  <% end %>
+
+  <%= javascript_include_tag 'jit/jit' %>
+  <%= javascript_include_tag 'jit/excanvas' %>
+  <%= data_to_js 'spacetree_preferences', @spacetree_preferences %>
+  <%= javascript_include_tag 'ivr/jit/spacetree' %>
+<% end %>
+
+<% content_for :css_tags do %>
+  <%= stylesheet_link_tag 'ivr/ivr.css' %>
+  <%= stylesheet_link_tag 'ivr/jit/spacetree.css' %>
+  <%= stylesheet_link_tag 'ivr/jit/spacetree_print.css', :media => 'print' %>
+<% end if params.include? :window %>

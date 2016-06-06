@@ -1,0 +1,24 @@
+es_ES:
+
+  libs:
+
+    schedules:
+
+      name: Horarios
+      create:
+        title: Nuevo horario
+      index:
+        title: Listado de horarios
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar el horario "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.
+      error_messages:
+        dx_x_2: debe ser mayor que su inicio.
+      fields:
+        schedules:
+          title: Franjas horarias
+          warning: Si define algún tramo horario, debe tener en cuenta que ya no se recibirán llamadas durante todo el día, sino sólo durante el mismo.
+          format: 'En formato HH:mm.'
+          start: Inicio
+          end: Fin
+        holidays:
+          format: 'En formato dd/mm/YYYY y separados por comas, sin espacios.'

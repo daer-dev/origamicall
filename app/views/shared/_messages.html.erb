@@ -1,0 +1,15 @@
+<% unless (@record.blank? || not @record.errors.any?) && flash[:error].blank? && flash[:notice].blank? %>
+  <div class="alert alert-block alert-<%= flash[:notice].blank? ? 'danger' : 'success' %>">
+    <% if flash[:notice].blank? %>
+      <% if flash[:error].blank? %>
+        <h4 class="alert-heading"><%= icon 'exclamation-circle', "#{@record.errors.count == 1 ? I18n.t('errors.template.title.singular') : I18n.t('errors.template.title.plural', :count => @record.errors.count)}:" %></h4>
+        <ul><%= fields_errors @record.errors.messages %></ul>
+      <% else %>
+        <p><%= raw flash[:error] %></p>
+      <% end %>
+    <% else %>
+      <button class="close" data-dismiss="alert">X</button>
+      <h4 class="alert-heading"><%= icon 'check-circle' %> <%= raw flash[:notice] %></h4>
+    <% end %>
+  </div>
+<% end %>

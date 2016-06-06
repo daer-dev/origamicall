@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title><%= I18n.t('company.title') %></title>
+    <!-- Vendor -->
+    <%= stylesheet_link_tag 'normalize/normalize' %>
+    <%= javascript_include_tag 'jquery', 'bootstrap' %>
+    <%= javascript_include_tag 'scroll_reveal/scroll_reveal' %>
+    <!-- Company -->
+    <%= stylesheet_link_tag 'company/company' %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= javascript_include_tag 'company/company' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="76">
+    <%= yield %>
+  </body>
+</html>

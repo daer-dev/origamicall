@@ -1,0 +1,1 @@
+Paperclip.interpolates(:user_id) { |attachment, style| attachment.instance.users_id }

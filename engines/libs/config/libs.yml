@@ -1,0 +1,112 @@
+# Navegación
+menu:
+  - text: misc.home
+    icon: home
+  - key: audios
+    text: libs.audios.name
+    icon: music
+    subelements:
+    - text: actions.create
+      link: libs.new_audio_path
+    - text: misc.list
+      link: libs.audios_path
+  - key: lists
+    text: libs.lists.name
+    icon: list
+    subelements:
+    - text: actions.create
+      link: libs.new_list_path
+    - text: misc.list
+      link: libs.lists_path
+  - key: schedules
+    text: libs.schedules.name
+    icon: clock-o
+    subelements:
+    - text: actions.create
+      link: libs.new_schedule_path
+    - text: misc.list
+      link: libs.schedules_path
+  - key: tables
+    text: libs.tables.name
+    icon: table
+    subelements:
+    - text: actions.create
+      link: libs.new_table_path
+    - text: misc.list
+      link: libs.tables_path
+  - key: destinations
+    text: libs.destinations.name
+    icon: phone
+    subelements:
+    - text: actions.create
+      link: libs.new_destination_path
+    - text: misc.list
+      link: libs.destinations_path
+  - key: accounts
+    text: libs.accounts.name
+    icon: users
+    subelements:
+    - text: actions.create
+      link: libs.new_account_path
+    - text: misc.list
+      link: libs.accounts_path
+  - key: grammars
+    text: libs.grammars.name
+    icon: comments-o
+    subelements:
+    - text: actions.create
+      link: libs.new_grammar_path
+    - text: misc.list
+      link: libs.grammars_path
+
+# Relación entre productos y librerías
+products_libs:
+  ivr:
+    - audios
+    - lists
+    - schedules
+    - tables
+    - destinations
+    - accounts
+    - grammars
+
+# Listas
+lists:
+  type:
+    - value: white
+      text: libs.lists.types.white
+    - value: black
+      text: libs.lists.types.black
+  system_urls:
+    update:
+      development: http://origamicall-kobune-ivr:8088/update_list
+      preproduction: http://origamicall-kobune-ivr:8088/update_list
+      production: http://origamicall-kobune-ivr:8088/update_list
+    delete:
+      development: http://origamicall-kobune-ivr:8088/delete_list
+      preproduction: http://origamicall-kobune-ivr:8088/delete_list
+      production: http://origamicall-kobune-ivr:8088/delete_list
+
+# Cuentas
+accounts:
+  type:
+    - value: email
+      text: libs.accounts.types.email
+    - value: ftp
+      text: libs.accounts.types.ftp
+    - value: sftp
+      text: libs.accounts.types.sftp
+    - value: post
+      text: libs.accounts.types.post
+
+# Archivos adjuntos
+attachments:
+  lists: tmp/lists
+  audios: audios
+
+# Desacterísticas desactivadas
+disabled_features:
+  accounts:
+    - ftp
+    - sftp
+    - post

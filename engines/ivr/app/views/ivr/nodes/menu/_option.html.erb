@@ -1,0 +1,26 @@
+<tr id="node_o_<%= num %>">
+  <td class="default"><%= smart_checkbox f, [ "[related_options][o_#{num}][default]", true, default, String.new ], :onclick => "uncheck_default_options('#{num}');" %></td>
+
+  <td class="block"><%= smart_text_field f, [ "[related_options][o_#{num}][dtmf]", dtmf ] %></td>
+
+  <td class="block grammar_options<%= raw ' hidden-block' unless @node.asr %>"><%= smart_select_field f, "[related_options][o_#{num}][libs_options_id]", options_from_hash_for_select((@node.grammar.blank? ? Array.new : @node.grammar_options), :id, :name, libs_options_id, true) %></td>
+
+  <td class="block">
+    <% if id.blank? %>
+      <%= smart_select_field f, "[related_options][o_#{num}][type]", options_from_hash_for_select(@available_nodes, :id, :name, type) %>
+    <% else %>
+      <%= hidden_field_tag "menu_node[related_options][o_#{num}][type]", type %>
+      <%= I18n.t("ivr.nodes.types.list.#{type}") %>
+    <% end %>
+  </td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_menu_node_option('#{escape_javascript(render 'ivr/nodes/menu/option', f: f, num: 'x', id: String.new, type: String.new, default: false, dtmf: String.new, libs_options_id: String.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_object($('#node_o_#{num}'));" %>
+    <% end %>
+  </td>
+</tr>
+
+<%= hidden_field_tag "menu_node[related_options][o_#{num}][id]", id unless id.blank? %>

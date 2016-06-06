@@ -1,0 +1,43 @@
+es_ES:
+
+  jarvis_widgets:
+
+    settings_key_label: Reset settings?
+    position_key_label: Reset position?
+    delete_msg: 'Warning: This action cannot be undone!'
+    custom_start: Hello you, this is a custom button
+    custom_end: Bye, till next time
+    timestamp_format: 'Last update: %m%/%d%/%y% %h%:%i%:%s%'
+    label_error: 'Sorry but there was a error:'
+    label_update: 'Last Update:'
+    label_refresh: Refresh
+    label_delete: 'Delete widget:'
+    delete_button: Delete
+    edit_button: Edit
+    fullscreen_button: Pantalla completa
+    collapse_button: Collapse
+    refresh_button: Refresh
+    loading_message: Loading...
+    colors:
+      list:
+        green_grass: Green Grass
+        dark_green: Dark Green
+        light_green: Light Green
+        purple: Purple
+        magenta: Magenta
+        pink: Pink
+        fade_pink: Fade Pink
+        light_blue: Light Blue
+        teal: Teal
+        ocean_blue: Ocean Blue
+        night_sky: Night Sky
+        night: Night
+        day_light: Day Light
+        orange: Orange
+        dark_orange: Dark Orange
+        red_rose: Red Rose
+        light_red: Light Red
+        purity: Purity
+      button:
+        text: Reestablecer
+        tooltip: Reset widget color to default

@@ -1,0 +1,25 @@
+<% unless @vars.blank? %>
+  <div class="tools">
+    <div>
+      <%= tooltip I18n.t('ivr.nodes.tools.vars.intro') %>
+
+      <%= label_tag "variables_#{field}", I18n.t('ivr.nodes.tools.vars.title') %>
+
+      <%= smart_select_field nil, "variables_#{field}", options_from_hash_for_select(@vars, 'value', 'text') %>
+
+      <%= link_to I18n.t('ivr.nodes.tools.vars.button'), "javascript:add_content('${'+$('#variables_#{field} option:selected').text()+'}','##{field}');", :class => 'btn btn-default btn-xs' %>
+    </div>
+
+    <% unless @tables.blank? %>
+      <div>
+        <%= tooltip I18n.t('ivr.nodes.tools.tables.intro') %>
+
+        <%= label_tag "tables_#{field}", I18n.t('ivr.nodes.tools.tables.title') %>
+
+        <%= smart_select_field nil, "tables_#{field}", options_from_hash_for_select(@tables, 'value', 'text') %>
+
+        <%= link_to I18n.t('ivr.nodes.tools.tables.button'), "javascript:add_content('${'+$('#tables_#{field} option:selected').text()+'['+$('#variables_#{field} option:selected').text()+']}','##{field}');", :class => 'btn btn-default btn-xs' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

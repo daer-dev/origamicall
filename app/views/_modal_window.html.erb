@@ -1,0 +1,13 @@
+<div id="modal" class="modal fade<%= ' auto' if defined? auto %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><%= raw content if defined? content %></p>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" class="button ok" data-dismiss="modal"><%= I18n.t('actions.close') %></a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+es_ES:
+
+  fields:
+
+    shared:
+      id: ID
+      name: Nombre
+      att: Archivo
+      product: Producto
+      type: Tipo
+    controllers:
+      libs__lists:
+        contacts: Contactos
+        replace_contacts: Sustituir contactos
+      libs__schedules:
+        d1_1_1: Lunes -inicio, tramo 1-
+        d2_1_1: Martes -inicio, tramo 1-
+        d3_1_1: Miércoles -inicio, tramo 1-
+        d4_1_1: Jueves -inicio, tramo 1-
+        d5_1_1: Viernes -inicio tramo 1-
+        d6_1_1: Sábado -inicio, tramo 1-
+        d7_1_1: Domingo -inicio, tramo 1-
+        d1_2_1: Lunes -inicio, tramo 2-
+        d2_2_1: Martes -inicio, tramo 2-
+        d3_2_1: Miércoles -inicio, tramo 2-
+        d4_2_1: Jueves -inicio, tramo 2-
+        d5_2_1: Viernes -inicio, tramo 2-
+        d6_2_1: Sábado -inicio, tramo 2-
+        d7_2_1: Domingo -inicio, tramo 2-
+        d1_3_1: Lunes -inicio, tramo 3-
+        d2_3_1: Martes -inicio, tramo 3-
+        d3_3_1: Miércoles -inicio, tramo 3-
+        d4_3_1: Jueves -inicio, tramo 3-
+        d5_3_1: Viernes -inicio, tramo 3-
+        d6_3_1: Sábado -inicio, tramo 3-
+        d7_3_1: Domingo -inicio, tramo 3-
+        d1_1_2: Lunes -fin, tramo 1-
+        d2_1_2: Martes -fin, tramo 1-
+        d3_1_2: Miércoles -fin, tramo 1-
+        d4_1_2: Jueves -fin, tramo 1-
+        d5_1_2: Viernes -fin, tramo 1-
+        d6_1_2: Sábado -fin, tramo 1-
+        d7_1_2: Domingo -fin, tramo 1-
+        d1_2_2: Lunes -fin, tramo 2-
+        d2_2_2: Martes -fin, tramo 2-
+        d3_2_2: Miércoles -fin, tramo 2-
+        d4_2_2: Jueves -fin, tramo 2-
+        d5_2_2: Viernes -fin, tramo 2-
+        d6_2_2: Sábado -fin, tramo 2-
+        d7_2_2: Domingo -fin, tramo 2-
+        d1_3_2: Lunes -fin, tramo 3-
+        d2_3_2: Martes -fin, tramo 3-
+        d3_3_2: Miércoles -fin, tramo 3-
+        d4_3_2: Jueves -fin, tramo 3-
+        d5_3_2: Viernes -fin, tramo 3-
+        d6_3_2: Sábado -fin, tramo 3-
+        d7_3_2: Domingo -fin, tramo 3-
+        holidays_list: Festivos
+      libs__tables:
+        rows: Filas
+        value: Valor
+      libs__destinations:
+        phone_number: Teléfono
+      libs__accounts:
+        email: Email
+        server: Servidor
+        port: Puerto
+        folder: Carpeta
+        user: Usuario
+        password: Clave
+        url: URL
+      libs__grammars:
+        options: Opciones
+        values: Valores

@@ -1,0 +1,237 @@
+function add_content(content, element) {
+  var element = $(element);
+  var current_value = element.val();
+
+  if(current_value == null) { current_value = ''; }
+  element.val(current_value + content);
+}
+
+/* Elimina un elemento y actualiza los campos "orden" de la lista a la que pertenece */
+function remove_list_element(obj, container) {
+  remove_object(obj);
+  sort_list(container);
+}
+
+function sort_list(container) {
+  var order = $(container).sortable('toArray');
+  for(i = 0; i < order.length; i++) { $(container + ' .order_' + order[i]).val(i + 1); }
+}
+
+/* Principal */
+
+function new_main_node_var(code) {
+  var num = parseInt($('#variables_list tr:last').attr('id').split('_v_')[1].split('_')[0]) + 1;
+  var new_code = code.replace(/v_x/g, 'v_' + num);
+
+  $('#variables_list').append(new_code);
+
+  $('#main_node_related_vars_v_' + num + '_name').val($('#main_node_related_vars_v_0_name').val());
+  $('#main_node_related_vars_v_' + num + '_value').val($('#main_node_related_vars_v_0_value').val());
+  $('#main_node_related_vars_v_' + num + '_type').val($('#main_node_related_vars_v_0_type').val());
+
+  $('#main_node_related_vars_v_0_name').val('');
+  $('#main_node_related_vars_v_0_value').val('');
+  $('#main_node_related_vars_v_0_type').prop('selectedIndex', 0);
+}
+
+/* Audio */
+
+function new_audio_node_audio(code) {
+  var list_div = '#audios_list';
+
+  if($(list_div + ' tr:last').length > 0) {
+    var num = parseInt($(list_div + ' tr:last').attr('id').split('_a_')[1].split('_')[0]) + 1;
+    var new_order = parseInt($(list_div + ' tr:last .order').val()) + 1;
+  } else {
+    var num = 1;
+    var new_order = 1;
+  }
+  var new_code = code.replace(/a_x/g, 'a_' + num);
+
+  $(list_div).append(new_code);
+
+  var libs_audios_id_0 = $('#audio_node_related_audios_a_0_libs_audios_id');
+
+  $('#audio_node_related_audios_a_' + num + '_order').val(new_order);
+  $('#audio_node_related_audios_a_' + num + '_libs_audios_id').html(libs_audios_id_0.html());
+  $('#audio_node_related_audios_a_' + num + '_libs_audios_id').val(libs_audios_id_0.val());
+  $('#audio_node_related_audios_a_' + num + '_text').val($('#audio_node_related_audios_a_0_text').val());
+  $('#audio_node_related_audios_a_' + num + '_tts_voice').val($('#audio_node_related_audios_a_0_tts_voice').val());
+
+  change_edit_libs('node_a_' + num);
+
+  libs_audios_id_0.prop('selectedIndex', 0);
+  $('#audio_node_related_audios_a_0_text').val('');
+  $('#audio_node_related_audios_a_0_tts_voice').prop('selectedIndex', 0);
+  $('.lib_audios:first .edit').hide();
+}
+
+/* Salto */
+
+function get_jump_node() {
+  $('#jump_node_ivr_nodes_id').val(get_cookie('ivr_nodes_id'));
+  $('#jump_node_ivr_nodes_name').val(get_cookie('ivr_nodes_name'));
+}
+
+/* Menu */
+
+function uncheck_default_options(option_id) {
+  $('#menu_node .default input').prop('checked', false);
+  $('#menu_node_related_options_o_' + option_id + '_default').prop('checked', true);
+}
+
+function new_menu_node_option(code) {
+  var list_div = '#options_list';
+
+  if($(list_div + ' tr:last').length > 0) {
+    var num = parseInt($(list_div + ' tr:last').attr('id').split('_o_')[1].split('_')[0]) + 1;
+  } else {
+    var num = 1;
+  }
+
+  var new_code = code.replace(/o_x/g, 'o_' + num).replace('(&#39;x&#39;)', "('" + num + "')");
+
+  $(list_div).append(new_code);
+
+  $('#menu_node_related_options_o_' + num + '_dtmf').val($('#menu_node_related_options_o_0_dtmf').val());
+  $('#menu_node_related_options_o_' + num + '_libs_options_id').html($('#menu_node_related_options_o_0_libs_options_id').html());
+  $('#menu_node_related_options_o_' + num + '_libs_options_id').val($('#menu_node_related_options_o_0_libs_options_id').val());
+  $('#menu_node_related_options_o_' + num + '_type').val($('#menu_node_related_options_o_0_type').val());
+  if($('#menu_node_related_options_o_0_default').is(':checked')) { uncheck_default_options(num) }
+  if($('#menu_node_asr_false').is(':checked') || $('#menu_node_grammar').val() == '') {
+    $('.grammar_options').hide();
+  } else {
+    $('.grammar_options').show();
+  }
+
+  $('#menu_node_related_options_o_0_dtmf').val('');
+  $('#menu_node_related_options_o_0_libs_options_id').prop('selectedIndex', 0);
+  $('#menu_node_related_options_o_0_type').prop('selectedIndex', 0);
+}
+
+function load_grammar_options(id, force_reload) {
+  // Recuperamos la lista de palabras sólo si no lo hemos hecho ya y disponemos de un ID
+  if(id != '' && id != undefined) {
+    $('.grammar_options').fadeIn();
+
+    if($('#grammar_options_' + id).length == 0 || typeof(force_reload) != 'undefined') {
+      $.getJSON('http://' + document.location.href.split('/')[2] + '/libs/grammars/' + id + '/export', function(data) {
+        var options = [ '<option value="">' + locale['misc.empty_option_text'] + '</option>' ];
+
+        $.each(data, function(index, obj) {
+          options.push('<option value="' + obj['id'] + '">' + obj['name'] + '</option>');
+        });
+
+        var options_code = options.join('');
+
+        $('#grammar_options #grammar_options_' + id).remove();
+        $('<select id="grammar_options_' + id + '">' + options_code + '</select>').appendTo('#grammar_options');
+        $('.grammar_options select').html(options_code);
+      });
+    } else {
+      $('.grammar_options select').html($('#grammar_options_' + id).html());
+    }
+  } else {
+    $('.grammar_options').fadeOut();
+  }
+}
+
+function show_and_hide_asr_options(asr) {
+  if(asr) {
+    $('#grammar').fadeIn();
+    if($('#menu_node_grammar').val() != '') { $('.grammar_options').fadeIn(); }
+  } else {
+    $('#grammar').fadeOut();
+    $('.grammar_options').fadeOut();
+  }
+}
+
+/* Buzón de voz */
+
+function new_voicemail_node_account(code) {
+  var num = parseInt($('#accounts_list tr:last').attr('id').split('_a_')[1].split('_')[0]) + 1;
+  var new_code = code.replace(/a_x/g, 'a_' + num);
+
+  $('#accounts_list').append(new_code);
+
+  var libs_accounts_id_0 = $('#voicemail_node_related_accounts_a_0_libs_accounts_id');
+
+  $('#voicemail_node_related_accounts_a_' + num + '_libs_accounts_id').html(libs_accounts_id_0.html());
+  $('#voicemail_node_related_accounts_a_' + num + '_libs_accounts_id').val(libs_accounts_id_0.val());
+
+  change_edit_libs('node_a_' + num);
+
+  libs_accounts_id_0.prop('selectedIndex', 0);
+  $('.lib_accounts:first .edit').hide();
+}
+
+/* Condición de origen */
+
+function new_source_condition_node_source(code) {
+  var num = parseInt($('#sources_list tr:last').attr('id').split('_s_')[1].split('_')[0]) + 1;
+  var new_code = code.replace(/s_x/g, 's_' + num);
+
+  $('#sources_list').append(new_code);
+
+  $('#source_condition_node_related_sources_s_' + num + '_mode').val($('#source_condition_node_related_sources_s_0_mode').val());
+  $('#source_condition_node_related_sources_s_' + num + '_phone_number').val($('#source_condition_node_related_sources_s_0_phone_number').val());
+
+  $('#source_condition_node_related_sources_s_0_mode').prop('selectedIndex', 0);
+  $('#source_condition_node_related_sources_s_0_phone_number').val('');
+}
+
+/* Transferencia */
+
+function toggle_transfer_node_percent() {
+  if($('#transfer_node_strategy').val() == 'percent') {
+    $('#transfer_node .percent').show();
+    $('#transfer_node .order_controls').hide();
+  } else {
+    $('#transfer_node .percent').hide();
+    $('#transfer_node .order_controls').show();
+  }
+}
+
+function hide_transfer_node_destination_fields(num) {
+  $('#transfer_node #node_d_' + num + ' .type').hide();
+  $('#transfer_node #node_d_' + num + ' .' + $('#transfer_node_related_destinations_d_' + num + '_type').val()).show();
+}
+
+function new_transfer_node_destination(code) {
+  var list_div = '#destinations_list';
+
+  if($(list_div + ' tr:last').length > 0) {
+    var num = parseInt($(list_div + ' tr:last').attr('id').split('_d_')[1].split('_')[0]) + 1;
+    var new_order = parseInt($(list_div + ' tr:last .order').val()) + 1;
+  } else {
+    var num = 1;
+    var new_order = 1;
+  }
+  var new_code = code.replace(/d_x/g, 'd_' + num).replace('hide_transfer_node_destination_fields(x', 'hide_transfer_node_destination_fields(' + num);
+
+  $(list_div).append(new_code);
+
+  var libs_destinations_id_0 = $('#transfer_node_related_destinations_d_0_libs_destinations_id');
+
+  $('#transfer_node_related_destinations_d_' + num + '_order').val(new_order);
+  $('#transfer_node_related_destinations_d_' + num + '_percent').val($('#transfer_node_related_destinations_d_0_percent').val());
+  $('#transfer_node_related_destinations_d_' + num + '_timeout').val($('#transfer_node_related_destinations_d_0_timeout').val());
+  $('#transfer_node_related_destinations_d_' + num + '_type').val($('#transfer_node_related_destinations_d_0_type').val());
+  $('#transfer_node_related_destinations_d_' + num + '_phone_number').val($('#transfer_node_related_destinations_d_0_phone_number').val());
+  $('#transfer_node_related_destinations_d_' + num + '_ivr_variables_id').val($('#transfer_node_related_destinations_d_0_ivr_variables_id').val());
+  $('#transfer_node_related_destinations_d_' + num + '_libs_destinations_id').html(libs_destinations_id_0.html());
+  $('#transfer_node_related_destinations_d_' + num + '_libs_destinations_id').val(libs_destinations_id_0.val());
+  hide_transfer_node_destination_fields(num);
+
+  change_edit_libs('node_d_' + num);
+
+  $('#transfer_node_related_destinations_d_0_percent').val('');
+  $('#transfer_node_related_destinations_d_0_timeout').val(<%= IVR_CONFIG['nodes']['transfer']['destinations']['default_timeout'] %>);
+  $('#transfer_node_related_destinations_d_0_type').prop('selectedIndex', 0);
+  $('#transfer_node_related_destinations_d_0_phone_number').val('');
+  $('#transfer_node_related_destinations_d_0_ivr_variables_id').prop('selectedIndex', 0);
+  libs_destinations_id_0.prop('selectedIndex', 0);
+  $('.lib_destinations:first .edit').hide();
+  hide_transfer_node_destination_fields(0);
+  toggle_transfer_node_percent();
+}

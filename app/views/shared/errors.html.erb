@@ -1,0 +1,7 @@
+<div id="error-message" class="alert alert-danger fade in">
+  <h4 class="alert-heading">
+    <%= icon 'exclamation-circle', String.new, class: 'fa-fw' %> <%= raw title %>
+  </h4>
+
+  <p><%= raw_message ? raw(message) : message %></p>
+</div>

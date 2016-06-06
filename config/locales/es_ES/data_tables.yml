@@ -1,0 +1,21 @@
+es_ES:
+
+  data_tables:
+
+    empty_table: No hay datos
+    info: Registros _START_-_END_ de _TOTAL_
+    info_empty: Registros 0-0 de 0
+    info_filtered: (filtrados de un total de _MAX_)
+    length_menu: _MENU_ por página
+    loading_records: Cargando...
+    processing: Procesando...
+    zero_records: No se encontró ningún registro
+    paginate:
+      first: Primero
+      last: Último
+      next: Siguiente
+      previous: Anterior
+    aria:
+      sort_ascending:  ': activar para ordenar la columna de manera ascendente'
+      sort_descending: ': activar para ordenar la columna de manera descendente'
+    print_message: Presione el botón ESC para volver

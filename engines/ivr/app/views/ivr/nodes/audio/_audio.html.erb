@@ -1,0 +1,25 @@
+<tr id="node_a_<%= num %>">
+  <td>
+    <% if num == 0 %>
+      &nbsp;
+    <% else %>
+      <%= text_field_tag "audio_node[related_audios][a_#{num}][order]", order, :class => "order order_node_a_#{num}", readonly: true %>
+
+      <%= icon :sort, nil, :class => 'handle' %>
+    <% end %>
+  </td>
+
+  <td class="block"><%= lib f, :audios, "[related_audios][a_#{num}][libs_audios_id]", libs_audios_id %></td>
+
+  <td class="block"><%= smart_textarea f, [ "[related_audios][a_#{num}][text]", text ] %></td>
+
+  <td class="block"><%= smart_select_field f, "[related_audios][a_#{num}][tts_voice]", options_from_hash_for_select(@voices, 'value', 'text', tts_voice, false, false) %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_audio_node_audio('#{escape_javascript(render 'ivr/nodes/audio/audio', f: f, field: '[related_audios][a_x]', num: 'x', order: String.new, libs_audios_id: String.new, text: String.new, tts_voice: String.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_list_element($('#node_a_#{num}'), '#audios_list');" %>
+    <% end %>
+  </td>
+</tr>

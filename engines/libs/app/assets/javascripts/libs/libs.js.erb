@@ -1,0 +1,25 @@
+function new_table_row(code) {
+  var num = parseInt($('#rows_list tr:last').attr('id').split('_r_')[1].split('_')[0]) + 1;
+  var new_code = code.replace(/r_x/g, 'r_' + num);
+
+  $('#rows_list').append(new_code);
+
+  $('#table_related_rows_r_' + num + '_name').val($('#table_related_rows_r_0_name').val());
+  $('#table_related_rows_r_' + num + '_value').val($('#table_related_rows_r_0_value').val());
+
+  $('#table_related_rows_r_0_name').val('');
+  $('#table_related_rows_r_0_value').val('');
+}
+
+function new_grammar_option(code) {
+  var num = parseInt($('#options_list tr:last').attr('id').split('_o_')[1].split('_')[0]) + 1;
+  var new_code = code.replace(/o_x/g, 'o_' + num);
+
+  $('#options_list').append(new_code);
+
+  $('#grammar_related_options_o_' + num + '_name').val($('#grammar_related_options_o_0_name').val());
+  $('#grammar_related_options_o_' + num + '_related_values').val($('#grammar_related_options_o_0_related_values').val()).tagsinput('');
+
+  $('#grammar_related_options_o_0_name').val('');
+  $('#grammar_related_options_o_0_related_values').val('').tagsinput('removeAll');
+}

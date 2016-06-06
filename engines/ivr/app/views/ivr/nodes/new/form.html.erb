@@ -1,0 +1,9 @@
+<% if params[:type].blank? %>
+
+  <%= render 'ivr/nodes/new/type' %>
+
+<% else %>
+
+  <%= render 'ivr/nodes/new/loader' %>
+
+<% end %>

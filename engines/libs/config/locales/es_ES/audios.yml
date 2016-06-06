@@ -1,0 +1,13 @@
+es_ES:
+
+  libs:
+
+    audios:
+
+      name: Audios
+      create:
+        title: Nuevo audio
+      index:
+        title: Listado de audios
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar el audio "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.

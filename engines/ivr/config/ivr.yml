@@ -1,0 +1,214 @@
+# Navegación
+menu:
+  - text: misc.home
+    icon: home
+    link: trees_path
+  - text: ivr.menu.trees
+    icon: sitemap
+    subelements:
+      - text: actions.create
+        link: new_tree_path
+      - text: misc.list
+        link: trees_path
+  - text: libs.shared.name
+    icon: paperclip
+    subelements:
+      - text: libs.audios.name
+        subelements:
+        - text: actions.create
+          link: libs.new_audio_path
+        - text: misc.list
+          link: libs.audios_path
+      - text: libs.tables.name
+        subelements:
+        - text: actions.create
+          link: libs.new_table_path
+        - text: misc.list
+          link: libs.tables_path
+      - text: libs.destinations.name
+        subelements:
+        - text: actions.create
+          link: libs.new_destination_path
+        - text: misc.list
+          link: libs.destinations_path
+      - text: libs.grammars.name
+        subelements:
+        - text: actions.create
+          link: libs.new_grammar_path
+        - text: misc.list
+          link: libs.grammars_path
+      - text: libs.lists.name
+        subelements:
+        - text: actions.create
+          link: libs.new_list_path
+        - text: misc.list
+          link: libs.lists_path
+      - text: libs.accounts.name
+        subelements:
+        - text: actions.create
+          link: libs.new_account_path
+        - text: misc.list
+          link: libs.accounts_path
+      - text: libs.schedules.name
+        subelements:
+        - text: actions.create
+          link: libs.new_schedule_path
+        - text: misc.list
+          link: libs.schedules_path
+
+# Sufijo de las tablas de nodos (con el que luego el nombre de tabla queda tipo "main_nodes", por ejemplo)
+node_tables_sufix: nodes
+
+# Nodos
+nodes:
+  # Listado de los nodos disponibles para el formulario de creación
+  # Si queremos hacer que uno en concreto no pueda tener hijos de X tipo, lo agregamos a partir de su clave, en un array
+  types:
+    audio: []
+    transfer: []
+    integration: []
+    menu: []
+    schedule_condition: []
+    expression_condition: []
+    source_condition: []
+    data_entry: []
+    jump: []
+    voicemail: []
+  main:
+    vars:
+      session: ivr.nodes.main.vars.session
+      global: ivr.nodes.main.vars.global
+    vars_system_url:
+      development: http://origamicall-kobune-ivr:8088/reload_vars
+      preproduction: http://origamicall-kobune-ivr:8088/reload_vars
+      production: http://origamicall-kobune-ivr:8088/reload_vars
+    lists_system_url:
+      development: http://origamicall-kobune-ivr:8088/update_node_list
+      preproduction: http://origamicall-kobune-ivr:8088/update_node_list
+      production: http://origamicall-kobune-ivr:8088/update_node_list
+  audio:
+    voices:
+      - text: ivr.nodes.audio.voices.jorge
+        value: jorge
+      - text: ivr.nodes.audio.voices.leonor
+        value: leonor
+      - text: ivr.nodes.audio.voices.simon
+        value: simon
+      - text: ivr.nodes.audio.voices.kate
+        value: kate
+      - text: ivr.nodes.audio.voices.bernard
+        value: bernard
+      - text: ivr.nodes.audio.voices.juliette
+        value: juliette
+  transfer:
+    strategy:
+      linear: ivr.nodes.transfer.strategy.linear
+      percent: ivr.nodes.transfer.strategy.percent
+    destinations:
+      default_timeout: 60
+      types:
+        phone: ivr.nodes.transfer.destinations.types.phone
+        var: ivr.nodes.transfer.destinations.types.var
+        destination: ivr.nodes.transfer.destinations.types.destination
+  source_condition:
+    source_modes:
+      contains: ivr.nodes.source_condition.sources.modes.contains
+      starts: ivr.nodes.source_condition.sources.modes.starts
+      ends: ivr.nodes.source_condition.sources.modes.ends
+      not_contains: ivr.nodes.source_condition.sources.modes.not_contains
+      not_starts: ivr.nodes.source_condition.sources.modes.not_starts
+      not_ends: ivr.nodes.source_condition.sources.modes.not_ends
+  integration:
+    code_system_url:
+      development: http://origamicall-kobune-ivr
+      preproduction: http://origamicall-kobune-ivr
+      production: http://origamicall-kobune-ivr
+  voicemail:
+    audios_url: resources/ivr/nodes/voicemail/audios
+
+# Spacetree
+spacetree:
+  canvas_height:
+    min: 450
+    max: 700
+  duration: 150
+  level_distance: 70
+  line_width: 5
+  node:
+    height: 25
+    width: 140
+    margin_left: 5
+    margin_right: 5
+    type: rectangle
+    color: '#c2c2c2'
+    overridable: true
+    ico:
+      width: 20
+      margin_left: 5
+      margin_right: 0
+    dtmf_asr:
+      width: 20
+      margin_left: 5
+      margin_right: 0
+    status:
+      width: 20
+      margin_left: 5
+      margin_right: 0
+    selected: '#ff0000'
+  edge:
+    type: bezier
+    overridable: true
+  label:
+    cursor: pointer
+    color: '#555555'
+    font_size: 12px
+    text_align: center
+    padding_top: 4
+  log:
+    loading: ivr.trees.log.loading
+    done: ivr.trees.log.done
+  bg_colors:
+    main: '#fcfc5b'
+    main_sub: '#ffffc8'
+  orientation:
+    - id: left
+      name: ivr.trees.orientation.left
+    - id: right
+      name: ivr.trees.orientation.right
+    - id: top
+      name: ivr.trees.orientation.top
+    - id: bottom
+      name: ivr.trees.orientation.bottom
+  alignment:
+    - id: center
+      name: ivr.trees.alignment.center
+    - id: left
+      name: ivr.trees.alignment.left
+    - id: right
+      name: ivr.trees.alignment.right
+  full:
+    margin: 25
+    content:
+      text_limit: 18
+      margin:
+        top:
+          text: 5
+          images: 7
+        left: 5
+    print:
+      font: 12px Helvetica, Arial
+      color: '#333333'
+
+# Páginas accesibles sin necesidad de loguearse
+public_pages:
+  - controller: ivr/voicemail_nodes
+    actions:
+      - send_audio
+      - download_audio
+
+# Características desactivadas
+disabled_features:
+  nodes:
+    - integration
+    - expression_condition
+    - data_entry

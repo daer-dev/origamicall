@@ -1,0 +1,105 @@
+en_EN:
+
+  company:
+
+    title: OrigamiCall
+
+    menu:
+      title: Menu
+      options:
+        us: About us
+        tech: Technology
+        products: Products
+        contact: Contact
+      languages:
+        title: Languages
+        message: Language already selected.
+      private_area: Private area
+
+    quotes:
+      buttons:
+        previous: Previous
+        next: Next
+      text:
+        q1: Intelligent network solutions accessible worldwide
+        q2: User-centred designed products
+        q3: Both security and the fulfilment of standards are our main bases
+        q4: Our platform is the result of years of experience in the sector
+        q5: Take a look at our products and ask for information without commitment
+
+    us:
+      title: Who we are
+      text:
+        t1: We are a company formed by technicians with more than ten years of experience in the sector. Both the organisation of the company and the relationship among its members is informal and friendly. Willing to provide solutions for telecommunications, we are inspired by the values of free software and agile development methodologies, as well as by the new information technologies.
+        t2: Part of our mission consists in the development of reliable and easy-to-use telecommunication products for any company with Internet presence. We facilitate the convergence between the new technologies and the traditional and IP telephony.  Teamwork, proactivity and professional performance are some of our values. This makes us a great team and enables us to create the best solutions in this area for your company.
+      team:
+        t1:
+          title: Telephony
+          text: We integrate for you the intelligence of our software with solutions for traditional, digital and IP based telephony. Moreover, we give your information systems the level of automation that will help further your company.
+        t2:
+          title: Web
+          text: 'All our products are web-based: the configuration, the statistical information, the control panels for operators and the monitoring for the controllers of the call-centres. All this is available from your computer, tablet or smartphone.'
+        t3:
+          title: Systems
+          text: Let us deal with the integration and maintenance of the system for you. Stop worrying about setups or physical equipment. Pay according to your use without having to think about the best way of growing.
+    tech:
+      title: The technology we use
+      blocks:
+        b1:
+          title: Debian
+          text: We like to use Debian GNU/Linux as our main operating system. This system provides us with versatility, and its social contract assures us stability, security and continuous maintenance.
+        b2:
+          title: Erlang
+          text: Ericsson developed this platform and language in the 1980’s for their telephony systems. Nowadays it is used, not only in telecommunications, but also in other companies from the bank or videogames sector, being the most used language in Whatsapp.
+        b3:
+          title: Ruby On Rails
+          text: This web development framework is the base of many others that exist today. This system is one of the most strong and, thanks to its versatility and philosophy, the one that has served as a model for big and small companies around the world. Developing with Ruby on Rails enables us to offer the best web-oriented services.
+        b4:
+          title: PostgreSQL
+          text: Among the free software and mission-critical databases, PostgreSQL is the one who has given us the best results. Its strength and performance, together with its wide variety of features, make it the perfect backend for our services, enabling us to provide a 24/7 service.
+
+    products:
+      title: What we do
+      text:
+        t1: Our technologies and experience work together to offer services designed to be employed by users from all levels of expertise in telephony. The services have been designed so that anyone can configure the response to get from their communication systems without the assistance of an expert.
+        t2: You can look over our different products. Each one covers a specific solution and is focused on solving and adding value to the use of the tool in conjunction with other solutions that can be added or integrated.
+      list:
+        ivr:
+          name: IVR
+          origami: Kobune
+          text:
+            visible: Kobune-IVR is our Interactive Voice Response system. It helps you configure the behaviour of a phone call received by a telephone, taking into account the telephone that is making the call, or information selected through menus, data input and the time of the call.
+            hidden:
+              h1: 'Kobune-IVR is configured as diagrams associated to an incoming telephone number. When that caller is driven into the first node of the diagram, depending on the performance configured, several actions will occur, such as: check of the time, check of the incoming number, reproduction of audios, options menu to branch off the behaviour into different directions, data input to obtain information about the user, audio recording or transfer of the call to a different telephone.'
+              h2: All this is configured from a simple and easy-to-use interface. You will always have a global vision of the running of your system and you will be able to change the behaviour of the calls in real time, at any moment, from anywhere.
+        acd:
+          name: ACD
+          origami: Tsune
+          text:
+            visible: Tsune-ACD is an Automatic Call Distributor. This system is conceived for centres where calls are answered by several agents, and where a control of the number of calls on hold and the status of the active and busy agents is needed, being configurable through a simple interface that is accessible from any device.
+            hidden:
+              h1: Tsune-ACD lets a supervisor to manage and monitor the agents of a call-centre. It even enables a company to do so with call-centres and agents geographically distributed. It makes it possible to know the number of calls on hold, how many calls are being answered, the statistics of each agent and, if the supervisor requires it, a listening-in of any current call.
+              h2: The agent has a panel in which they are informed of the incoming call and in which they can start an event from the browser, such as opening a website with the data provided by the system. The agent can also configure their status in case they need to leave their post.
+        c2c:
+          name: C2C
+          origami: Kaeru
+          text:
+            visible: Kaeru-C2C is our Click 2 Call solution. It is as simple as adding a short line of code to your website and you will have the complete functionality to receive calls from your website.
+            hidden:
+              h1: Kaeru-C2C works as a button in your website. When a visitor uses it, they have to introduce their telephone number. Our system immediately contacts them and then we call you so that you answer the call.
+              h2: As all our products, Kaeru-C2C is completely configurable from the web interface and allows to adapt the running of calls and the call dynamics to your needs. You can establish customer service times so that the user simply leaves a voice message, add audios at the beginning of the call for the user, link that incoming call to Kobune-IVR or Tsune-ACD to add more intelligence to that call, and a lot more.
+      button: Read more
+
+    contact:
+      title: Contact
+      text: 'If you want to know more about our solutions, or if you have any doubt, suggestion or proposal, send us a message filling in this form:'
+      form:
+        messages:
+          success: Everything worked fine! We will contact you as soon as possible. Thanks for your attention!
+          validation: "Please, make sure you don't leave it blank!"
+          server: The system failed. Try it again later, please.
+        buttons:
+          send: Send
+          reset: Reset
+      links:
+        email: info@origamicall.com

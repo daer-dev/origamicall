@@ -1,0 +1,13 @@
+<tr id="table_r_<%= num %>">
+  <td><%= smart_text_field f, [ "[related_rows][r_#{num}][name]", name ] %></td>
+
+  <td class="block"><%= smart_text_field f, [ "[related_rows][r_#{num}][value]", value ] %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_table_row('#{escape_javascript(render 'libs/tables/row', f: f, num: 'x', name: String.new, value: String.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_object($('#table_r_x'));" %>
+    <% end %>
+  </td>
+</tr>

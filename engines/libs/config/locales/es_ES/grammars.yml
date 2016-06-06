@@ -1,0 +1,14 @@
+es_ES:
+
+  libs:
+
+    grammars:
+
+      name: Gramáticas
+      create:
+        title: Nueva gramática
+      index:
+        title: Listado de gramáticas
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar la gramática "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.
+      values_info: Para agregar un valor, escríbalo y presione [INTRO]

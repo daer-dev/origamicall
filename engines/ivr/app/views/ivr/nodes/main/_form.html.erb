@@ -1,0 +1,47 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.main.titles.vars') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="30%"><%= I18n.t('fields.shared.name') %></th>
+          <th width="30%" class="block"><%= I18n.t('ivr.nodes.main.fields.vars.value') %></th>
+          <th width="30%" class="block"><%= I18n.t('fields.shared.type') %></th>
+          <th width="10%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="variables_list">
+        <%= render 'ivr/nodes/main/variable', f: f, num: 0, name: @node.related_vars['v_0']['name'], value: @node.related_vars['v_0']['value'], type: @node.related_vars['v_0']['type'] %>
+        <% unless @node.related_vars.blank? %>
+          <% @node.related_vars.each do |k,v| %>
+          <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/main/variable', f: f, num: num, name: v['name'], value: v['value'], type: v['type'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= f.label :related_tables, I18n.t('ivr.nodes.main.titles.tables') %></span>
+
+    <%= multiple_lib f, :tables, :related_tables, nil, nil, @node.tables %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= f.label :related_lists, I18n.t('ivr.nodes.main.titles.lists') %></span>
+
+    <%= multiple_lib f, :lists, :related_lists, :lists_type, @node.lists_type, @node.lists, 'vip', true %>
+  </div>
+</fieldset>

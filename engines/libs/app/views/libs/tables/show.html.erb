@@ -1,0 +1,68 @@
+<h1 class="page-title">
+  <%= icon :table, @table.name, class: 'fa-fw' %>
+</h1>
+
+<section id="widget-grid">
+  <div id="table_<%= @table.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+    <header>
+      <span class="widget-icon"><%= icon :edit %></span>
+      <h2><%= I18n.t('misc.data') %> (<%= I18n.t('misc.read_only') %>)</h2>
+    </header>
+
+    <div>
+      <div class="widget-body no-padding">
+        <table class="table table-bordered">
+          <tr>
+            <td><strong><%= I18n.t('fields.shared.name') %></strong></td>
+            <td><%= @table.name %></td>
+          </tr>
+          <% unless @table.product.blank? %>
+            <tr>
+              <td><strong><%= I18n.t('fields.shared.product') %></strong></td>
+              <td><%= I18n.t("products.#{@table.product}") %></td>
+            </tr>
+          <% end %>
+          <% unless @table.rows.blank? %>
+            <tr>
+              <td colspan="2"><strong><%= I18n.t('libs.tables.fields.rows') %></strong></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table class="bordered-table">
+                  <thead>
+                    <tr>
+                      <th width="50%"><%= I18n.t('fields.shared.name') %></th>
+                      <th width="50%" class="block"><%= I18n.t('libs.tables.fields.value') %></th>
+                    </tr>
+                  </thead>
+                  <tbody id="rows_list">
+                    <% @table.rows.each do |r| %>
+                      <tr>
+                        <td><%= r.name %></td>
+                        <td class="block"><%= r.value %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if params.include? :ajax_loaded %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), tables_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

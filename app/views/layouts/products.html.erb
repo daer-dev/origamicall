@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= I18n.t('layout.title') %></title>
+    <meta charset="<%= I18n.t('layout.charset') %>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <%= stylesheet_link_tag 'jquery-ui' %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag 'splash/sptouch-icon-iphone.png', rel: 'apple-touch-icon' %>
+    <%= favicon_link_tag 'splash/touch-icon-ipad.png', rel: 'apple-touch-icon', sizes: '76x76' %>
+    <%= favicon_link_tag 'splash/touch-icon-iphone-retina.png', rel: 'apple-touch-icon', sizes: '120x120' %>
+    <%= favicon_link_tag 'splash/touch-icon-ipad-retina.png', rel: 'apple-touch-icon', sizes: '152x152' %>
+    <%= favicon_link_tag 'splash/ipad-landscape.png', media: 'screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)', rel: 'apple-touch-startup-image' %>
+    <%= favicon_link_tag 'splash/ipad-portrait.png', media: 'screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)', rel: 'apple-touch-startup-image' %>
+    <%= favicon_link_tag 'splash/iphone.png', media: 'screen and (max-device-width: 320px)', rel: 'apple-touch-startup-image' %>
+    <%= render "#{engine_name}/shared/css_tags" if File.exists? "#{Rails.root}/engines/#{engine_name}/app/views/#{engine_name}/shared/_css_tags.html.erb" %>
+    <%= stylesheet_link_tag session[:user]['data']['css_file'] if session[:user]['data']['white_label'] && not session[:user]['data']['css_file'].blank? %>
+  </head>
+  <body class="smart-style-2 fixed-header fixed-navigation fixed-ribbon">
+    <header id="header">
+      <%= render 'layouts/components/header' %>
+    </header>
+
+    <aside id="left-panel">
+      <%= render 'layouts/components/menu' %>
+    </aside>
+
+    <div id="main" role="main">
+      <div id="ribbon">
+        <%= render 'layouts/components/ribbon' %>
+      </div>
+
+      <div id="content"></div>
+    </div>
+
+    <div id="shortcut">
+      <%= render 'layouts/components/products' %>
+    </div>
+
+    <%= render 'layouts/components/voice_recognition' %>
+
+    <%= render '/modal_window' %>
+
+    <%= raw locale_to_js %>
+    <%= javascript_include_tag 'jquery2' %>
+    <%= javascript_include_tag 'jquery-ui' %>
+    <%= javascript_include_tag 'plugin/pace/pace.min.js' %>
+    <%= javascript_include_tag 'app.config' %>
+    <%= javascript_include_tag 'plugin/jquery-touch/jquery.ui.touch-punch.min' %>
+    <%= javascript_include_tag 'bootstrap-sprockets' %>
+    <%= javascript_include_tag 'notification/SmartNotification.min' %>
+    <%= javascript_include_tag 'smartwidgets/jarvis.widget.min' %>
+    <%= javascript_include_tag 'plugin/msie-fix/jquery.mb.browser.min' %>
+    <%= javascript_include_tag 'plugin/fastclick/fastclick.min' %>
+    <%= javascript_include_tag 'app.min' %>
+    <%= javascript_include_tag 'speech/voicecommand.min' %>
+    <%= javascript_include_tag 'application' %>
+    <%= render "#{engine_name}/shared/js_tags" if File.exists? "#{Rails.root}/engines/#{engine_name}/app/views/#{engine_name}/shared/_js_tags.html.erb" %>
+    <%= javascript_include_tag session[:user]['data']['js_file'] if session[:user]['data']['white_label'] && not session[:user]['data']['js_file'].blank? %>
+  </body>
+</html>

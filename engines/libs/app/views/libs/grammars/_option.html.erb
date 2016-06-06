@@ -1,0 +1,13 @@
+<tr id="grammar_o_<%= num %>">
+  <td><%= smart_text_field f, [ "[related_options][o_#{num}][name]", name ] %></td>
+
+  <td class="block"><%= text_field_tag "grammar[related_options][o_#{num}][related_values]", related_values, class: 'tagsinput' %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_grammar_option('#{escape_javascript(render 'libs/grammars/option', f: f, num: 'x', name: String.new, related_values: Array.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_object($('#grammar_o_x'));" %>
+    <% end %>
+  </td>
+</tr>

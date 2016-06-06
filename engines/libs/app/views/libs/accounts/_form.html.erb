@@ -1,0 +1,79 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% unless external_engine %>
+    <div class="section">
+      <span class="label"><%= auto_label_for f, :product %>
+      <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @account.product, true) %>
+    </div>
+  <% end %>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :type %></span>
+
+    <%= smart_select_field f, :type, options_from_hash_for_select(@type, :value, :text, @account.type), :onchange => 'show_and_hide(["."+this.value,".account_type"]);' %>
+  </div>
+
+  <div class="section account_type email<%= ' hidden-block' unless @account.type == 'email' %>">
+    <span class="label"><%= auto_label_for f, :email %></span>
+
+    <%= smart_text_field f, :email, :at %>
+  </div>
+
+  <div class="section account_type ftp sftp<%= ' hidden-block' unless %w(ftp sftp).include? @account.type %>">
+    <span class="label"><%= auto_label_for f, :server %></span>
+
+    <%= smart_text_field f, :server, :database %>
+  </div>
+
+  <div class="section account_type ftp sftp<%= ' hidden-block' unless %w(ftp sftp).include? @account.type %>">
+    <span class="label"><%= auto_label_for f, :port %></span>
+
+    <%= smart_text_field f, :port %>
+  </div>
+
+  <div class="section account_type ftp sftp<%= ' hidden-block' unless %w(ftp sftp).include? @account.type %>">
+    <span class="label"><%= auto_label_for f, :folder %></span>
+
+    <%= smart_text_field f, :folder, 'folder-open' %>
+  </div>
+
+  <div class="section account_type ftp sftp<%= ' hidden-block' unless %w(ftp sftp).include? @account.type %>">
+    <span class="label"><%= auto_label_for f, :user %></span>
+
+    <%= smart_text_field f, :user, :user %>
+  </div>
+
+  <div class="section account_type ftp sftp<%= ' hidden-block' unless %w(ftp sftp).include? @account.type %>">
+    <span class="label"><%= auto_label_for f, :password %></span>
+
+    <%= smart_text_field f, :password, :lock %>
+  </div>
+
+  <div class="section account_type post<%= ' hidden-block' unless @account.type == 'post' %>">
+    <span class="label"><%= auto_label_for f, :url %></span>
+
+    <%= smart_text_field f, :url, :cloud %>
+  </div>
+</fieldset>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), accounts_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

@@ -1,0 +1,17 @@
+<ul>
+  <% WEBO_CONFIG['products'].each do |product| %>
+    <li<%= raw " class=\"#{product['key']}\"" unless session[:user]['data']['white_label'] %>>
+      <%= link_to (product['link'][-5..-1] == '_path' ? eval(product['link']) : product['link']), class: "jarvismetro-tile big-cubes bg-color-#{product['color']}#{' selected' if product['key'] == engine_name}" do %>
+        <span class="iconbox">
+          <% if product.include? 'icon' %>
+            <%= icon product['icon'], String.new, class: 'fa-5x' %>
+          <% else %>
+            <i></i>
+          <% end %>
+
+          <span><%= I18n.t("products.#{product['key']}") %></span>
+        </span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

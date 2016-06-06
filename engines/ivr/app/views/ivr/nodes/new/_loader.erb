@@ -1,0 +1,33 @@
+<div id="<%= @type %>_node">
+  <section id="widget-grid">
+    <div id="create_node" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= image_tag('ivr/nodes/' + params[:type] + '.png', :alt => params[:type]) %></span>
+        <h2><%= I18n.t('ivr.nodes.create.title') %>: <%= I18n.t("ivr.nodes.types.list.#{params[:type]}") %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+          <%= form(@node, :url => tree_nodes_path(@tree), :html => { :class => 'smart-form', :multipart => true }) do |f| %>
+            <%= render "ivr/nodes/#{params[:type]}/form", :f => f %>
+
+            <%= hidden_field_tag :content_div, '#node' %>
+            <%= hidden_field_tag :type, params[:type] %>
+            <%= hidden_field_tag :parent, params[:parent] %>
+
+            <footer>
+              <%= f.submit I18n.t('actions.create'), :class => 'btn btn-primary' %>
+              <%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default' %>
+              <%= link_to I18n.t('ivr.nodes.create.button'), "javascript:load_in_div('#{new_tree_node_path params[:tree_id]}?parent=#{params[:parent]}', 'node');", :class => 'btn btn-default' %>
+            </footer>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default btn-xs' %>
+    <%= link_to I18n.t('ivr.nodes.create.button'), "javascript:load_in_div('#{new_tree_node_path params[:tree_id]}?parent=#{params[:parent]}', 'node');", :class => 'btn btn-default btn-xs' %>
+  </div>
+</div>

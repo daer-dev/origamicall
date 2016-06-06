@@ -1,0 +1,17 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :expression %></span>
+
+    <%= smart_text_field f, :expression, :code %>
+
+    <%= render 'ivr/nodes/shared/tools', :field => 'expression_condition_node_expression' %>
+  </div>
+
+  <%= render 'ivr/nodes/shared/status', :f => f %>
+</fieldset>

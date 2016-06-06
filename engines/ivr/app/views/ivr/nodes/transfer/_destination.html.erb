@@ -1,0 +1,41 @@
+<tr id="node_d_<%= num %>">
+  <td class="order_controls<%= ' hidden-block' if @node.strategy == 'percent' %>">
+    <% if num == 0 %>
+      &nbsp;
+    <% else %>
+      <%= text_field_tag "transfer_node[related_destinations][d_#{num}][order]", order, :class => "order order_node_d_#{num}", readonly: true %>
+
+      <%= icon :sort, nil, :class => 'handle' %>
+    <% end %>
+  </td>
+
+  <td class="percent<%= ' hidden-block' unless @node.strategy == 'percent' %>"><%= smart_text_field f, [ "[related_destinations][d_#{num}][percent]", percent ] %></td>
+
+  <td class="block"><%= smart_select_field f, "[related_destinations][d_#{num}][type]", options_from_hash_for_select(@destination_types, 'value', 'text', type, false, false), :onchange => "hide_transfer_node_destination_fields(#{num});" %></td>
+
+  <td class="block">
+    <div class="type phone<%= ' hidden-block' unless type == 'phone' %>">
+      <%= smart_text_field f, [ "[related_destinations][d_#{num}][phone_number]", phone_number ] %>
+    </div>
+
+    <% if @no_vars.blank? %>
+      <div class="type var<%= ' hidden-block' unless type == 'var' %>">
+        <%= smart_select_field f, "[related_destinations][d_#{num}][ivr_variables_id]", options_from_hash_for_select(@node.main_node.vars, 'id', 'name', ivr_variables_id, true) %>
+      </div>
+    <% end %>
+
+    <div class="type destination<%= ' hidden-block' unless type == 'destination' %>">
+      <%= lib f, :destinations, "[related_destinations][d_#{num}][libs_destinations_id]", libs_destinations_id %>
+    </div>
+  </td>
+
+  <td class="block"><%= smart_text_field f, [ "[related_destinations][d_#{num}][timeout]", timeout ] %></td>
+
+  <td class="block">
+    <% if num == 0 %>
+      <%= link_to icon('plus-square', nil, class: 'fa-1-5x'), "javascript:new_transfer_node_destination('#{escape_javascript(render 'ivr/nodes/transfer/destination', f: f, num: 'x', type: String.new, order: String.new, percent: String.new, timeout: String.new, phone_number: String.new, libs_destinations_id: String.new, ivr_variables_id: String.new)}');" %>
+    <% else %>
+      <%= link_to icon('minus-square', nil, class: 'fa-1-5x'), "javascript:remove_list_element($('#node_d_#{num}'), '#destinations_list');" %>
+    <% end %>
+  </td>
+</tr>

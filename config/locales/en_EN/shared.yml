@@ -1,0 +1,8 @@
+en_EN:
+
+  languages:
+    es_ES: Spanish
+    en_EN: English
+
+  actions:
+    close: Close

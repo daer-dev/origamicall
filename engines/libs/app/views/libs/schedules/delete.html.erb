@@ -1,0 +1,12 @@
+<%= form String.new, :url => schedule_path(@schedule), :html => { :id => "delete_schedule_#{@schedule.id}_form", :method => :delete } do |f| %>
+  <div class="alert alert-warning fade in">
+    <%= icon :warning, String.new, class: 'fa-fw' %> <%= raw I18n.t('libs.schedules.delete.text', name: @schedule.name) %>
+  </div>
+
+  <%= submit_tag I18n.t('actions.delete'), :class => 'btn btn-primary' %>
+  <%= hlink_to I18n.t('actions.return'), schedules_path, :class => 'btn btn-default' %>
+<% end %>
+
+<div class="ribbon-content">
+  <%= hlink_to I18n.t('actions.edit'), edit_schedule_path(@schedule), :class => 'btn btn-default btn-xs' %>
+</div>

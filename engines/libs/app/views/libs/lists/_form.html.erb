@@ -1,0 +1,66 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% if [ 'edit', 'update' ].include? params[:action] || ([ 'new', 'create' ].include? params[:action] && not params.include? :ajax_loaded) %>
+    <% unless params.include? :ajax_loaded %>
+      <div class="section">
+        <span class="label"><%= auto_label_for f, :type %></span>
+
+        <%= smart_select_field f, :type, options_from_hash_for_select(@type, :value, :text, @list.type, true) %>
+      </div>
+    <% end %>
+
+    <% unless external_engine %>
+      <div class="section">
+        <span class="label"><%= auto_label_for f, :product %></span>
+
+        <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @list.product, true) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="section">
+    <span class="label">
+      <%= tooltip "
+        <ul>
+          <li>#{I18n.t('libs.lists.info.requirements.r1')}</li>
+          <li>#{I18n.t('libs.lists.info.requirements.r2')}</li>
+          <li>#{I18n.t('libs.lists.info.requirements.r3')}</li>
+          <li>#{I18n.t('libs.lists.info.requirements.r4')}</li>
+        </ul>", I18n.t('libs.lists.info.title')
+      %>
+      <%= auto_label_for f, :att %>
+    </span>
+
+    <%= smart_file_field f, :att %>
+  </div>
+
+  <% if [ 'edit', 'update' ].include? params[:action] %>
+    <div class="section">
+      <%= smart_checkbox f, :replace_contacts %>
+      <%= tooltip I18n.t('libs.lists.info.replace') %>
+    </div>
+  <% end %>
+</fieldset>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= f.hidden_field :type, :value => params[:group] if params.include? :group %>
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), lists_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

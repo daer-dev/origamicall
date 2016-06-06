@@ -1,0 +1,138 @@
+<h1 class="page-title">
+  <%= icon 'clock-o', @schedule.name, class: 'fa-fw' %>
+</h1>
+
+<section id="widget-grid">
+  <div id="schedule_<%= @schedule.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+    <header>
+      <span class="widget-icon"><%= icon :edit %></span>
+      <h2><%= I18n.t('misc.data') %> (<%= I18n.t('misc.read_only') %>)</h2>
+    </header>
+
+    <div>
+      <div class="widget-body no-padding">
+        <table class="table table-bordered">
+          <tr>
+            <td><strong><%= I18n.t('fields.shared.name') %></strong></td>
+            <td><%= @schedule.name %></td>
+          </tr>
+          <% unless @schedule.product.blank? %>
+            <tr>
+              <td><strong><%= I18n.t('fields.shared.product') %></strong></td>
+              <td><%= I18n.t("products.#{@schedule.product}") %></td>
+            </tr>
+          <% end %>
+          <% unless @schedule.time_slots.blank? %>
+            <tr>
+              <td colspan="2"><strong><%= I18n.t('libs.schedules.fields.schedules.title') %></strong></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table class="bordered-table">
+                  <thead>
+                    <tr>
+                      <th width="10%">&nbsp;</th>
+                      <th width="15%" class="block"><%= I18n.t('libs.schedules.fields.schedules.start') %></th>
+                      <th width="15%"><%= I18n.t('libs.schedules.fields.schedules.end') %></th>
+                      <th width="15%" class="block"><%= I18n.t('libs.schedules.fields.schedules.start') %></th>
+                      <th width="15%"><%= I18n.t('libs.schedules.fields.schedules.end') %></th>
+                      <th width="15%" class="block"><%= I18n.t('libs.schedules.fields.schedules.start') %></th>
+                      <th width="15%"><%= I18n.t('libs.schedules.fields.schedules.end') %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[1] %></td>
+                      <td class="block"><%= @schedule.d1_1_1 %></td>
+                      <td><%= @schedule.d1_1_2 %></td>
+                      <td class="block"><%= @schedule.d1_2_1 %></td>
+                      <td><%= @schedule.d1_2_2 %></td>
+                      <td class="block"><%= @schedule.d1_3_1 %></td>
+                      <td><%= @schedule.d1_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[2] %></td>
+                      <td class="block"><%= @schedule.d2_1_1 %></td>
+                      <td><%= @schedule.d2_1_2 %></td>
+                      <td class="block"><%= @schedule.d2_2_1 %></td>
+                      <td><%= @schedule.d2_2_2 %></td>
+                      <td class="block"><%= @schedule.d2_3_1 %></td>
+                      <td><%= @schedule.d2_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[3] %></td>
+                      <td class="block"><%= @schedule.d3_1_1 %></td>
+                      <td><%= @schedule.d3_1_2 %></td>
+                      <td class="block"><%= @schedule.d3_2_1 %></td>
+                      <td><%= @schedule.d3_2_2 %></td>
+                      <td class="block"><%= @schedule.d3_3_1 %></td>
+                      <td><%= @schedule.d3_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[4] %></td>
+                      <td class="block"><%= @schedule.d4_1_1 %></td>
+                      <td><%= @schedule.d4_1_2 %></td>
+                      <td class="block"><%= @schedule.d4_2_1 %></td>
+                      <td><%= @schedule.d4_2_2 %></td>
+                      <td class="block"><%= @schedule.d4_3_1 %></td>
+                      <td><%= @schedule.d4_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[5] %></td>
+                      <td class="block"><%= @schedule.d5_1_1 %></td>
+                      <td><%= @schedule.d5_1_2 %></td>
+                      <td class="block"><%= @schedule.d5_2_1 %></td>
+                      <td><%= @schedule.d5_2_2 %></td>
+                      <td class="block"><%= @schedule.d5_3_1 %></td>
+                      <td><%= @schedule.d5_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[6] %></td>
+                      <td class="block"><%= @schedule.d6_1_1 %></td>
+                      <td><%= @schedule.d6_1_2 %></td>
+                      <td class="block"><%= @schedule.d6_2_1 %></td>
+                      <td><%= @schedule.d6_2_2 %></td>
+                      <td class="block"><%= @schedule.d6_3_1 %></td>
+                      <td><%= @schedule.d6_3_2 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= I18n.t('date.day_names')[0] %></td>
+                      <td class="block"><%= @schedule.d7_1_1 %></td>
+                      <td><%= @schedule.d7_1_2 %></td>
+                      <td class="block"><%= @schedule.d7_2_1 %></td>
+                      <td><%= @schedule.d7_2_2 %></td>
+                      <td class="block"><%= @schedule.d7_3_1 %></td>
+                      <td><%= @schedule.d7_3_2 %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+          <% unless @schedule.holidays.blank? %>
+            <tr>
+              <td colspan="2"><strong><%= I18n.t('fields.controllers.libs__schedules.holidays_list') %></strong></td>
+            </tr>
+            <tr>
+              <td colspan="2"><%= @schedule.holidays_list %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if params.include? :ajax_loaded %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), schedules_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

@@ -1,0 +1,12 @@
+<%= form String.new, :url => tree_node_path(params[:tree_id], @node), :html => { :id => "delete_node_#{@node.id}_form", :method => :delete } do |f| %>
+  <div class="alert alert-warning fade in">
+    <%= icon :warning, String.new, class: 'fa-fw' %> <%= raw I18n.t('ivr.nodes.delete.text', name: @node.name) %>
+  </div>
+
+  <%= submit_tag I18n.t('actions.delete'), :class => 'btn btn-primary' %>
+  <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");close_div("node");', :class => 'btn btn-default' %>
+<% end %>
+
+<div class="ribbon-content">
+  <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");close_div("node");', :class => 'btn btn-default btn-xs' %>
+</div>

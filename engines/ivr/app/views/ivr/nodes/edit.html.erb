@@ -1,0 +1,29 @@
+<div id="<%= @type %>_node">
+  <section id="widget-grid">
+    <div id="edit_node_<%= @node.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= image_tag('ivr/nodes/' + @type + '.png', :alt => @type) %></span>
+        <h2><%= I18n.t("ivr.nodes.types.list.#{@type}") %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+          <%= form(@node, :url => tree_node_path(params[:tree_id], @node), :html => { :class => 'smart-form', :multipart => true }) do |f| %>
+            <%= render "ivr/nodes/#{@type}/form", :f => f %>
+
+            <%= hidden_field_tag :content_div, '#node' %>
+
+            <footer>
+              <%= f.submit I18n.t('actions.edit'), :class => 'btn btn-primary' %>
+              <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");close_div("node");', :class => 'btn btn-default' %>
+            </footer>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");close_div("node");', :class => 'btn btn-default btn-xs' %>
+  </div>
+</div>

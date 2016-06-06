@@ -1,0 +1,86 @@
+@import 'mixins';
+
+/************/
+/* Árboles */
+/************/
+
+#spacetree.select_node #canvas .st_node,
+#spacetree.select_node #canvas .st_node * {
+  cursor: pointer;
+}
+
+/************/
+/* Nodos */
+/************/
+
+.status_nodes,
+.tools {
+  float: left;
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  background: #f3f3f3;
+  @include border-radius(5px, 5px, 5px, 5px);
+  margin-top: 5px;
+}
+
+.status_nodes .select,
+.tools .select {
+  float: left;
+  width: 160px;
+}
+
+.status_nodes span {
+  float: left;
+  margin: 8px 10px 0 10px;
+}
+
+.tools div {
+  float: left;
+}
+
+.tools div span {
+  float: left;
+  margin: 8px 10px 0 10px;
+}
+
+.tools div label:not(.select),
+.tools div .btn {
+  float: left;
+}
+
+.tools div label:not(.select) {
+  margin: 8px 10px 0 0;
+}
+
+.tools div .btn {
+  margin: 5px 0 0 10px;
+}
+
+/* Salto */
+
+#jump_node #select_node {
+  margin: 15px;
+}
+
+/* Menu */
+
+#menu_node .default .checkbox {
+  float: left;
+  margin-top: -10px;
+}
+
+#menu_node .tts .btn {
+  float: right;
+}
+
+/* Buzón de voz */
+
+#voicemail_node .tts .btn {
+  float: right;
+}
+
+/* Entrada de datos */
+
+#data_entry_node .tts .btn {
+  float: right;
+}

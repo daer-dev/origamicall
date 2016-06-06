@@ -1,0 +1,29 @@
+<h1 class="page-title">
+  <%= icon :phone, @destination.name, class: 'fa-fw' %>
+</h1>
+
+<section id="widget-grid">
+  <div id="edit_destination_<%= @destination.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+    <header>
+      <span class="widget-icon"><%= icon :edit %></span>
+      <h2><%= I18n.t('misc.data') %></h2>
+    </header>
+
+    <div>
+      <div class="widget-body no-padding">
+        <%= form(@destination, :url => destination_path, :html => { :class => 'smart-form' }) do |f| %>
+          <%= render 'form', f: f %>
+
+          <footer>
+            <%= f.submit I18n.t('actions.edit'), :class => 'btn btn-primary' %>
+            <% if params.include? :ajax_loaded %>
+              <%= link_to I18n.t('actions.close'), "javascript:close_div('lib');", :class => 'btn btn-default' %>
+            <% else %>
+              <%= hlink_to I18n.t('actions.return'), destinations_path, :class => 'btn btn-default' %>
+            <% end %>
+          </footer>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

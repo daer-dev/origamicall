@@ -1,0 +1,28 @@
+$.datepicker.setDefaults({
+  firstDay: 1,
+  minDate: new Date(),
+  dateFormat: 'dd/mm/yy',
+  closeText: locale['actions.close'],
+  prevText: '&laquo;',
+  nextText: '&raquo;',
+  currentText: locale['misc.today'],
+  monthNames: locale['date.month_names'],
+  monthNamesShort: locale['date.abbr_month_names'],
+  dayNames: locale['date.day_names'],
+  dayNamesShort: locale['date.abbr_day_names'],
+  dayNamesMin: locale['date.abbr_day_names_2']
+});
+
+$('.datepicker_calendar').datepicker({
+  onSelect: function(date) {
+    var input = $('.datepicker_field');
+    var current_value = input.val();
+    if(input.val().indexOf(date) == -1) {
+      if(current_value == '') {
+        input.val(date);
+      } else {
+        input.val(current_value + ',' + date);
+      }
+    }
+  }
+}).draggable();

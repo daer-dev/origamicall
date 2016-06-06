@@ -1,0 +1,72 @@
+<h1 class="page-title">
+  <%= icon 'comments-o', I18n.t('libs.grammars.index.title'), class: 'fa-fw' %>
+</h1>
+
+<% unless @grammars.blank? %>
+
+  <section id="widget-grid">
+    <div id="grammars" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= icon :table %></span>
+        <h2><%= I18n.t('misc.data') %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+          <table class="data-table table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><%= I18n.t('fields.shared.id') %></th>
+                <th><%= icon 'comments-o', String.new, class: 'text-muted hidden-md hidden-sm hidden-xs' %> <%= I18n.t('fields.shared.name') %></th>
+                <% unless external_engine %>
+                  <th><%= I18n.t('fields.shared.product') %></th>
+                <% end %>
+                <th class="options"><%= I18n.t('misc.options') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @grammars.each do |grammar| %>
+                <tr>
+                  <td><%= grammar.id %></td>
+                  <td><%= grammar.name %></td>
+                  <% unless external_engine %>
+                    <td><%= I18n.t("products.#{grammar.product}") unless grammar.product.blank? %></td>
+                  <% end %>
+                  <td class="options">
+                    <% if grammar.users_id.blank? && not WEBO_CONFIG['users']['administrators'].include? session[:user]['data']['id'] %>
+                      <%= hlink_to grammar_path(grammar) do %>
+                        <%= icon :eye %>
+                        <%= I18n.t('actions.view') %>
+                      <% end %>
+                    <% else %>
+                      <%= hlink_to edit_grammar_path(grammar) do %>
+                        <%= icon :edit %>
+                        <%= I18n.t('actions.edit') %>
+                      <% end %>
+
+                      <%= hlink_to delete_grammar_path(grammar) do %>
+                        <%= icon :remove %>
+                        <%= I18n.t('actions.delete') %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% content_for :js_tags do %>
+    <%= render 'assets_calls/javascripts/data_tables' %>
+  <% end %>
+
+<% else %>
+
+  <div class="alert alert-info fade in">
+    <p><%= icon :info, I18n.t('messages.error.no_results'), class: 'fa-fw' %></p>
+  </div>
+
+<% end %>

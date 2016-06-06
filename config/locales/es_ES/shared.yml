@@ -1,0 +1,54 @@
+es_ES:
+
+  layout:
+    charset: UTF8
+    title: OrigamiCall
+
+  products:
+    libs: Librerías
+    ivr: Kobune-IVR
+
+  header:
+    activity:
+      options:
+        product: Producto
+        common: Común
+      message:
+        title: Bienvenido a su panel de notificaciones
+        text: Haga click en el botón de la categoría que quiera ver
+    user:
+      title: Usuario
+      logout_message: ¿Está seguro? Necesitará volver a proporcionar sus credenciales si quiere seguir usando nuestros productos 
+    collapse_menu: Cerrar menu
+    full_screen: Pantalla completa
+
+  languages:
+    es_ES: Español
+    en_EN: Inglés
+
+  actions:
+    logout: Cerrar sesión
+    create: Crear
+    close: Cerrar
+    select: Seleccionar
+    return: Volver
+    view: Ver
+    edit: Modificar
+    delete: Borrar
+    play: Reproducir
+    save: Guardar
+    move: Mover
+
+  misc:
+    home: Inicio
+    data: Datos
+    options: Opciones
+    empty_option_text: ··········
+    list: Listado
+    read_only: Sólo lectura
+    "yes": Sí
+    "no": "No"
+    today: Hoy
+    new: Nuevo
+    enabled: Activado
+    disabled: Desactivado

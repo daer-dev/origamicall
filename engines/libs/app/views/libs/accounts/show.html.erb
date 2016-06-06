@@ -1,0 +1,79 @@
+<h1 class="page-title">
+  <%= icon :users, @account.name, class: 'fa-fw' %>
+</h1>
+
+<section id="widget-grid">
+  <div id="account_<%= @account.id %>" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+    <header>
+      <span class="widget-icon"><%= icon :edit %></span>
+      <h2><%= I18n.t('misc.data') %> (<%= I18n.t('misc.read_only') %>)</h2>
+    </header>
+
+    <div>
+      <div class="widget-body no-padding">
+        <table class="table table-bordered">
+          <tr>
+            <td><strong><%= I18n.t('fields.shared.name') %></strong></td>
+            <td><%= @account.name %></td>
+          </tr>
+          <% unless @account.product.blank? %>
+            <tr>
+              <td><strong><%= I18n.t('fields.shared.product') %></strong></td>
+              <td><%= I18n.t("products.#{@account.product}") %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td><strong><%= I18n.t('fields.shared.type') %></strong></td>
+            <td><%= get_string @account.type, 'account_type' %></td>
+          </tr>
+          <% if @account.type == 'email' %>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.email') %></strong></td>
+              <td><%= @account.email %></td>
+            </tr>
+          <% elsif %w(ftp sftp).include? @account.type %>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.server') %></strong></td>
+              <td><%= @account.server %></td>
+            </tr>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.port') %></strong></td>
+              <td><%= @account.port %></td>
+            </tr>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.folder') %></strong></td>
+              <td><%= @account.folder %></td>
+            </tr>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.user') %></strong></td>
+              <td><%= @account.user %></td>
+            </tr>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.password') %></strong></td>
+              <td><%= @account.password %></td>
+            </tr>
+          <% elsif @account.type == 'post' %>
+            <tr>
+              <td><strong><%= I18n.t('fields.controllers.libs__accounts.url') %></strong></td>
+              <td><%= @account.url %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if params.include? :ajax_loaded %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), accounts_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

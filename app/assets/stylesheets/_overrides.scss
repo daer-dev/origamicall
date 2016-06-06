@@ -1,0 +1,377 @@
+@import 'mixins';
+
+/************/
+/* General */
+/************/
+
+#logo-group {
+  width: auto !important;
+}
+
+#logo img {
+  width: auto;
+  max-width: 130px;
+  max-heignt: 20px;
+}
+
+#logo-mini img {
+  max-width: 26px;
+  max-heignt: 20px;
+}
+
+h1 {
+  margin: 5px 0 15px 0;
+}
+
+#main {
+  min-height: 0;
+  padding: 0;
+}
+
+.ajax-loading-error {
+  margin: 10px 0;
+}
+
+.ajax-dropdown .fa-5x.fa-border {
+  border-width: 3px;
+  @include border-radius(50%, 50%, 50%, 50%);
+  display: block;
+  margin: 0 auto;
+  width: 66px;
+  height: 71px;
+  text-align: center;
+  color: #d1d1d1;
+  border-color: #d1d1d1;
+}
+
+.dataTables_filter .form-control {
+  height: 32px;
+}
+
+.widget-body,
+.widget-body.no-padding {
+  min-height: 0;
+}
+
+/************/
+/* Formularios */
+/************/
+
+.smart-form footer .btn {
+  float: left;
+}
+
+.smart-form .button,
+.smart-form .radio input + i:after {
+  background-color: #717171;
+}
+
+.smart-form .input:hover input,
+.smart-form .select:hover select,
+.smart-form .textarea:hover textarea,
+.smart-form .radio:hover i,
+.smart-form .checkbox:hover i,
+.smart-form .toggle:hover i {
+  border-color: #949494;
+}
+
+.smart-form .checkbox input + i:after,
+.smart-form .rating input + label:hover,
+.smart-form .rating input + label:hover ~ label,
+.smart-form .rating input:checked ~ label {
+  color: #717171;
+}
+
+.smart-form .input input:focus,
+.smart-form .select select:focus,
+.smart-form .textarea textarea:focus,
+.smart-form .radio input:focus + i,
+.smart-form .checkbox input:focus + i,
+.smart-form .toggle input:focus + i,
+.smart-form .radio input:checked + i,
+.smart-form .checkbox input:checked + i,
+.smart-form .toggle input:checked + i {
+  border-color: #717171;
+}
+
+.smart-form .radio,
+.smart-form .checkbox {
+  float: left;
+  margin: 0 10px 0 0;
+  color: #666666;
+  display: inline;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.ui-datepicker-unselectable.ui-state-disabled > span {
+  background-color: #fbfbfb;
+}
+
+.ui-datepicker-calendar a:hover {
+  background: #717171;
+}
+
+/************/
+/* Pace */
+/************/
+
+.pace {
+  @include box-sizing(border-box);
+  @include border-radius(10px, 10px, 10px, 10px);
+  @include background-clip(padding-box);
+  @include pointer-events(none);
+  @include user-select(none);
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 25px;
+  border: 2px solid #333333;
+  background-color: #ffffff;
+}
+
+.pace .pace-progress {
+  @include box-sizing(border-box);
+  @include border-radius(5px, 5px, 5px, 5px);
+  @include background-clip(padding-box);
+  @include transition(width 1s ease-in-out 1s linear);
+  @include transform(translate3d(0, 0, 0));
+  max-width: 190px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 15px;
+  font-size: 12px;
+  background: #333333;
+  color: #333333;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.pace .pace-progress:after {
+  content: attr(data-progress-text);
+  display: inline-block;
+}
+
+.pace.pace-inactive {
+  display: none;
+}
+
+/************/
+/* jQuery UI */
+/************/
+
+.ui-datepicker .ui-datepicker-header,
+.ui-datepicker .ui-datepicker-header a {
+  color: #bfbfbf;
+}
+
+.ui-datepicker .ui-datepicker-header a:hover {
+  color: #333333;
+}
+
+.ui-datepicker .ui-datepicker-header {
+  background: #333333;
+}
+
+/************/
+/* Smart Style 2 */
+/************/
+
+.smart-style-2 #shortcut ul {
+  border-bottom: 1px solid #c1c1c1;
+}
+
+.smart-style-2 #header,
+.smart-style-2 .page-footer,
+.smart-style-2 .superbox-show {
+  background-color: #333333;
+  border: 0;
+}
+
+.smart-style-2 .superbox-list.active:before {
+  color: #373737;
+}
+
+.smart-style-2 .superbox-img-description  {
+  color: #a7a7a7 !important;
+}
+
+.smart-style-2 .project-selector {
+  color: #c3c3c3;
+}
+
+.smart-style-2 #header * {
+  #color: #c7c7c7;
+}
+
+.smart-style-2 #logo-group span#activity {
+  color: #c7c7c7;
+}
+
+.smart-style-2 .header-search>input[type="text"] {
+  background: #1c1c1c;
+  border: 0;
+}
+
+.smart-style-2 .btn-header>:first-child>a,
+.smart-style-2 #hide-menu a > i {
+  color: #c7c7c7 !important;
+}
+
+.smart-style-2 .header-search>button,
+.smart-style-2 .header-dropdown-list a.dropdown-toggle {
+  color: #c7c7c7;
+}
+
+.smart-style-2 .btn.btn-ribbon {
+  background: #9a9a9a;
+}
+
+.smart-style-2 #logo-group>span .badge {
+  background: #626262;
+}
+
+.smart-style-2 nav ul li a {
+  color: #717171 !important;
+}
+
+.smart-style-2 nav ul ul>li:hover b {
+  color: #717171 !important;
+}
+
+.smart-style-2 nav ul li.open>a,
+.smart-style-2 nav ul li.open>a b,
+.smart-style-2 nav ul .active>a {
+  color: #232323 !important;
+}
+
+.smart-style-2 nav ul ul li>a:hover,
+.smart-style-2 nav ul li a:hover {
+  color: #232323 !important;
+}
+
+.smart-style-2 .btn-primary,
+.smart-style-2 .smart-form .button {
+  background-color: #979797;
+  border-color: #8a8a8a;
+}
+
+.smart-style-2 .btn-primary,
+.smart-style-2 .open .dropdown-toggle.btn-primary,
+.smart-style-2 .smart-form .button {
+  background-color: #333333;
+  border-color: #000000;
+}
+
+.smart-style-2 .btn-primary:hover,
+.smart-style-2 .btn-primary:focus,
+.smart-style-2 .btn-primary:active,
+.smart-style-2 .btn-primary.active,
+.smart-style-2 .open .dropdown-toggle.btn-primary {
+  background-color: #898989;
+  border-color: #767676;
+}
+
+.smart-style-2 .dropdown-menu>li>a:hover,
+.smart-style-2 .dropdown-menu>li>a:focus {
+  background-color: #898989;
+  color: #ffffff;
+}
+
+.smart-style-2 .dropdown-menu>li.active>a {
+  background-color: #333333;
+}
+
+.smart-style-2 .pagination>.active>a,
+.smart-style-2 .pagination>.active>span,
+.smart-style-2 .pagination>.active>a:hover,
+.smart-style-2 .pagination>.active>span:hover,
+.smart-style-2 .pagination>.active>a:focus,
+.smart-style-2 .pagination>.active>span:focus {
+  background-color: #979797;
+  border-color: #c3c3c3;
+}
+
+.smart-style-2 .smart-form .checkbox input:checked+i,
+.smart-style-2 .smart-form .radio input:checked+i,
+.smart-style-2 .smart-form .toggle input:checked+i {
+  border-color: #979797;
+}
+
+.smart-style-2 .smart-form .toggle i:before {
+  background-color: #979797;
+}
+
+.smart-form .rating input+label:hover,
+.smart-form .rating input+label:hover~label {
+  color: #979797;
+}
+
+.smart-style-2 .minifyme {
+  background: #dcdcdc;
+}
+
+.smart-style-2 .onoffswitch-inner:before {
+  background: #979797;
+  border-color: #979797 #767676 #777777;
+}
+
+.smart-style-2 aside#left-panel nav > ul > li > ul {
+  margin-top: -10px;
+}
+
+.smart-style-2.menu-on-top nav ul ul li>a {
+  color: #6c6c6c;
+}
+
+.smart-style-2.menu-on-top aside#left-panel nav > ul > li:hover {
+  background: #424242;
+}
+
+.smart-style-2.menu-on-top aside#left-panel nav > ul > li > ul {
+  background: #373737;
+}
+
+.smart-style-2.menu-on-top nav ul ul li a,
+.smart-style-2.menu-on-top nav ul ul ul li a {
+  color: #c0c0c0 !important;
+}
+
+.smart-style-2.menu-on-top nav ul ul li a:hover,
+.smart-style-2.menu-on-top nav ul ul ul li a:hover {
+  background-color: #737373 !important;
+}
+
+.smart-style-2.menu-on-top nav ul ul li:hover > a {
+  background-color: #737373;
+}
+
+.smart-style-2.menu-on-top nav > ul ul ul {
+  border-top: 1px solid #c7c7c7 !important;
+}
+
+.smart-style-2.menu-on-top nav ul ul,
+.smart-style-2.menu-on-top nav ul ul ul {
+  background: #424242 !important;
+}
+
+.smart-style-2.menu-on-top nav > ul > li > a:after {
+  color: #9e9e9e !important;
+}
+
+.smart-style-2 nav ul li.active > a:before {
+  color: #717171;
+}
+
+.smart-style-2 aside#left-panel .login-info span a:hover {
+  color: #000000;
+}

@@ -1,0 +1,18 @@
+es_ES:
+
+  libs:
+
+    accounts:
+
+      name: Cuentas
+      create:
+        title: Nueva cuenta de notificación
+      index:
+        title: Listado de cuentas de notificación
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar la cuenta de notificación "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.
+      types:
+        email: Email
+        ftp: FTP
+        sftp: SFTP
+        post: HTTP (POST)

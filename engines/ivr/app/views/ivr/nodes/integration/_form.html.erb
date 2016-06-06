@@ -1,0 +1,34 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.integration.titles.code') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :type, 'content', I18n.t('ivr.nodes.integration.types.content'), :onclick => "javascript:show_and_hide(['#integration_node_content_div','#integration_node_url_div']);refresh_codemirror();" %>
+      <%= smart_radio f, :type, 'url', I18n.t('ivr.nodes.integration.types.url'), :onclick => "javascript:show_and_hide(['#integration_node_url_div','#integration_node_content_div']);" %>
+    </div>
+  </div>
+
+  <div class="section">
+    <div id="integration_node_url_div"<%= raw ' class="hidden-block"' if @node.type == 'content' %>>
+      <%= smart_text_field f, :url, 'external-link' %>
+    </div>
+
+    <div id="integration_node_content_div"<%= raw ' class="hidden-block"' if @node.type == 'url' %>>
+      <%= f.text_area :content, :class => 'codemirror_code', 'data-codemirror-mode' => 'text/x-php', placeholder: I18n.t('ivr.nodes.integration.content_placeholder') %>
+    </div>
+  </div>
+</fieldset>
+
+<% content_for :css_tags do %>
+  <%= stylesheet_link_tag 'codemirror/lib/codemirror' %>
+<% end %>
+
+<% content_for :js_tags do %>
+  <%= render 'assets_calls/javascripts/codemirror' %>
+<% end %>

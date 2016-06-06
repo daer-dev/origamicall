@@ -1,0 +1,59 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :caller_id %></span>
+
+    <%= smart_text_field f, :caller_id, :phone %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :maxtime %></span>
+
+    <%= smart_text_field f, :maxtime, 'clock-o' %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :strategy %></span>
+
+    <%= smart_select_field f, :strategy, options_from_hash_for_select(@strategy, 'value', 'text', @node.strategy), :onchange => 'toggle_transfer_node_percent();' %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.transfer.titles.destinations') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="14%" class="order_controls<%= ' hidden-block' if @node.strategy == 'percent' %>"><%= I18n.t('ivr.nodes.transfer.fields.order') %></th>
+          <th width="14%" class="percent<%= ' hidden-block' unless @node.strategy == 'percent' %>"><%= I18n.t('fields.controllers.ivr__nodes.percent') %></th>
+          <th width="18%" class="block"><%= I18n.t('ivr.nodes.transfer.fields.type') %></th>
+          <th width="28%" class="block"><%= I18n.t('ivr.nodes.transfer.fields.destination') %></th>
+          <th width="18%" class="block"><%= I18n.t('fields.controllers.ivr__nodes.timeout') %></th>
+          <th width="8%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render 'ivr/nodes/transfer/destination', f: f, num: 0, type: @node.related_destinations['d_0']['type'], order: String.new, percent: @node.related_destinations['d_0']['percent'], timeout: @node.related_destinations['d_0']['timeout'], phone_number: @node.related_destinations['d_0']['phone_number'], libs_destinations_id: @node.related_destinations['d_0']['libs_destinations_id'], ivr_variables_id: @node.related_destinations['d_0']['ivr_variables_id'] %>
+      </tbody>
+      <tbody id="destinations_list" class="sortable">
+        <% unless @node.related_destinations.blank? %>
+          <% @node.related_destinations.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/transfer/destination', f: f, num: num + 1, type: v['type'], order: v['order'], percent: v['percent'], timeout: v['timeout'], phone_number: v['phone_number'], libs_destinations_id: v['libs_destinations_id'], ivr_variables_id: v['ivr_variables_id'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= render 'ivr/nodes/shared/status', :f => f %>
+</fieldset>

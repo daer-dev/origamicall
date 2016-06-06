@@ -1,0 +1,107 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :timeout %></span>
+
+    <%= smart_text_field f, :timeout %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :maxtime %></span>
+
+    <%= smart_text_field f, :maxtime %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.fields.bargein') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :bargein, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :bargein, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.fields.beep') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :beep, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :beep, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.fields.send_now') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :send_now, true, I18n.t('ivr.nodes.voicemail.send_now.enabled') %>
+      <%= smart_radio f, :send_now, false, I18n.t('ivr.nodes.voicemail.send_now.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.titles.audios') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="10%"><%= I18n.t('ivr.nodes.audio.fields.type') %></th>
+          <th width="28%" class="block"><%= I18n.t('ivr.nodes.audio.fields.libs_audios_id') %></th>
+          <th width="44%" class="block"><%= raw("<acronym title=\"#{I18n.t('ivr.nodes.audio.fields.tts')}\">#{I18n.t('ivr.nodes.audio.fields.tts_acronym')}</acronym>") %></th>
+          <th width="18%"><%= I18n.t('ivr.nodes.audio.fields.tts_voice') %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% %w(prompt confirm no_match).each do |a| %>
+          <%= render 'ivr/nodes/voicemail/audio', f: f, audio: a %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.titles.email') %></span>
+
+    <table class="bordered-table">
+      <tbody>
+        <tr>
+          <td width="20%"><%= auto_label_for f, :email_from %></td>
+          <td width="80%" class="block"><%= smart_text_field f, :email_from, 'envelope-o' %></td>
+        </tr>
+        <tr>
+          <td><%= auto_label_for f, :email_subject %></td>
+          <td class="block"><%= smart_text_field f, :email_subject %></td>
+        </tr>
+        <tr>
+          <td><%= auto_label_for f, :email_message %></td>
+          <td class="block"><%= smart_textarea f, :email_message %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.voicemail.titles.accounts') %></span>
+
+    <table class="bordered-table">
+      <tbody id="accounts_list">
+        <%= render 'ivr/nodes/voicemail/account', f: f, num: 0, libs_accounts_id: @node.related_accounts['a_0']['libs_accounts_id'] %>
+        <% unless @node.related_accounts.blank? %>
+          <% @node.related_accounts.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/voicemail/account', f: f, num: num, libs_accounts_id: v['libs_accounts_id'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>

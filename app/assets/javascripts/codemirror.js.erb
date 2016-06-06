@@ -1,0 +1,33 @@
+var x = document.getElementsByClassName('codemirror_code');
+var i;
+
+for(i = 0; i < x.length; i++) {
+  var editor = CodeMirror.fromTextArea(x[i], {
+    lineNumbers: true,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    mode: x[i].getAttribute('data-codemirror-mode'),
+    tabSize: 2,
+    lineWrapping: true,
+    styleActiveLine: true
+  });
+
+  editor.setOption('extraKeys', {
+    Tab: function(cm) {
+      var spaces = Array(cm.getOption('indentUnit') + 1).join(' ');
+      cm.replaceSelection(spaces);
+    }
+  });
+
+  editor.setSize('100%', 250);
+}
+
+function refresh_codemirror() {
+  $('.CodeMirror').each(function(i, el){
+    el.CodeMirror.refresh();
+  });
+}
+
+function after_div_slidedown() {
+  refresh_codemirror();
+}

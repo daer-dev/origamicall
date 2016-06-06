@@ -1,0 +1,58 @@
+function update_libs(lib, id, name, group) {
+  $('.lib.lib_' + lib).each(function() {
+    if($('.lib.lib_' + lib + ' option[value="' + id + '"]').length > 0) {
+      update_option_select('.lib.lib_' + lib, id, name);
+    } else {
+      add_new_lib(lib, $(this).attr('id'), id, name);
+    }
+  });
+
+  $('.multiple_lib.lib_' + lib).each(function() {
+    var multiple_lib_id_selector = '.multiple_lib.lib_' + lib + ' .id_' + id;
+
+    if($(multiple_lib_id_selector).length > 0) {
+      $(multiple_lib_id_selector + ' label span').html(name); 
+    } else {
+      add_new_multiple_lib(lib, id, name, group);
+    }
+  });
+}
+
+function add_new_lib(lib, selected_group_field, id, name) {
+  var select = '.lib_' + lib + ' select';
+  $(select).removeAttr('selected');
+  $(select).append($(document.createElement('option')).attr('selected', true).attr('value', id).text(name.replace(/\+/g, ' ')));
+  $('#' + selected_group_field + ' select').val(id);
+
+  change_edit_libs(selected_group_field);
+
+  $(select).trigger('change');
+}
+
+function add_new_multiple_lib(lib, id, name, group) {
+  var group_container = '.multiple_lib.lib_' + lib + ' .group_' + group + ' ul';
+  var field_name = $('#' + lib + '_field').val() + "[group_" + group + "][elem_" + id + "]";
+  var option_code = $('.multiple_lib_option').html().replace(/{{LIB}}/g, lib).replace(/{{ID}}/g, id).replace(/{{NAME}}/g, name).replace(/{{FIELD_NAME}}/g, field_name).replace('[[', '[').replace(']]', ']').replace(/__FIELD_NAME__/g, field_name.replace(/\[/g, '_').replace(/\]/g, ''));
+
+  $(group_container + ' .empty').fadeOut();
+  $(group_container).prepend(option_code);
+}
+
+function update_option_select(lib_class, value, text) {
+  $(lib_class + ' option[value="' + value + '"]').text(text);
+}
+
+function change_edit_libs(parent_id) {
+  var selected_val = $('#' + parent_id + ' select').val();
+  var edit_button = $('#' + parent_id + ' .edit');
+
+  if(selected_val == '') {
+    edit_button.fadeOut();
+  } else {
+    edit_button.fadeIn();
+
+    if($('#' + parent_id + ' .edit').attr('href') != undefined) {
+      edit_button.attr('href', $('#' + parent_id + ' .edit').attr('href').replace(/\/[0-9]+/, '/' + selected_val));
+    }
+  }
+}

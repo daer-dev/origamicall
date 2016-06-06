@@ -1,0 +1,72 @@
+<h1 class="page-title">
+  <%= icon :music, I18n.t('libs.audios.index.title'), class: 'fa-fw' %>
+</h1>
+
+<% unless @audios.blank? %>
+
+  <section id="widget-grid">
+    <div id="audios" class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false">
+      <header>
+        <span class="widget-icon"><%= icon :table %></span>
+        <h2><%= I18n.t('misc.data') %></h2>
+      </header>
+
+      <div>
+        <div class="widget-body no-padding">
+          <table class="data-table table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><%= I18n.t('fields.shared.id') %></th>
+                <th><%= icon :music, String.new, class: 'text-muted hidden-md hidden-sm hidden-xs' %> <%= I18n.t('fields.shared.name') %></th>
+                <% unless external_engine %>
+                  <th><%= I18n.t('fields.shared.product') %></th>
+                <% end %>
+                <th class="options"><%= I18n.t('misc.options') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @audios.each do |audio| %>
+                <tr>
+                  <td><%= audio.id %></td>
+                  <td><%= audio.name %></td>
+                  <% unless external_engine %>
+                    <td><%= I18n.t("products.#{audio.product}") unless audio.product.blank? %></td>
+                  <% end %>
+                  <td class="options">
+                    <% if audio.users_id.blank? && not WEBO_CONFIG['users']['administrators'].include? session[:user]['data']['id'] %>
+                      <%= hlink_to audio_path(audio) do %>
+                        <%= icon :eye %>
+                        <%= I18n.t('actions.view') %>
+                      <% end %>
+                    <% else %>
+                      <%= hlink_to edit_audio_path(audio) do %>
+                        <%= icon :edit %>
+                        <%= I18n.t('actions.edit') %>
+                      <% end %>
+
+                      <%= hlink_to delete_audio_path(audio) do %>
+                        <%= icon :remove %>
+                        <%= I18n.t('actions.delete') %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% content_for :js_tags do %>
+    <%= render 'assets_calls/javascripts/data_tables' %>
+  <% end %>
+
+<% else %>
+
+  <div class="alert alert-info fade in">
+    <p><%= icon :info, I18n.t('messages.error.no_results'), class: 'fa-fw' %></p>
+  </div>
+
+<% end %>

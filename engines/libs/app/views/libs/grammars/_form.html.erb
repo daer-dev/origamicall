@@ -1,0 +1,67 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% unless external_engine %>
+    <div class="section">
+      <span class="label"><%= auto_label_for f, :product %></span>
+
+      <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @grammar.product, true) %>
+    </div>
+  <% end %>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('fields.controllers.libs__grammars.options') %></span>
+
+    <div class="alert alert-info fade in">
+      <p><%= icon :info, I18n.t('libs.grammars.values_info'), class: 'fa-fw' %></p>
+    </div>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="45%"><%= I18n.t('fields.shared.name') %></th>
+          <th width="45%" class="block"><%= I18n.t('fields.controllers.libs__grammars.values') %></th>
+          <th width="10%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="options_list">
+        <%= render 'libs/grammars/option', f: f, num: 0, name: @grammar.related_options['o_0']['name'], related_values: @grammar.related_options['o_0']['related_values'] %>
+        <% unless @grammar.related_options.blank? %>
+          <% @grammar.related_options.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'libs/grammars/option', f: f, num: num, name: v['name'], related_values: v['related_values'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>
+
+<% content_for :js_tags do %>
+  <%= render 'assets_calls/javascripts/tagsinput' %>
+<% end %>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), grammars_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

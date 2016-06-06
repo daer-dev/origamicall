@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  database: dbcore
+  username: origami
+  password: origamicall2015
+  host: localhost
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

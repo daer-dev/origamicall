@@ -1,0 +1,124 @@
+# URLs
+default_url_options:
+  host: draft.origamicall.com
+  protocol: http
+
+# Selector de productos
+products:
+  - key: libs
+    link: /libs/
+    color: yellow
+    icon: paperclip
+  - key: ivr
+    link: ivr.root_path
+    color: greenLight
+
+# Idioma
+locale:
+  list:
+    - es_ES
+    - en_EN
+  default: es_ES
+  fields_to_js:
+    shared:
+      - data_tables.empty_table
+      - data_tables.info
+      - data_tables.info_empty
+      - data_tables.info_filtered
+      - data_tables.info_post_fix
+      - data_tables.thousands
+      - data_tables.length_menu
+      - data_tables.loading_records
+      - data_tables.processing
+      - data_tables.zero_records
+      - data_tables.paginate.first
+      - data_tables.paginate.last
+      - data_tables.paginate.next
+      - data_tables.paginate.previous
+      - data_tables.aria.sort_ascending
+      - data_tables.aria.sort_descending
+      - data_tables.print_message
+      - jarvis_widgets.settings_key_label
+      - jarvis_widgets.position_key_label
+      - jarvis_widgets.delete_msg
+      - jarvis_widgets.custom_start
+      - jarvis_widgets.custom_end
+      - jarvis_widgets.timestamp_format
+      - jarvis_widgets.label_error
+      - jarvis_widgets.label_update
+      - jarvis_widgets.label_refresh
+      - jarvis_widgets.label_delete
+      - jarvis_widgets.delete_button
+      - jarvis_widgets.edit_button
+      - jarvis_widgets.fullscreen_button
+      - jarvis_widgets.collapse_button
+      - jarvis_widgets.refresh_button
+      - jarvis_widgets.loading_message
+      - jarvis_widgets.colors.list.green_grass
+      - jarvis_widgets.colors.list.dark_green
+      - jarvis_widgets.colors.list.light_green
+      - jarvis_widgets.colors.list.purple
+      - jarvis_widgets.colors.list.magenta
+      - jarvis_widgets.colors.list.pink
+      - jarvis_widgets.colors.list.fade_pink
+      - jarvis_widgets.colors.list.light_blue
+      - jarvis_widgets.colors.list.teal
+      - jarvis_widgets.colors.list.ocean_blue
+      - jarvis_widgets.colors.list.night_sky
+      - jarvis_widgets.colors.list.night
+      - jarvis_widgets.colors.list.day_light
+      - jarvis_widgets.colors.list.orange
+      - jarvis_widgets.colors.list.dark_orange
+      - jarvis_widgets.colors.list.red_rose
+      - jarvis_widgets.colors.list.light_red
+      - jarvis_widgets.colors.list.purity
+      - jarvis_widgets.colors.button.text
+      - jarvis_widgets.colors.button.tooltip
+      - messages.info.loading
+      - messages.error.ajax
+      - messages.question.sure
+      - actions.logout
+      - actions.save
+      - actions.close
+      - misc.today
+      - misc.yes
+      - misc.no
+      - misc.empty_option_text
+      - date.month_names
+      - date.abbr_month_names
+      - date.day_names
+      - date.abbr_day_names
+      - date.abbr_day_names_2
+
+# Reconocimiento de voz
+voice_commands:
+  - go_back
+  - scroll_up
+  - scroll_down
+  - hide_navigation
+  - show_navigation
+  - mute
+  - sound_on
+  - stop
+  - help
+  - got_it
+
+# Comandos de sistema
+commands:
+  to_al: "/usr/bin/sox {{foo}} -e a-law -r 8000 -c 1 {{bar}}.al"
+  to_mp3: "/usr/bin/sox {{foo}} -t wav -e signed-integer - | lame - {{bar}}.mp3"
+  to_wav: "/usr/bin/sox {{foo}} -r 8000 -t wav -c 1 -b 16 {{bar}}.wav"
+
+# "Bandera" para marcar si la respuesta de una petición ha de interpretarse como código JS
+exec_response_flag: <!-- EXEC-RESPONSE -->
+
+# Usuarios
+users:
+  # Administradores predefinidos, que tendrán acceso a opciones avanzadas (como el acceso a librerías comunes, por ejemplo)
+  administrators:
+    - 1
+
+# Características desactivadas
+disabled_features:
+  - voice_recognition
+  - activity

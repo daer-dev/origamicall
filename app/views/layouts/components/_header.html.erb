@@ -1,0 +1,94 @@
+<% unless session[:user]['data']['white_label'] && session[:user]['data']['no_logo'] %>
+  <div id="logo-mini" class="visible-xs">
+    <%= image_tag session[:user]['data']['logo_mini'], alt: I18n.t('layout.title') %>
+  </div>
+
+  <div id="logo-group">
+    <span id="logo" class="hidden-xs">
+      <%= image_tag session[:user]['data']['logo'], alt: I18n.t('layout.title') %>
+    </span>
+
+    <%= render 'layouts/components/activity' unless feature_disabled? 'activity' %>
+  </div>
+<% end %>
+
+<div class="project-context">
+  <span class="label"><%= I18n.t('header.user.title') %>:</span>
+  <span class="project-selector dropdown-toggle" data-toggle="dropdown"><%= session[:user]['data']['name'] %> <%= icon 'angle-down' %></span>
+
+  <ul class="dropdown-menu">
+    <li>
+      <%= link_to('?logout', title: I18n.t('actions.logout'), 'data-action' => 'userLogout', 'data-logout-msg' => I18n.t('header.user.logout_message')) do %>
+        <%= icon 'sign-out' %>
+        <%= I18n.t('actions.logout') %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div class="pull-right">
+  <div id="hide-menu" class="btn-header pull-right">
+    <span>
+      <%= link_to('javascript:void(0);', title: I18n.t('header.collapse_menu'), 'data-action' => 'toggleMenu') do %>
+        <%= icon :reorder %>
+      <% end %>
+    </span>
+  </div>
+
+  <div id="fullscreen" class="btn-header transparent pull-right">
+    <span>
+      <%= link_to('javascript:void(0);', title: I18n.t('header.full_screen'), 'data-action' => 'launchFullscreen') do %>
+        <%= icon 'arrows-alt' %>
+      <% end %>
+    </span>
+  </div>
+
+  <% unless feature_disabled? 'voice_recognition' %>
+    <div id="speech-btn" class="btn-header transparent pull-right">
+      <div>
+        <%= link_to('javascript:void(0);', title: I18n.t('voice_recognition.title'), 'data-action' => 'voiceCommand') do %>
+          <%= icon :microphone %>
+        <% end %>
+
+        <div class="popover bottom"><div class="arrow"></div>
+          <div class="popover-content">
+            <h4 class="vc-title">
+              <%= I18n.t('voice_recognition.activation.title') %><br />
+              <small><%= I18n.t('voice_recognition.activation.subtitle') %></small>
+            </h4>
+
+            <h4 class="vc-title-error text-center">
+              <%= icon 'microphone-slash' %> <%= I18n.t('voice_recognition.error.title') %><br />
+              <small class="txt-color-red"><%= I18n.t('voice_recognition.error.subtitle_1') %></small><br />
+              <small class="txt-color-red"><%= I18n.t('voice_recognition.error.subtitle_2') %></small>
+            </h4>
+
+            <%= link_to I18n.t('voice_recognition.see_commands'), 'javascript:void(0);', class: 'btn btn-success', onclick: 'commands.help()' %>
+            <%= link_to I18n.t('voice_recognition.close_popup'), 'javascript:void(0);', class: 'btn bg-color-purple txt-color-white', onclick: '$("#speech-btn .popover").fadeOut(50);' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <ul class="header-dropdown-list">
+    <li>
+      <%= link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+        <%= image_tag 'blank.gif', class: "flag flag-#{flag I18n.locale}", alt: I18n.t("languages.#{I18n.locale}") %>
+        <span class="hidden-xs"><%= I18n.t("languages.#{I18n.locale}") %></span>
+        <%= icon 'angle-down' %>
+      <% end %>
+
+      <ul class="dropdown-menu pull-right">
+        <% WEBO_CONFIG['locale']['list'].each do |locale| %>
+          <li<%= raw ' class="active"' if I18n.locale.to_s == locale %>>
+            <%= link_to "?locale=#{locale}" do %>
+              <%= image_tag 'blank.gif', class: "flag flag-#{flag locale}" %>
+              <%= I18n.t("languages.#{locale}") %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+</div>

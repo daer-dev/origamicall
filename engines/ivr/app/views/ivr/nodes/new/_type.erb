@@ -1,0 +1,26 @@
+<% if @available_nodes.blank? %>
+
+  <div class="alert alert-info fade in">
+    <p><%= icon :info, I18n.t('ivr.nodes.types.not_found'), class: 'fa-fw' %></p>
+  </div>
+
+<% else %>
+
+  <p><%= I18n.t('ivr.nodes.types.intro') %></p>
+
+  <ul>
+    <% @available_nodes.each do |x| %>
+      <li>
+        <% link = "javascript:load_in_div('#{new_tree_node_path(params[:tree_id])}?parent=#{params[:parent]}&type=#{x[:id]}', 'node');" %>
+        <%= link_to image_tag('ivr/nodes/' + x[:id] + '.png', :alt => x[:name]), link %> <%= link_to x[:name], link %>
+      </li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default' %>
+
+<div class="ribbon-content">
+  <%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default btn-xs' %>
+</div>

@@ -1,0 +1,13 @@
+es_ES:
+
+  libs:
+
+    destinations:
+
+      name: Destinos
+      create:
+        title: Nuevo destino
+      index:
+        title: Listado de destinos
+      delete:
+        text: <strong>¡Atención!</strong> Va a eliminar el destino "<strong>%{name}</strong>". Haga click en el siguiente botón para continuar.

@@ -1,0 +1,20 @@
+/************/
+/* SpaceTree */
+/************/
+
+html,
+html body {
+  float: left;
+  height: 1px;
+}
+
+#spacetree.full .bar,
+#spacetree.full #canvas #window_resize_alert,
+#spacetree.full #canvas .node,
+.popover {
+  display: none;
+}
+
+#spacetree.full #canvas {
+  border: 0;
+}

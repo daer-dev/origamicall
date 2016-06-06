@@ -1,0 +1,49 @@
+@import 'mixins';
+
+.modal.fullscreen .modal-dialog,
+.modal.fullscreen .modal-content {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.modal.fullscreen .modal-dialog {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal.fullscreen .modal-dialog .modal-content .modal-body {
+  height: 100%;
+}
+
+.modal.fullscreen .modal-content {
+  border: none;
+  @include border-radius(none, none, none, none);
+  box-shadow: inherit;
+}
+
+.modal.fullscreen .modal-body {
+  padding: 0;
+}
+
+.modal.fullscreen .modal-header,
+.modal.fullscreen .modal-footer {
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.modal.fullscreen .modal-header {
+  top: 0;
+}
+
+.modal.fullscreen .modal-footer {
+  bottom: 0;
+}
+
+.modal.fullscreen iframe {
+  border: 0;
+}

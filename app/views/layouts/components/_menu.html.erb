@@ -1,0 +1,51 @@
+<div class="login-info">
+  <span>
+    <%= link_to 'javascript:void(0);', id: 'show-shortcut', 'data-action' => 'toggleShortcut' do %>
+
+      <% if session[:user]['data']['white_label'] %>
+        <%= image_tag 'product_bullet.png' %>
+      <% else %>
+        <%= image_tag "#{engine_name}/icon.png" %>
+      <% end %>
+
+      <span><%= I18n.t("products.#{engine_name}") %></span>
+      <%= icon 'angle-down' %>
+    <% end %>
+  </span>
+</div>
+
+<nav>
+  <ul>
+    <% (@engine_menu.blank? ? engine_config['menu'] : @engine_menu).each do |element| %>
+      <li>
+        <%= link_to (element.include?('link') ? eval(element['link']) : '#') do %>
+          <%= icon element['icon'], String.new, class: 'fa-lg fa-fw' %>
+          <span class="menu-item-parent"><%= I18n.t(element['text']) %></span>
+        <% end %>
+
+        <% if element.include? 'subelements' %>
+          <ul>
+            <% element['subelements'].each do |sub_element| %>
+              <li>
+                <%= link_to I18n.t(sub_element['text']), (sub_element.include?('link') ? eval(sub_element['link']) : '#') %>
+                <% if sub_element.include? 'subelements' %>
+                  <ul>
+                    <% sub_element['subelements'].each do |sub_sub_element| %>
+                      <li><%= link_to(t(sub_sub_element['text']), (sub_sub_element.include?('link') ? eval(sub_sub_element['link']) : '#')) %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end if engine_config.include? 'menu' %>
+
+    <%= render "#{engine_name}/shared/menu" if File.exists? "#{Rails.root}/engines/#{engine_name}/app/views/#{engine_name}/shared/_menu.html.erb" %>
+  </ul>
+</nav>
+
+<span class="minifyme" data-action="minifyMenu">
+  <%= icon 'arrow-circle-left', String.new, class: 'hit' %>
+</span>

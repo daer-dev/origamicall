@@ -1,0 +1,16 @@
+<tr>
+  <td><%= I18n.t("ivr.nodes.voicemail.audios.#{audio}.name") %></td>
+
+  <td class="block"><%= lib f, :audios, "[#{audio}_data][libs_audios_id]", eval("@node.#{audio}_data['libs_audios_id']") %></td>
+
+  <td class="block tts">
+    <%= smart_textarea f, [ "[#{audio}_data][text]", eval("@node.#{audio}_data['text']") ] %>
+
+    <% unless @vars.blank? %>
+      <%= link_to I18n.t('ivr.nodes.voicemail.fields.vars'), 'javascript:void(0);', :class => 'audio_link btn btn-default btn-xs', :title => audio %>
+      <div id="<%= audio %>_variables" class="hidden-block"><%= render 'ivr/nodes/shared/tools', field: "voicemail_node_#{audio}_data_text" %></div>
+    <% end %>
+  </td>
+
+  <td class="block"><%= smart_select_field f, "[#{audio}_data][tts_voice]", options_from_hash_for_select(@voices, 'value', 'text', eval("@node.#{audio}_data['tts_voice']"), false, false) %></td>
+</tr>

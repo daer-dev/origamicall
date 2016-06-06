@@ -1,0 +1,127 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* ColVis styles
+*/
+div.ColVis {
+  float: right;
+  margin-bottom: 1em;
+}
+
+button.ColVis_Button,
+ul.ColVis_collection li {
+  position: relative;
+  float: left;
+  margin-right: 3px;
+  padding: 5px 8px;
+  border: 1px solid #adadad;
+  cursor: pointer;
+  *cursor: hand;
+  font-size: 0.88em;
+  color: black !important;
+  white-space: nowrap;
+
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+      -ms-border-radius: 2px;
+       -o-border-radius: 2px;
+          border-radius: 2px;
+
+  background: #ffffff;
+}
+
+.ColVis_Button:hover,
+ul.ColVis_collection li:hover {
+  border: 1px solid #adadad;
+  text-decoration: none !important;
+  background: #e6e6e6;
+}
+
+button.ColVis_Button {
+  height: 30px;
+  padding: 3px 8px;
+  &:active { outline: none; }
+}
+button.ColVis_Button::-moz-focus-inner {
+  border: none !important;
+  padding: 0;
+}
+
+div.ColVis_collectionBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  z-index: 1100;
+}
+
+ul.ColVis_collection {
+  width: 150px;
+  padding: 8px 8px 4px 8px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border: 1px solid rgba( 0, 0, 0, 0.4 );
+  background-color: #f3f3f3;
+  background-color: rgba( 255, 255, 255, 0.3 );
+  overflow: hidden;
+  z-index: 2002;
+
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+       -o-border-radius: 5px;
+          border-radius: 5px;
+
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+      -ms-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+       -o-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  li {
+    position: relative;
+    height: auto;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+
+    display: block;
+    float: none;
+    margin-bottom: 4px;
+
+    -webkit-box-shadow: 1px 1px 3px #999;
+       -moz-box-shadow: 1px 1px 3px #999;
+        -ms-box-shadow: 1px 1px 3px #999;
+         -o-box-shadow: 1px 1px 3px #999;
+            box-shadow: 1px 1px 3px #999;
+
+    text-align: left;
+    &.ColVis_Button:hover {
+      border: 1px solid #999;
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+ul.ColVis_collection li {
+  span {
+    display: inline-block;
+    padding-left: 0.5em;
+    cursor: pointer;
+  }
+  &.ColVis_Special {
+    border-color: #555;
+    background: rgb(237,237,237);
+  }
+}
+
+span.ColVis_radio {
+  display: inline-block;
+  width: 20px;
+}
+
+div.ColVis_catcher {
+  position: absolute;
+  z-index: 1101;
+}
+
+.disabled { color: #999; }

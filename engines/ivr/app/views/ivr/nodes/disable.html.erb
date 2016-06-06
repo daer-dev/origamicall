@@ -1,0 +1,16 @@
+<% action_data = @node.active? ? %w(disable false) : %w(enable true) %>
+
+<%= form(@node, :url => tree_node_path(params[:tree_id], @node)) do |f| %>
+  <div class="alert alert-warning fade in">
+    <%= icon :warning, String.new, class: 'fa-fw' %> <%= raw I18n.t("ivr.nodes.#{action_data[0]}.text", name: @node.name) %>
+  </div>
+
+  <%= f.hidden_field :active, :value => action_data[1] %>
+
+  <%= f.submit I18n.t("ivr.nodes.#{action_data[0]}.button"), :class => 'btn btn-primary' %>
+  <%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default' %>
+<% end %>
+
+<div class="ribbon-content">
+  <%= link_to I18n.t('actions.close'), 'javascript:close_div("node");', :class => 'btn btn-default btn-xs' %>
+</div>

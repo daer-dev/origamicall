@@ -1,0 +1,22 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% unless session[:user]['services'].blank? %>
+    <div class="section">
+      <span class="label">
+        <%= tooltip I18n.t('ivr.trees.services.advice') %>
+        <%= I18n.t('ivr.trees.services.title') %>
+      </span>
+
+      <ul class="fixed-inline-elements">
+        <% session[:user]['services'].each do |service| %>
+          <li><%= smart_checkbox f, [ "[related_services][s_#{service['id']}]", service['id'], (@related_services.include? service['id'].to_s), service['number'] ] %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</fieldset>

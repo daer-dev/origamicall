@@ -1,0 +1,22 @@
+/************/
+/* Horarios */
+/************/
+
+#schedules .bordered-table tbody div {
+  margin: 5px 0;
+}
+
+#schedules .bordered-table tbody .separator {
+  background: #f6f6f6;
+}
+
+#holidays textarea {
+  height: 75px;
+}
+
+#holidays .datepicker_calendar {
+  cursor: move;
+  position: relative;
+  margin: -100px 0 0 100%;
+  left: -280px;
+}

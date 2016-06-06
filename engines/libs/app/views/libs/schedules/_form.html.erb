@@ -1,0 +1,106 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <% unless external_engine %>
+    <div class="section">
+      <span class="label"><%= auto_label_for f, :product %></span>
+
+      <%= smart_select_field f, :product, options_from_hash_for_select(@products, :value, :text, @schedule.product, true) %>
+    </div>
+  <% end %>
+
+  <div id="schedules" class="section">
+    <span class="label">
+      <%= tooltip "
+        <ul>
+          <li>#{I18n.t('libs.schedules.fields.schedules.warning')}</li>
+          <li>#{I18n.t('libs.schedules.fields.schedules.format')}</li>
+        </ul>"
+      %>
+      <%= I18n.t('libs.schedules.fields.schedules.title') %>
+    </span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="33%">&nbsp;</th>
+          <th width="33%" class="block"><%= I18n.t('libs.schedules.fields.schedules.start') %></th>
+          <th width="43%"><span class="end_label"><%= I18n.t('libs.schedules.fields.schedules.end') %></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+          7.times do |num|
+            num += 1
+        %>
+          <tr class="separator"><td colspan="3"></td></tr>
+          <tr>
+            <td><%= I18n.t('date.day_names')[(num == 7 ? 0 : num)] %></td>
+            <td class="block">
+              <div>
+                <%= f.text_field "d#{num}_1_1", :class => 'clockpicker' %>
+              </div>
+
+              <div>
+                <%= f.text_field "d#{num}_2_1", :class => 'clockpicker' %>
+              </div>
+
+              <div>
+                <%= f.text_field "d#{num}_3_1", :class => 'clockpicker' %>
+              </div>
+            </td>
+            <td>
+              <div>
+                <%= f.text_field "d#{num}_1_2", :class => 'clockpicker' %>
+              </div>
+
+              <div>
+                <%= f.text_field "d#{num}_2_2", :class => 'clockpicker' %>
+              </div>
+
+              <div>
+                <%= f.text_field "d#{num}_3_2", :class => 'clockpicker' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="holidays" class="section">
+    <span class="label">
+      <%= tooltip I18n.t('libs.schedules.fields.holidays.format') %>
+      <%= auto_label_for f, :holidays_list %>
+    </span>
+
+    <%= smart_textarea f, :holidays_list, :class => 'datepicker_field' %>
+    <div class="datepicker_calendar"></div>
+  </div>
+</fieldset>
+
+<% content_for :js_tags do %>
+  <%= render 'assets_calls/javascripts/clockpicker' %>
+  <%= javascript_include_tag 'datepicker' %>
+<% end %>
+
+<% if params.include? :ajax_loaded %>
+
+  <%= hidden_field_tag :ajax_loaded %>
+  <%= hidden_field_tag :content_div, '#lib' %>
+
+  <div class="ribbon-content">
+    <%= link_to I18n.t('actions.close'), 'javascript:close_div("lib");', :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% else %>
+
+  <div class="ribbon-content">
+    <%= hlink_to I18n.t('misc.list'), schedules_path, :class => 'btn btn-default btn-xs' %>
+  </div>
+
+<% end %>

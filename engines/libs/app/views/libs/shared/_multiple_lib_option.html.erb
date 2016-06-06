@@ -1,0 +1,14 @@
+<li class="id_<%= id %>">
+  <%= smart_checkbox f, [ field, id, checked, name ] %>
+  <%
+  if buttons
+    icon_tooltip = if defined? edit_button || (defined? users_id && not users_id.blank? || (users_id.blank? && WEBO_CONFIG['users']['administrators'].include? session[:user]['data']['id']))
+      tooltip(I18n.t('actions.edit'), nil, icon(:edit))
+    else
+      tooltip(I18n.t('actions.view'), nil, icon(:eye))
+    end
+  %>
+
+    <%= link_to icon_tooltip, link, :onclick => "javascript:load_in_div(this.href + '?ajax_loaded', 'lib');return false;" %>
+  <% end %>
+</li>

@@ -1,0 +1,27 @@
+audio:
+  - audio/mpeg
+  - audio/x-mpeg
+  - audio/mp3
+  - audio/x-mp3
+  - audio/mpeg3
+  - audio/x-mpeg3
+  - audio/mpg
+  - audio/x-mpg
+  - audio/x-mpegaudio
+  - audio/wav
+  - audio/x-wav
+  - audio/wave
+  - audio/x-pn-wav
+  - application/x-mp3
+  - application/x-wav
+csv:
+  - text/comma-separated-values
+  - text/csv
+  - application/csv
+  - application/excel
+  - application/vnd.ms-excel
+  - application/vnd.msexcel
+jpg:
+  - image
+  - image/jpeg
+  - image/pjpeg

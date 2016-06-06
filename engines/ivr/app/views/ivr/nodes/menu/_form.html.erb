@@ -1,0 +1,104 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :timeout %></span>
+
+    <%= smart_text_field f, :timeout %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :times %></span>
+
+    <%= smart_text_field f, :times %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :ivr_variables_id %></span>
+
+    <%= smart_select_field f, :ivr_variables_id, options_from_hash_for_select(@vars, 'value', 'text', @node.ivr_variables_id, true) %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.menu.fields.bargein') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :bargein, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :bargein, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.menu.titles.audios') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="10%"><%= I18n.t('ivr.nodes.audio.fields.type') %></th>
+          <th width="28%" class="block"><%= I18n.t('ivr.nodes.audio.fields.libs_audios_id') %></th>
+          <th width="44%" class="block"><%= raw("<acronym title=\"#{I18n.t('ivr.nodes.audio.fields.tts')}\">#{I18n.t('ivr.nodes.audio.fields.tts_acronym')}</acronym>") %></th>
+          <th width="18%" class="block"><%= I18n.t('ivr.nodes.audio.fields.tts_voice') %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% %w(prompt no_match).each do |a| %>
+          <%= render 'ivr/nodes/menu/audio', f: f, audio: a %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.menu.fields.asr') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :asr, true, I18n.t('misc.enabled'), :onclick => 'show_and_hide_asr_options(true);' %>
+      <%= smart_radio f, :asr, false, I18n.t('misc.disabled'), :onclick => 'show_and_hide_asr_options(false);' %>
+    </div>
+  </div>
+
+  <div id="grammar" class="section<%= ' hidden-block' unless @node.asr %>">
+    <span class="label"><%= f.label :grammars, I18n.t('ivr.nodes.menu.fields.grammar') %></span>
+
+    <%= lib f, :grammars, :grammar, @node.grammar, true, :onchange => 'load_grammar_options($(this).val());' %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.menu.titles.options') %></span>
+
+    <div id="grammar_options" class="hidden-block">
+      <%= select_tag "grammar_options_#{@node.grammar}", options_from_hash_for_select(@node.grammar_options, :id, :name, nil, true) unless @node.grammar.blank? || @node.grammar_options.blank? %>
+    </div>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="15%"><%= I18n.t('ivr.nodes.menu.fields.default') %></th>
+          <th width="25%" class="block"><%= I18n.t('ivr.nodes.menu.fields.dtmf') %></th>
+          <th width="25%" class="block grammar_options<%= raw ' hidden-block' unless @node.asr %>"><%= I18n.t('ivr.nodes.menu.fields.option_asr') %></th>
+          <th width="25%" class="block"><%= I18n.t('ivr.nodes.menu.fields.node') %></td>
+          <th width="10%" class="block">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render 'ivr/nodes/menu/option', f: f, num: 0, id: String.new, type: @node.related_options['o_0']['type'], default: @node.related_options['o_0']['default'], dtmf: @node.related_options['o_0']['dtmf'], libs_options_id: @node.related_options['o_0']['libs_options_id'] %>
+      </tbody>
+      <tbody id="options_list">
+        <% unless @node.related_options.blank? %>
+          <% @node.related_options.each do |k,v| %>
+            <%
+              num = k.split('_')[1].to_i
+              unless num == 0
+            %>
+              <%= render 'ivr/nodes/menu/option', f: f, num: num, id: v['id'], type: v['type'], default: v['default'], dtmf: v['dtmf'], libs_options_id: v['libs_options_id'] %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>

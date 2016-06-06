@@ -1,0 +1,42 @@
+es_ES:
+
+  voice_recognition:
+    title: Reconocimiento de voz
+    activation:
+      title: Voice command activated
+      subtitle: Please speak clearly into the mic
+    error:
+      title: Voice command failed
+      subtitle_1: Must allow microphone
+      subtitle_2: Must have Internet connection
+    see_commands: See commands
+    close_popup: Close popup
+    instructions:
+      title: Instructions
+      text:
+        t1: Click <span class="text-success">"Allow"</span> to access your microphone and activate Voice Command. You will notice a <span class="text-primary"><strong>BLUE</strong> Flash</span> on the microphone icon indicating activation. The icon will appear <span class="text-danger"><strong>RED</strong></span> if you <span class="text-danger">"Deny"</span> access or don't have any microphone installed.
+        t2: As a security precaution, your browser will disconnect the microphone every 60 to 120 seconds (sooner if not being used). In which case Voice Command will prompt you again to <span class="text-success">"Allow"</span> or <span class="text-danger">"Deny"</span> access to your microphone.
+    commands:
+      title: Commands
+      list:
+        go_back: goes back in history (history -1 click)
+        scroll_up: scrolls to the top of the page
+        scroll_down: scrolls to the bottom of the page
+        hide_navigation: toggle navigation collapse
+        show_navigation: toggle navigation to open (can be used again to close)
+        mute: mutes all sound effects for the theme
+        sound_on: unmutes all sound effects for the theme
+        stop: deactivates voice command
+        help: brings up the command list
+        got_it: closes help modal
+    button: Got it!
+    messages:
+      mute:
+        title: MUTE
+        content: All sounds have been muted!
+      sound_on:
+        title: UNMUTE
+        content: All sounds have been turned on!
+      stop:
+        title: VOICE COMMAND OFF
+        content: Your voice commands has been successfully turned off. Click on the icon to turn it back on.

@@ -1,0 +1,41 @@
+<div id="voiceModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+
+				<h1><%= icon :microphone, I18n.t('voice_recognition.title'), class: 'text-muted' %></h1>
+
+				<hr class="simple" />
+
+				<h5><%= I18n.t('voice_recognition.instructions.title') %></h5>
+
+				<p><%= raw I18n.t('voice_recognition.instructions.text.t1') %></p>
+
+				<p><%= raw I18n.t('voice_recognition.instructions.text.t2') %></p>
+
+				<h5><%= I18n.t('voice_recognition.commands.title') %></h5>
+
+				<ul>
+					<% engine_config['voice_commands'].each do |command| %>
+						<li>
+							<strong><%= command.gsub('_', ' ') %></strong>: <%= I18n.t("#{engine_name}.voice_commands.#{command}") %>.
+						</li>
+					<% end if engine_config.include? 'voice_commands' %>
+
+					<% WEBO_CONFIG['voice_commands'].each do |command| %>
+						<li>
+							<strong><%= command.gsub('_', ' ') %></strong>: <%= I18n.t("voice_recognition.commands.list.#{command}") %>.
+						</li>
+					<% end %>
+				</ul>
+
+				<hr class="simple">
+				<div class="text-right">
+					<button type="button" class="btn btn-success btn-lg" data-dismiss="modal">
+						<%= I18n.t('voice_recognition.button') %>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

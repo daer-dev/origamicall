@@ -1,0 +1,15 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :libs_schedules_id %></span>
+
+    <%= lib f, :schedules, :libs_schedules_id, @node.libs_schedules_id %>
+  </div>
+
+  <%= render 'ivr/nodes/shared/status', :f => f %>
+</fieldset>

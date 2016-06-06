@@ -1,0 +1,22 @@
+<html>
+  <% if content_for? :css_tags %>
+    <head>
+      <%= content_for :css_tags %>
+    </head>
+  <% end %>
+  <body>
+    <%= render 'shared/messages' unless defined? @no_messages %>
+
+    <%= yield %>
+
+    <%= raw locale_to_js :controller %>
+
+    <% if content_for? :js_tags %>
+      <%= content_for :js_tags %>
+    <% end %>
+
+    <%= javascript_tag do %>
+      pageSetUp();
+    <% end unless defined? @no_page_setup %>
+  </body>
+</html>

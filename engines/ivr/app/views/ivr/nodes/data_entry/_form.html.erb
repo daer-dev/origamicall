@@ -1,0 +1,80 @@
+<fieldset>
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :name %></span>
+
+    <%= smart_text_field f, :name %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :timeout %></span>
+
+    <%= smart_text_field f, :timeout %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :times %></span>
+
+    <%= smart_text_field f, :times %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= auto_label_for f, :ivr_variables_id %></span>
+
+    <%= smart_select_field f, :ivr_variables_id, options_from_hash_for_select(@vars, 'value', 'text', @node.ivr_variables_id, true) %>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.data_entry.fields.bargein') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :bargein, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :bargein, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.data_entry.fields.beep') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :beep, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :beep, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.data_entry.fields.asr') %></label>
+
+    <div class="group">
+      <%= smart_radio f, :asr, true, I18n.t('misc.enabled') %>
+      <%= smart_radio f, :asr, false, I18n.t('misc.disabled') %>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= I18n.t('ivr.nodes.data_entry.titles.audios') %></span>
+
+    <table class="bordered-table">
+      <thead>
+        <tr>
+          <th width="10%"><%= I18n.t('ivr.nodes.data_entry.fields.type') %></th>
+          <th width="28%" class="block"><%= I18n.t('ivr.nodes.data_entry.fields.libs_audios_id') %></th>
+          <th width="44%" class="block"><%= raw("<acronym title=\"#{I18n.t('ivr.nodes.data_entry.fields.tts')}\">#{I18n.t('ivr.nodes.data_entry.fields.tts_acronym')}</acronym>") %></th>
+          <th width="18%"><%= I18n.t('ivr.nodes.data_entry.fields.tts_voice') %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% %w(prompt no_match disconnect).each do |a| %>
+          <%= render 'ivr/nodes/data_entry/audio', f: f, audio: a %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="label"><%= f.label :related_grammars, I18n.t('ivr.nodes.data_entry.titles.grammars') %></span>
+
+    <%= multiple_lib f, :grammars, :related_grammars, nil, nil, @node.grammars %>
+  </div>
+
+  <%= render 'ivr/nodes/shared/status', :f => f %>
+</fieldset>
